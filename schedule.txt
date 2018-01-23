@@ -1,0 +1,47 @@
+Milestone 1 (Feb 21)
+
+Must:
+ - Have a basic map
+ _ Be able to move the player arround the map
+   * Tile based movement
+ _
+Should:
+ _
+ _
+Could:
+ _
+
+
+Milestone 2 (Mar 28)
+
+Must:
+ -
+ _
+ _
+Should:
+ _
+ _
+Could:
+ _
+
+
+
+Project Final (Apr 18)
+
+Must:
+ -
+ _
+ _
+Should:
+ _
+ _
+Could:
+ _
+
+
+
+
+
+
+
+
