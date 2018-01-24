@@ -1,0 +1,14 @@
+Checkpoint 1
+___ M 
+___ M 
+___ S 
+
+Checkpoint 2
+___ M 
+___ M 
+___ S 
+
+Final
+___ M 
+___ M 
+___ S 
