@@ -1,47 +1,98 @@
-Milestone 1 (Feb 21)
+Checkpoint 1
+___ M 
+___ M 
+___ S 
 
-Must:
- - Have a basic map
- _ Be able to move the player arround the map
-   * Tile based movement
- _
-Should:
- _
- _
-Could:
- _
+Checkpoint 2
+___ M 
+___ M 
+___ S 
+
+Final
+___ M 
+___ M 
+___ S 
+
++-------+
+| Musts |
++-------+
+Game System:
+-Game progresses in turns
+  * Wait on player input
+  * Automatically move monsters
+-Player death = game over
+
+Player:
+-Be able to move and attack with character
+-3 different classes to play with/as
+-Level up
+-3 different abilities to each class
+-UI available for the player to see health/mana/skills
+
+Enemies:
+-Be able to move and attack character
+  * Block player movement
+  * Move randomly
+  * Move preprogrammed
+-Can be killed
+-Deal variable damage
+
+Levels:
+-Must have at least 3 levels
+  * Walls that block the player from moving
+  * Transistion between levels
+
+Sprites:
+-Player character
+-Walls/ floor
+-Monster
+
++---------+
+| Should: |
++---------+
+
+Player:
+-Allow player to restart
+  * Level
+  * Game
+
+-Equipment
+  * "Replace Current" invintory system
+  * Weapons
+  * Sprites
+
+Enemies:
+-Vulnerabilities/Resistances to damage types
+-Aggro radius & simple pathfinding
+-Different skills akin to player (3 for should, more than 3 are could)
+  * Ranged
+  * Defence
+  * Magic
+  * AOE
+  * etc.
+
+Levels:
+-Have traps
+-Have treasures
+-Player interactables
+  * Keys
+
++---------+
+| Coulds: |
++---------+
+
+Player:
+-Semi-permenance from previous playthroughs (stat boosts, items, char unlocks)
 
 
-Milestone 2 (Mar 28)
-
-Must:
- -
- _
- _
-Should:
- _
- _
-Could:
- _
+Enemies:
+-Random enemy spawn locations
+-Enemy journal log, detailing vulnerabilites/resistances & descriptions
 
 
-
-Project Final (Apr 18)
-
-Must:
- -
- _
- _
-Should:
- _
- _
-Could:
- _
-
-
-
-
-
-
+Levels:
+-Randomized level generation
+-Secret rooms
+-Central hub between levels or between playthroughs
 
 
