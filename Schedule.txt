@@ -1,0 +1,67 @@
+Checkpoint 1
+___ M 
+___ M 
+___ S 
+
+Checkpoint 2
+___ M 
+___ M 
+___ S 
+
+Final
+___ M 
+___ M 
+___ S 
+
+
+Musts:
+
+Player:
+-Be able to move and attack with character
+-3 different classes to play with/as
+-Level up
+-3 different abilities to each class
+-UI available for the player to see health/mana/skills
+
+Enemies:
+-Be able to move and attack character
+
+Levels:
+-Must have at least 3 levels
+
+Should:
+
+Player:
+-Allow player to restart
+
+
+Enemies:
+-Vulnerabilities/Resistances to damage types
+-Aggro radius & simple pathfinding
+
+
+Levels:
+-Have traps
+-Have treasures
+
+
+Coulds:
+
+Player:
+-Semi-permenance from previous playthroughs (stat boosts, items, char unlocks)
+
+
+Enemies:
+-Random enemy spawn locations
+-Enemy journal log, detailing vulnerabilites/resistances & descriptions
+
+
+Levels:
+-Randomized level generation
+-Secret rooms
+-Central hub between levels or between playthroughs
+
+
+
+	
+Enemies must be able to move and attack
