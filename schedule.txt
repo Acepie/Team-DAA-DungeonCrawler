@@ -1,17 +1,34 @@
 Checkpoint 1
-___ M 
-___ M 
-___ S 
+Game progresses in turns (M)
+Be able to move and attack with character (M)
+Enemies able to move and attack character (M)
+Enemies can be killed (M)
+Enemies deal variable damage (M)
+Enemies have aggro radius & simple pathfinding (S)
 
 Checkpoint 2
-___ M 
-___ M 
-___ S 
+3 different classes to play with/as (M)
+3 different abilities to each class (M)
+UI available for the player to see health/mana/skills (M)
+Must have at least 3 levels (M)
+Levels have traps and treasures (S)
+Player interactables exist (S) 
+Allow player to restart (S)
+Secret rooms (C)
+
 
 Final
-___ M 
-___ M 
-___ S 
+Player death = game over (M)
+Level up (M)
+Sprites (M)
+Enemies have different skills akin to player (S)
+Randomized level generation (C)
+Random enemy spawn locations (C)
+Semi-permenance from previous playthroughs (C)
+Central hub between levels or between playthroughs (C)
+
+See below for more details and ideas
+
 
 +-------+
 | Musts |
