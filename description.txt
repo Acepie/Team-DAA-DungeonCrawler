@@ -1,10 +1,23 @@
 2-D RPG
 
-
-
 Top down, turnbased dungeon crawl game.
-
 Navigate dangerous traps, fight powerfull
-
 monsters, grow in skill and level. 
 
+This game is loosly inspired on games such as:
+ - Pokemon Mystery Dungeon
+ - Dungeons of Dredmore
+ - Fire Emblem francise
+ - Legend of Zelda 
+
+
+Players control an adventure through a series of 2d maps. 
+The maps are tile based and movement takes place in turns.
+The player can explore, attack monsters, interact with
+items/ buttons in the map and (if they're not careful)
+they can be killed and die. 
+
+Currently, there is no play for a story. Instead we're 
+focusing our efforts on building more mechanics/ 
+practice more and more complicated programming challenges
+than design challenges. 
