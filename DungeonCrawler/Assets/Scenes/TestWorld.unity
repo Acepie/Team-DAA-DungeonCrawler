@@ -3249,8 +3249,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.244, y: 0.623, z: 0}
   m_LocalScale: {x: 1.0230783, y: 1.0461569, z: 1}
-  m_Children:
-  - {fileID: 1922981044}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3327,7 +3326,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 3.01
+  m_Radius: 0.7
 --- !u!1 &603750837
 GameObject:
   m_ObjectHideFlags: 0
@@ -3383,7 +3382,7 @@ GameObject:
   - component: {fileID: 1166084604}
   - component: {fileID: 1166084605}
   m_Layer: 0
-  m_Name: gem blue
+  m_Name: player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3402,7 +3401,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 0
   speed: 2
-  enemyCombatTrigger: 0
 --- !u!212 &1166084601
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3456,7 +3454,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 7.05, y: 0.03, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
-  m_Children: []
+  m_Children:
+  - {fileID: 1922981044}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3494,7 +3493,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 0.3
 --- !u!61 &1166084605
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3595,9 +3594,9 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1922981040}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.232, y: -0.64599997, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -5}
+  m_LocalScale: {x: 0.51153916, y: 0.52307844, z: 0.50000006}
   m_Children: []
-  m_Father: {fileID: 184516686}
+  m_Father: {fileID: 1166084602}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

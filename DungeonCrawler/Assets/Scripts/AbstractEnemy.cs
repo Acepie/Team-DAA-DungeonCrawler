@@ -23,23 +23,25 @@ public class AbstractEnemy : AbstractCreature {
 	
 	// Update is called once per frame
 	void Update () {
-		Move (speed);
-	}
-
-	protected override void UnderAttack(int damageTaken){
-		health -= damageTaken;
-		if (health <= 0) {
-			OnDeath();
+		if (!inCombat) {
+			Move (speed);
 		}
 	}
 
-	protected override void  MakeAttack(){
+	public override void UnderAttack(int damageTaken){
+		health -= damageTaken;
+	}
+
+	public override void  MakeAttack(List<AbstractCreature> targets){
 
 		int attackDamage = 0;
 		attackDamage = Random.Range (1, maxAttackDamage + 1);
+		AbstractCreature target = targets[Random.Range(0, targets.Count)];
+		Debug.Log("Enemy attacking " + target.name);
+		target.UnderAttack(attackDamage);
 	}
 
-	protected override void OnDeath(){
+	public override void OnDeath(){
 		Destroy (this.gameObject);
 		//Animate Death
 	}
@@ -65,4 +67,11 @@ public class AbstractEnemy : AbstractCreature {
 			break;
 		}
 	}
+
+	public override bool TurnOver()
+	{
+		return true;
+	}
+
+	public override void StartTurn(List<AbstractCreature> targets){}
 }

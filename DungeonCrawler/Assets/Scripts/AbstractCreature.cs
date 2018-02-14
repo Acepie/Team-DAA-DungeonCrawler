@@ -2,29 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AbstractCreature : MonoBehaviour {
+public abstract class AbstractCreature : MonoBehaviour {
 
 	public int health;
 	public float speed;
 
 	protected bool inCombat;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+	public abstract void Move(float speed);
 
-	public virtual void Move(float speed){
+	public abstract void UnderAttack(int damageTaken);
+
+	public abstract void MakeAttack(List<AbstractCreature> targets);
+
+	public virtual bool IsDead() {
+		return health <= 0;
 	}
 
-	protected virtual void UnderAttack(int damageTaken){}
+	public abstract void OnDeath();
 
-	protected virtual void MakeAttack(){}
+	public abstract bool TurnOver();
 
-	protected virtual void OnDeath(){}
+	public abstract void StartTurn(List<AbstractCreature> targets);
+
+	public virtual void CombatStarted() {
+		inCombat = true;
+		Move(0);
+	}
+
+	public virtual void CombatEnded() {
+		inCombat = false;
+	}
 }
