@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class CombatController : MonoBehaviour{
 
+	AbstractCreature activeCreature;
+
 	List<AbstractCreature> combatants;
+	private bool quitCombat;
 	ContactFilter2D cf2d;
-	private int turn;
+	private int roundCount;
+	private int turnCount;
+	int numOfCombatants;
 	List<AbstractCreature> nonplayers;
 	List<AbstractCreature> players;
 	private bool turnHasStarted;
 
+	AbstractCreature playerTarget;
+
 	void Awake() {
 		cf2d.layerMask = 12; // Layer 12 is Player Layer, Where enemies will be as well
+		quitCombat = false;
 
 		CircleCollider2D combatRadius = gameObject.AddComponent<CircleCollider2D> ();
 		combatRadius.radius = 10;
@@ -20,20 +28,17 @@ public class CombatController : MonoBehaviour{
 
 		Collider2D[] combatantColliders;
 		combatantColliders = new Collider2D[100]; //Max of 100 creatures in a combat
-		int numofCombatants = combatRadius.OverlapCollider (cf2d, combatantColliders);
+		numOfCombatants = combatRadius.OverlapCollider (cf2d, combatantColliders);
 
-		if (numofCombatants == 0) {
+		if (numOfCombatants == 0) {
 			Debug.Log("nobody in combat");
 			return;
 		}
 
-		Debug.Log(numofCombatants);
-		Debug.Log(combatantColliders);
-
 		combatants = new List<AbstractCreature>();
 		nonplayers = new List<AbstractCreature>();
 		players = new List<AbstractCreature>();
-		for(int i = 0; i < numofCombatants; i++) {
+		for(int i = 0; i < numOfCombatants; i++) {
 			AbstractCreature creature = combatantColliders[i].gameObject.GetComponent<AbstractCreature>();
 			if (creature == null) {
 				continue;
@@ -49,11 +54,84 @@ public class CombatController : MonoBehaviour{
 		
 		Destroy(combatRadius);
 
-		turn = 0;
+		roundCount = 0;
+		turnCount = 0;
 		turnHasStarted = false;
 	}
 
-	void Update()
+	void Start(){
+		 StartCoroutine("turnTracker");
+	}
+
+
+	IEnumerator turnTracker(){
+		while(!quitCombat){
+			activeCreature = combatants [turnCount];
+			if(activeCreature.CompareTag("Player")){
+				yield return StartCoroutine(PlayerTurn());
+			} else {
+				yield return StartCoroutine(EnemyTurn());
+			}
+
+			if (turnCount == numOfCombatants - 1) {
+				turnCount = 0;
+			} else {
+				turnCount++;
+			}
+
+			if (nonplayers.Count == 0) {
+				quitCombat = true;
+				Debug.Log ("Combat has ended");
+
+				foreach(var p in players){
+					p.CombatEnded ();
+				}
+			}
+		}
+		yield return null;
+	}
+
+	IEnumerator PlayerTurn(){
+
+		Debug.Log ("It is the player's turn");
+
+		yield return PlayerSelectTarget();
+
+		playerTarget.UnderAttack (10);
+		if (playerTarget.IsDead()) {
+			nonplayers.Remove (playerTarget);
+			Debug.Log (nonplayers.Count);
+		}
+	}
+
+	IEnumerator EnemyTurn(){
+		Debug.Log ("It is the enemies turn");
+		yield return null;
+
+	}
+
+	IEnumerator PlayerSelectTarget(){
+		LayerMask lm = 12;
+		Camera cam = activeCreature.GetComponent<PlayerController> ().GetComponentInChildren<Camera> ();
+		RaycastHit2D hit = new RaycastHit2D();
+	
+		bool targetSelected = false;
+
+		while (!targetSelected) {
+			//Coroutine in player that waits until they left click the mouse
+			yield return StartCoroutine (activeCreature.GetComponent<PlayerController> ().waitPlayerLeftClick ());
+			hit = Physics2D.Raycast (cam.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+				//targetCollider = Physics2D.Raycast (ray, 0.1f, lm).collider;
+			if (hit.collider != null) {
+				playerTarget = hit.collider.gameObject.GetComponent<AbstractCreature> ();
+				Debug.Log (playerTarget.name);
+				targetSelected = true;
+			}
+		}
+		yield return null;
+	}
+
+	/*void Update()
 	{
 		AbstractCreature combatant = combatants[turn];
 
@@ -107,5 +185,5 @@ public class CombatController : MonoBehaviour{
 			targetList.Remove(d);
 			d.OnDeath();
 		});
-	}
+	}*/
 }

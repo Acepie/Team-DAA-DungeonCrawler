@@ -32,5 +32,6 @@ public abstract class AbstractCreature : MonoBehaviour {
 
 	public virtual void CombatEnded() {
 		inCombat = false;
+		Move (speed);
 	}
 }

@@ -80,6 +80,10 @@ public class PlayerController : AbstractCreature {
 		return hasAttacked;
 	}
 
+	public IEnumerator waitPlayerLeftClick(){
+		yield return new WaitUntil (() => Input.GetMouseButtonDown (0));
+	}
+
 	public override void StartTurn(List<AbstractCreature> targets)
 	{
 		hasAttacked = false;

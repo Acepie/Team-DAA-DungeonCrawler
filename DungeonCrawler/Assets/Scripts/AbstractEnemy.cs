@@ -18,6 +18,7 @@ public class AbstractEnemy : AbstractCreature {
 	void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
 		speed = 1;
+		health = 5;
 		
 	}
 	
@@ -30,6 +31,9 @@ public class AbstractEnemy : AbstractCreature {
 
 	public override void UnderAttack(int damageTaken){
 		health -= damageTaken;
+		if(health <= 0){
+			OnDeath ();
+		}
 	}
 
 	public override void  MakeAttack(List<AbstractCreature> targets){
