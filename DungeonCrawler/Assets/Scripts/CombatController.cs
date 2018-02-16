@@ -64,12 +64,6 @@ public class CombatController : MonoBehaviour{
 			return;
 		}
 
-		// the combatant's turn has already ended
-		if (combatant.TurnOver()) {
-			turnCount = (turnCount + 1) % combatants.Count;
-			turnHasStarted = false;
-		}
-
 		// get list of valid targets for combatant
 		List<AbstractCreature> targetList;
 		if (combatant.CompareTag("Player")) {
@@ -108,5 +102,11 @@ public class CombatController : MonoBehaviour{
 			targetList.Remove(d);
 			d.OnDeath();
 		});
+
+		// the combatant's turn has already ended
+		if (combatant.TurnOver()) {
+			turnCount = (turnCount + 1) % combatants.Count;
+			turnHasStarted = false;
+		}
 	}
 }
