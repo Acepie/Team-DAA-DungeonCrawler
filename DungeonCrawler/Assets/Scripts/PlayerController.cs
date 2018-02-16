@@ -33,9 +33,30 @@ public class PlayerController : AbstractCreature {
 		if (Mathf.Abs(moveHorizontal) > 0.1 || Mathf.Abs(moveVertical) > 0.1) {
 			
 			rb2d.velocity = new Vector2 (moveHorizontal, moveVertical) * speed;
+
+            // Update animation controller
+            if (moveVertical > 0) {
+                this.GetComponent<Animator>().SetInteger("Direction", 0);
+            } else if (moveVertical < 0) {
+                this.GetComponent<Animator>().SetInteger("Direction", 1);
+            } else if (moveHorizontal > 0) {
+                this.GetComponent<Animator>().SetInteger("Direction", 2);
+            } else {
+                this.GetComponent<Animator>().SetInteger("Direction", 3);
+            }
+
 		} else {
 			rb2d.velocity = new Vector2 (0, 0);
+
+            // Set the animation to idle
+            //this.GetComponent<Animator>().SetInteger("Direction", -1);
 		}
+
+        if (!Input.anyKey)
+        {
+            // If nothing is being pressed, then move to idle animation
+            this.GetComponent<Animator>().SetInteger("Direction", -1);
+        }
 	}
 
 	private void ProcessCombat() {
