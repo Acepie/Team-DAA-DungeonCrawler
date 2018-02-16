@@ -46,25 +46,25 @@ public class AbstractEnemy : AbstractCreature {
 			lastMoveTimeStamp = Time.time;
 		}
 
-        Animator ani = GetComponent<Animator>();
+		Animator ani = GetComponent<Animator>();
 
-        switch (moveDirection) {
+		switch (moveDirection) {
 		case 1:
-			    rb2d.velocity = new Vector2 (speed, 0);
-                ani.SetInteger("Direction", 2);
-			    break;
+				rb2d.velocity = new Vector2 (speed, 0);
+				ani.SetInteger("Direction", 2);
+				break;
 		case 2:
-			    rb2d.velocity = new Vector2 (-speed, 0);
-                ani.SetInteger("Direction", 3);
-                break;
+				rb2d.velocity = new Vector2 (-speed, 0);
+				ani.SetInteger("Direction", 3);
+				break;
 		case 3:
-			    rb2d.velocity = new Vector2 (0, speed);
-                ani.SetInteger("Direction", 0);
-                break;
+				rb2d.velocity = new Vector2 (0, speed);
+				ani.SetInteger("Direction", 0);
+				break;
 		case 4:
-			    rb2d.velocity = new Vector2 (0, -speed);
-                ani.SetInteger("Direction", 1);
-                break;
+				rb2d.velocity = new Vector2 (0, -speed);
+				ani.SetInteger("Direction", 1);
+				break;
 		}
 	}
 
