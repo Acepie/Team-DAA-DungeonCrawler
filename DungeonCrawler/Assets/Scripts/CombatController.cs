@@ -9,9 +9,6 @@ public class CombatController : MonoBehaviour{
 	private int turnCount;
 	List<AbstractCreature> nonplayers;
 	List<AbstractCreature> players;
-	private bool turnHasStarted;
-
-	AbstractCreature playerTarget;
 
 	void Awake() {
 		ContactFilter2D cf2d = new ContactFilter2D();
@@ -51,19 +48,26 @@ public class CombatController : MonoBehaviour{
 
 		roundCount = 0;
 		turnCount = 0;
-		turnHasStarted = false;
+
+		StartCoroutine("DoCombat");
 	}
 
-	void Update(){
-		AbstractCreature combatant = combatants[turnCount];
+	IEnumerator DoCombat(){
+		while (true) {
+			AbstractCreature combatant = combatants[turnCount];
 
-		// A combatant is already dead
-		if (combatant == null) {
-			combatants.RemoveAt(turnCount);
-			turnCount = turnCount % combatants.Count;
-			return;
+			// A combatant is already dead
+			if (combatant == null) {
+				combatants.RemoveAt(turnCount);
+				turnCount = turnCount % combatants.Count;
+				continue;
+			}
+
+			yield return StartCoroutine(DoTurn(combatant));
 		}
+	}
 
+	IEnumerator DoTurn(AbstractCreature combatant) {
 		// get list of valid targets for combatant
 		List<AbstractCreature> targetList;
 		if (combatant.CompareTag("Player")) {
@@ -73,6 +77,30 @@ public class CombatController : MonoBehaviour{
 		}
 
 		// if no valid targets then combat should end
+		HasWon(combatant, targetList);
+		yield return null;
+
+		combatant.StartTurn(targetList);
+
+		do {
+			combatant.MakeAttack(targetList);
+
+			// kill any dead targets
+			targetList.FindAll((target) => {
+				return target.IsDead();
+			}).ForEach((d) => {
+				targetList.Remove(d);
+				d.OnDeath();
+			});
+			HasWon(combatant, targetList);
+			yield return null;
+		} while (!combatant.TurnOver());
+		
+		turnCount = (turnCount + 1) % combatants.Count;
+		yield return null;
+	}
+
+	void HasWon(AbstractCreature combatant, List<AbstractCreature> targetList) {
 		if (targetList.Count == 0) {
 			if (combatant.CompareTag("Player")) {
 				Debug.Log("Players won");
@@ -85,28 +113,6 @@ public class CombatController : MonoBehaviour{
 				Debug.Log("Monsters won");
 			}
 			Destroy(this.gameObject);
-			return;
-		}
-
-		if (!turnHasStarted) {
-			combatant.StartTurn(targetList);
-			turnHasStarted = true;
-		}
-
-		combatant.MakeAttack(targetList);
-
-		// kill any dead targets
-		targetList.FindAll((target) => {
-			return target.IsDead();
-		}).ForEach((d) => {
-			targetList.Remove(d);
-			d.OnDeath();
-		});
-
-		// the combatant's turn has already ended
-		if (combatant.TurnOver()) {
-			turnCount = (turnCount + 1) % combatants.Count;
-			turnHasStarted = false;
 		}
 	}
 }
