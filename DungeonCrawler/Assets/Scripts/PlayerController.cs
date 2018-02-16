@@ -7,10 +7,9 @@ public class PlayerController : AbstractCreature {
 
 	Rigidbody2D rb2d;
 	bool hasAttacked;
-	int target;
-	int numTargets;
-	bool readyToAttack;
+	private bool readyToAttack;
 	public int attackPower;
+	private AbstractCreature targetCreature;
 
 	void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
@@ -31,7 +30,6 @@ public class PlayerController : AbstractCreature {
 
 
 		if (Mathf.Abs(moveHorizontal) > 0.1 || Mathf.Abs(moveVertical) > 0.1) {
-			
 			rb2d.velocity = new Vector2 (moveHorizontal, moveVertical) * speed;
 
             // Update animation controller
@@ -60,30 +58,34 @@ public class PlayerController : AbstractCreature {
 	}
 
 	private void ProcessCombat() {
-		// TODO actual target selection
 		if (Input.GetKeyDown(KeyCode.Space)) {
-			readyToAttack = true;
+			readyToAttack = targetCreature != null;
+		}
+
+		if (Input.GetMouseButtonDown(0)) {
+			LayerMask lm = 12;
+			Camera cam = Camera.main;
+			RaycastHit2D hit = Physics2D.Raycast (cam.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+			if (hit.collider != null) {
+				targetCreature = hit.collider.gameObject.GetComponent<AbstractCreature> ();
+				Debug.Log (targetCreature.name);
+			}
 		}
 	}
 
-	void OnTriggerEnter2D(Collider2D other){
+	void OnCollisionEnter2D(Collision2D other){
 		if(other.gameObject.CompareTag("Enemy")){
 			inCombat = true;
 			GameObject combat = new GameObject("CombatInstance");
+			combat.transform.position = transform.position;
 			combat.AddComponent<CombatController>();
 		}
-	}
-
-	public override void UnderAttack(int damageTaken)
-	{
-		health -= damageTaken;
 	}
 
 	public override void MakeAttack(List<AbstractCreature> targets)
 	{
 		if (!hasAttacked) {
 			if (readyToAttack) {
-				AbstractCreature targetCreature = targets[target];
 				Debug.Log("Player attacking " + targetCreature.name);
 				targetCreature.UnderAttack(attackPower);
 				hasAttacked = true;
@@ -101,15 +103,9 @@ public class PlayerController : AbstractCreature {
 		return hasAttacked;
 	}
 
-	public IEnumerator waitPlayerLeftClick(){
-		yield return new WaitUntil (() => Input.GetMouseButtonDown (0));
-	}
-
 	public override void StartTurn(List<AbstractCreature> targets)
 	{
 		hasAttacked = false;
-		target = 0;
-		numTargets = targets.Count;
 		readyToAttack = false;
 	}
 }

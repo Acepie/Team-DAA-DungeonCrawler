@@ -17,22 +17,12 @@ public class AbstractEnemy : AbstractCreature {
 	// Use this for initialization
 	void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
-		speed = 1;
-		health = 5;
-		
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (!inCombat) {
 			Move (speed);
-		}
-	}
-
-	public override void UnderAttack(int damageTaken){
-		health -= damageTaken;
-		if(health <= 0){
-			OnDeath ();
 		}
 	}
 
