@@ -11,7 +11,9 @@ public abstract class AbstractCreature : MonoBehaviour {
 
 	public abstract void Move(float speed);
 
-	public abstract void UnderAttack(int damageTaken);
+	public virtual void UnderAttack(int damageTaken) {
+		health -= damageTaken;
+	}
 
 	public abstract void MakeAttack(List<AbstractCreature> targets);
 
