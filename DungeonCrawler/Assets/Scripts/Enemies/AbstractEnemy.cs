@@ -51,20 +51,20 @@ public class AbstractEnemy : AbstractCreature {
 
 		switch (moveDirection) {
 		case 1:
-				rb2d.velocity = new Vector2 (speed, 0);
 				ani.SetInteger("Direction", 1);
+				rb2d.velocity = new Vector2 (speed, 0);
 				break;
 		case 2:
-				rb2d.velocity = new Vector2 (-speed, 0);
 				ani.SetInteger("Direction", 2);
+				rb2d.velocity = new Vector2 (-speed, 0);
 				break;
 		case 3:
-				rb2d.velocity = new Vector2 (0, speed);
 				ani.SetInteger("Direction", 3);
+				rb2d.velocity = new Vector2 (0, speed);
 				break;
 		case 4:
-				rb2d.velocity = new Vector2 (0, -speed);
 				ani.SetInteger("Direction", 4);
+				rb2d.velocity = new Vector2 (0, -speed);
 				break;
 		}
 	}
@@ -83,6 +83,7 @@ public class AbstractEnemy : AbstractCreature {
 	public override void CombatEnded ()
 	{
 		base.CombatEnded ();
+		revertToNormalSprite();
 	}
 
 	public virtual void swapToCombatSprite(){

@@ -13,7 +13,6 @@ public class PlayerController : AbstractCreature {
 
 	void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
-		health = 10;
 	}
 	
 	// Update is called once per frame
