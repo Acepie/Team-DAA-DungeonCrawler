@@ -1,25 +1,25 @@
 fileFormatVersion: 2
-guid: 2e0a82499eb2dd44b8a2c2a8b2c61d8a
-timeCreated: 1518850654
+guid: 187c54a6fb4f71141ac2829dceaae9e7
+timeCreated: 1518850680
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Sorceress_0
-    21300002: Sorceress_1
-    21300004: Sorceress_2
-    21300006: Sorceress_3
-    21300008: Sorceress_4
-    21300010: Sorceress_5
-    21300012: Sorceress_6
-    21300014: Sorceress_7
-    21300016: Sorceress_8
-    21300018: Sorceress_9
-    21300020: Sorceress_10
-    21300022: Sorceress_11
-    21300024: Sorceress_12
-    21300026: Sorceress_13
-    21300028: Sorceress_14
-    21300030: Sorceress_15
+    21300000: Sorceress_Combat_0
+    21300002: Sorceress_Combat_1
+    21300004: Sorceress_Combat_2
+    21300006: Sorceress_Combat_3
+    21300008: Sorceress_Combat_4
+    21300010: Sorceress_Combat_5
+    21300012: Sorceress_Combat_6
+    21300014: Sorceress_Combat_7
+    21300016: Sorceress_Combat_8
+    21300018: Sorceress_Combat_9
+    21300020: Sorceress_Combat_10
+    21300022: Sorceress_Combat_11
+    21300024: Sorceress_Combat_12
+    21300026: Sorceress_Combat_13
+    21300028: Sorceress_Combat_14
+    21300030: Sorceress_Combat_15
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -126,7 +126,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Sorceress_0
+      name: Sorceress_Combat_0
       rect:
         serializedVersion: 2
         x: 0
@@ -140,7 +140,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Sorceress_1
+      name: Sorceress_Combat_1
       rect:
         serializedVersion: 2
         x: 32
@@ -154,7 +154,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Sorceress_2
+      name: Sorceress_Combat_2
       rect:
         serializedVersion: 2
         x: 64
@@ -168,7 +168,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Sorceress_3
+      name: Sorceress_Combat_3
       rect:
         serializedVersion: 2
         x: 96
@@ -182,7 +182,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Sorceress_4
+      name: Sorceress_Combat_4
       rect:
         serializedVersion: 2
         x: 0
@@ -196,7 +196,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Sorceress_5
+      name: Sorceress_Combat_5
       rect:
         serializedVersion: 2
         x: 32
@@ -210,7 +210,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Sorceress_6
+      name: Sorceress_Combat_6
       rect:
         serializedVersion: 2
         x: 64
@@ -224,7 +224,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Sorceress_7
+      name: Sorceress_Combat_7
       rect:
         serializedVersion: 2
         x: 96
@@ -238,7 +238,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Sorceress_8
+      name: Sorceress_Combat_8
       rect:
         serializedVersion: 2
         x: 0
@@ -252,7 +252,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Sorceress_9
+      name: Sorceress_Combat_9
       rect:
         serializedVersion: 2
         x: 32
@@ -266,7 +266,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Sorceress_10
+      name: Sorceress_Combat_10
       rect:
         serializedVersion: 2
         x: 64
@@ -280,7 +280,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Sorceress_11
+      name: Sorceress_Combat_11
       rect:
         serializedVersion: 2
         x: 96
@@ -294,7 +294,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Sorceress_12
+      name: Sorceress_Combat_12
       rect:
         serializedVersion: 2
         x: 0
@@ -308,7 +308,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Sorceress_13
+      name: Sorceress_Combat_13
       rect:
         serializedVersion: 2
         x: 32
@@ -322,7 +322,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Sorceress_14
+      name: Sorceress_Combat_14
       rect:
         serializedVersion: 2
         x: 64
@@ -336,7 +336,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Sorceress_15
+      name: Sorceress_Combat_15
       rect:
         serializedVersion: 2
         x: 96

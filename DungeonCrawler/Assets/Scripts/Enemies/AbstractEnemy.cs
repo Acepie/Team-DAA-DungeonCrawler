@@ -32,6 +32,7 @@ public class AbstractEnemy : AbstractCreature {
 		attackDamage = Random.Range (1, maxAttackDamage + 1);
 		AbstractCreature target = targets[Random.Range(0, targets.Count)];
 		Debug.Log("Enemy attacking " + target.name);
+		Debug.Log (target.name + " has"  + target.health + "health");
 		target.UnderAttack(attackDamage);
 	}
 
@@ -51,19 +52,19 @@ public class AbstractEnemy : AbstractCreature {
 		switch (moveDirection) {
 		case 1:
 				rb2d.velocity = new Vector2 (speed, 0);
-				ani.SetInteger("Direction", 2);
+				ani.SetInteger("Direction", 1);
 				break;
 		case 2:
 				rb2d.velocity = new Vector2 (-speed, 0);
-				ani.SetInteger("Direction", 3);
+				ani.SetInteger("Direction", 2);
 				break;
 		case 3:
 				rb2d.velocity = new Vector2 (0, speed);
-				ani.SetInteger("Direction", 0);
+				ani.SetInteger("Direction", 3);
 				break;
 		case 4:
 				rb2d.velocity = new Vector2 (0, -speed);
-				ani.SetInteger("Direction", 1);
+				ani.SetInteger("Direction", 4);
 				break;
 		}
 	}
@@ -71,6 +72,25 @@ public class AbstractEnemy : AbstractCreature {
 	public override bool TurnOver()
 	{
 		return true;
+	}
+
+	public override void CombatStarted ()
+	{
+		speed = 0;
+		swapToCombatSprite ();
+	}
+
+	public override void CombatEnded ()
+	{
+		base.CombatEnded ();
+	}
+
+	public virtual void swapToCombatSprite(){
+
+	}
+
+	public virtual void revertToNormalSprite(){
+
 	}
 
 	public override void StartTurn(List<AbstractCreature> targets){}

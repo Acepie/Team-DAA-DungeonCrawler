@@ -23,9 +23,9 @@ GameObject:
   - component: {fileID: 114222179970737188}
   - component: {fileID: 50667526366024288}
   - component: {fileID: 61635433036954202}
-  - component: {fileID: 95208027610086222}
+  - component: {fileID: 95731667655424150}
   m_Layer: 12
-  m_Name: boss
+  m_Name: Spider
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1202529344318048}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.03, y: -0.06, z: 0}
+  m_LocalPosition: {x: 0.62204045, y: 1.1578082, z: 0}
   m_LocalScale: {x: 1.0230783, y: 1.0461569, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,7 +76,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.15}
+  m_Offset: {x: -0.01645127, y: -0.1614923}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 1}
@@ -87,9 +87,9 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3, y: 0.3}
+  m_Size: {x: 0.448296, y: 0.4218569}
   m_EdgeRadius: 0
---- !u!95 &95208027610086222
+--- !u!95 &95731667655424150
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1

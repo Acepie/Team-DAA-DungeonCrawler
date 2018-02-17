@@ -13,6 +13,7 @@ public class PlayerController : AbstractCreature {
 
 	void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
+		health = 10;
 	}
 	
 	// Update is called once per frame
@@ -65,7 +66,7 @@ public class PlayerController : AbstractCreature {
 		if (Input.GetMouseButtonDown(0)) {
 			Camera cam = Camera.main;
 			RaycastHit2D hit = Physics2D.Raycast (cam.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-			if (hit.collider != null) {
+			if (hit.collider != null && hit.collider.GetComponent<AbstractCreature>() is AbstractEnemy) {
 				targetCreature = hit.collider.gameObject.GetComponent<AbstractCreature> ();
 				Debug.Log (targetCreature.name);
 			}

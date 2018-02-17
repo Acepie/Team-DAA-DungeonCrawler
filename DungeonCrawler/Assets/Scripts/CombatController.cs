@@ -39,6 +39,7 @@ public class CombatController : MonoBehaviour{
 				players.Add((PlayerController) creature);
 			} else {
 				nonplayers.Add(creature);
+
 			}
 			creature.CombatStarted();
 			combatants.Add(creature);
