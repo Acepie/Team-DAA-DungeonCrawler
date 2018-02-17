@@ -105,6 +105,7 @@ public class CombatController : MonoBehaviour{
 		if (targetList.Count == 0) {
 			if (combatant.CompareTag("Player")) {
 				Debug.Log("Players won");
+                GameObject.Find("Canvas/CombatCenterText").GetComponent<CombatTextController>().displayWinner("Players won!");
 				foreach(var player in players) {
 					if (player != null) {
 						player.CombatEnded();
@@ -112,7 +113,10 @@ public class CombatController : MonoBehaviour{
 				}
 			} else {
 				Debug.Log("Monsters won");
+                GameObject.Find("Canvas/CombatCenterText").GetComponent<CombatTextController>().displayWinner("Monsters won!");
+
 			}
+
 			Destroy(this.gameObject);
 		}
 	}
