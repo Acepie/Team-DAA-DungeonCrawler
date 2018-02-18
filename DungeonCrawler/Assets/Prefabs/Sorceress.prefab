@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 4729164021983310}
   - component: {fileID: 212802252192443726}
   - component: {fileID: 61874342449525776}
-  - component: {fileID: 114479849497518458}
   - component: {fileID: 50438746178519284}
   - component: {fileID: 95178042174427990}
+  - component: {fileID: 114240842797766702}
   m_Layer: 12
   m_Name: Sorceress
   m_TagString: Enemy
@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1924186500491498}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.234, y: -0.316, z: 0}
+  m_LocalPosition: {x: 9.58, y: 6.08, z: 0}
   m_LocalScale: {x: 2, y: 2.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -106,7 +106,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114479849497518458
+--- !u!114 &114240842797766702
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -114,12 +114,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1924186500491498}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4570a353f7efc1b479b14a4e0047ed26, type: 3}
+  m_Script: {fileID: 11500000, guid: df95e521bc04143419a1c33aa69d262c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   health: 5
-  speed: 1
+  speed: 1.2
   moveCD: 1
+  combatsprite: {fileID: 21300000, guid: 187c54a6fb4f71141ac2829dceaae9e7, type: 3}
+  combatAnimControl: {fileID: 9100000, guid: 9c3e6297995d12c4eb7832d976d4c139, type: 2}
 --- !u!212 &212802252192443726
 SpriteRenderer:
   m_ObjectHideFlags: 1

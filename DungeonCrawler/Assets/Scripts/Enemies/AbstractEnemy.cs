@@ -14,9 +14,13 @@ public class AbstractEnemy : AbstractCreature {
 	private int moveDirection;
 
 	Rigidbody2D rb2d;
+
+	Animator ani;
 	// Use this for initialization
 	void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
+		ani = GetComponent<Animator> ();
+		lastMoveTimeStamp = -moveCD;
 	}
 	
 	// Update is called once per frame
@@ -44,26 +48,22 @@ public class AbstractEnemy : AbstractCreature {
 	public override void Move(float speed){
 		if (Time.time - lastMoveTimeStamp > moveCD) {
 			moveDirection = Random.Range (1, 5);
+			ani.SetInteger ("Direction", moveDirection);
 			lastMoveTimeStamp = Time.time;
 		}
 
-		Animator ani = GetComponent<Animator>();
 
 		switch (moveDirection) {
 		case 1:
-				ani.SetInteger("Direction", 1);
 				rb2d.velocity = new Vector2 (speed, 0);
 				break;
 		case 2:
-				ani.SetInteger("Direction", 2);
 				rb2d.velocity = new Vector2 (-speed, 0);
 				break;
 		case 3:
-				ani.SetInteger("Direction", 3);
 				rb2d.velocity = new Vector2 (0, speed);
 				break;
 		case 4:
-				ani.SetInteger("Direction", 4);
 				rb2d.velocity = new Vector2 (0, -speed);
 				break;
 		}

@@ -15,6 +15,9 @@ public class PlayerController : AbstractCreature {
 	// Used for combat UI
 	public CombatTextController ctc;
 
+	void Awake(){
+		SpawnPlayer ();
+	}
 	void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
 	}
@@ -120,5 +123,9 @@ public class PlayerController : AbstractCreature {
 	{
 		hasAttacked = false;
 		readyToAttack = false;
+	}
+
+	public void SpawnPlayer(){
+		transform.position = GameObject.Find ("PlayerSpawnPoint").transform.position;
 	}
 }
