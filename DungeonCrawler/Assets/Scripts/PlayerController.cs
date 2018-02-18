@@ -12,8 +12,8 @@ public class PlayerController : AbstractCreature {
 	public int attackPower;
 	private AbstractCreature targetCreature;
 
-    // Used for combat UI
-    public CombatTextController ctc;
+	// Used for combat UI
+	public CombatTextController ctc;
 
 	void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
@@ -72,13 +72,13 @@ public class PlayerController : AbstractCreature {
 			if (hit.collider != null && hit.collider.GetComponent<AbstractCreature>() is AbstractEnemy) {
 				targetCreature = hit.collider.gameObject.GetComponent<AbstractCreature> ();
 				Debug.Log (targetCreature.name);
-                this.ctc.updateText("Click Enemy to mark for attack.\nCurrently marked: " +
-                                    targetCreature.name +
-                                   "\n\nPress Space to preform attack.");
-            } else {
-                // You didn't click on anything...
-                this.ctc.updateText("Click Enemy to mark for attack.\nNothing currently selected");
-            }
+				this.ctc.updateText("Click Enemy to mark for attack.\nCurrently marked: " +
+									targetCreature.name +
+								   "\n\nPress Space to preform attack.");
+			} else {
+				// You didn't click on anything...
+				this.ctc.updateText("Click Enemy to mark for attack.\nNothing currently selected");
+			}
 		}
 	}
 
@@ -89,8 +89,9 @@ public class PlayerController : AbstractCreature {
 			combat.transform.position = transform.position;
 			combat.AddComponent<CombatController>();
 
-            // Turn on the UI
-            this.ctc.enableText();
+			// Turn on the UI
+			ctc.enableText();
+			ctc.updateText("Click Enemy to mark for attack: ");
 		}
 	}
 

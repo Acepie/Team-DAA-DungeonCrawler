@@ -13,7 +13,7 @@ public abstract class AbstractCreature : MonoBehaviour {
 
 	public virtual void UnderAttack(int damageTaken) {
 		health -= damageTaken;
-        Debug.Log("Hit taken for: " + damageTaken + "  Total health: " + health);
+		Debug.Log("Hit taken for: " + damageTaken + "  Total health: " + health);
 	}
 
 	public abstract void MakeAttack(List<AbstractCreature> targets);
