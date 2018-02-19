@@ -188,7 +188,13 @@ public class PlayerController : AbstractCreature {
     {
         if (other.gameObject.CompareTag("Food"))
         {
-            currentHealth += 5;
+            if (currentHealth + 5 > maxHealth)
+            {
+                currentHealth = maxHealth;
+            } else
+            {
+                currentHealth += 5;
+            }
             playerUIController.PickupEvent("Healed for 5 hit points!");
             Destroy(other.gameObject);
         }
