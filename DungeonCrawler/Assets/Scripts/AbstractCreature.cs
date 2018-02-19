@@ -4,7 +4,8 @@ using UnityEngine;
 
 public abstract class AbstractCreature : MonoBehaviour {
 
-	public int health;
+	public int currentHealth;
+    public int maxHealth;
 	public float speed;
 
 	protected bool inCombat;
@@ -12,21 +13,20 @@ public abstract class AbstractCreature : MonoBehaviour {
 	public abstract void Move(float speed);
 
 	public virtual void UnderAttack(int damageTaken) {
-		health -= damageTaken;
-		Debug.Log("Hit taken for: " + damageTaken + "  Total health: " + health);
+		currentHealth -= damageTaken;
 	}
 
 	public abstract void MakeAttack(List<AbstractCreature> targets);
 
 	public virtual bool IsDead() {
-		return health <= 0;
+		return currentHealth <= 0;
 	}
 
 	public abstract void OnDeath();
 
 	public abstract bool TurnOver();
 
-	public abstract void StartTurn(List<AbstractCreature> targets);
+	public abstract void StartTurn();
 
 	public virtual void CombatStarted() {
 		inCombat = true;
@@ -37,4 +37,6 @@ public abstract class AbstractCreature : MonoBehaviour {
 		inCombat = false;
 		Move (speed);
 	}
+
+	public abstract IEnumerator PerformTurn(List<AbstractCreature> targets);
 }

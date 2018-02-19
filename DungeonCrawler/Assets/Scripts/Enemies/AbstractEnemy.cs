@@ -21,6 +21,7 @@ public class AbstractEnemy : AbstractCreature {
 		rb2d = GetComponent<Rigidbody2D> ();
 		ani = GetComponent<Animator> ();
 		lastMoveTimeStamp = -moveCD;
+        currentHealth = maxHealth;
 	}
 	
 	// Update is called once per frame
@@ -30,13 +31,18 @@ public class AbstractEnemy : AbstractCreature {
 		}
 	}
 
+
+	public override IEnumerator PerformTurn(List<AbstractCreature> targets){
+		MakeAttack (targets);
+		yield return null;
+	}
 	public override void  MakeAttack(List<AbstractCreature> targets){
 
 		int attackDamage = 0;
 		attackDamage = Random.Range (1, maxAttackDamage + 1);
 		AbstractCreature target = targets[Random.Range(0, targets.Count)];
 		Debug.Log("Enemy attacking " + target.name);
-		Debug.Log (target.name + " has"  + target.health + "health");
+		Debug.Log (target.name + " has"  + target.currentHealth + "health");
 		target.UnderAttack(attackDamage);
 	}
 
@@ -94,5 +100,5 @@ public class AbstractEnemy : AbstractCreature {
 
 	}
 
-	public override void StartTurn(List<AbstractCreature> targets){}
+	public override void StartTurn(){}
 }

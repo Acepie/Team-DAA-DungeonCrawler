@@ -23,7 +23,6 @@ public class CombatController : MonoBehaviour{
 		int numOfCombatants = combatRadius.OverlapCollider (cf2d, combatantColliders);
 
 		if (numOfCombatants == 0) {
-			Debug.Log("nobody in combat");
 			return;
 		}
 
@@ -79,12 +78,13 @@ public class CombatController : MonoBehaviour{
 
 		// if no valid targets then combat should end
 		HasWon(combatant, targetList);
-		yield return null;
+		//yield return null;
 
-		combatant.StartTurn(targetList);
-
+		combatant.StartTurn();
 		do {
-			combatant.MakeAttack(targetList);
+			//combatant.MakeAttack(targetList);
+
+			yield return StartCoroutine(combatant.PerformTurn(targetList));
 
 			// kill any dead targets
 			targetList.FindAll((target) => {
@@ -104,7 +104,6 @@ public class CombatController : MonoBehaviour{
 	void HasWon(AbstractCreature combatant, List<AbstractCreature> targetList) {
 		if (targetList.Count == 0) {
 			if (combatant.CompareTag("Player")) {
-				Debug.Log("Players won");
 				GameObject.Find("Canvas/CombatCenterText").GetComponent<CombatTextController>().displayWinner("Players won!");
 				foreach(var player in players) {
 					if (player != null) {
@@ -112,7 +111,6 @@ public class CombatController : MonoBehaviour{
 					}
 				}
 			} else {
-				Debug.Log("Monsters won");
 				GameObject.Find("Canvas/CombatCenterText").GetComponent<CombatTextController>().displayWinner("Monsters won!");
 
 			}
