@@ -14,7 +14,7 @@ public class PlayerController : AbstractCreature {
 
 	// Used for combat UI
 	public CombatTextController ctc;
-    public PlayerUIController playerUIController;
+	public PlayerUIController playerUIController;
 
 	void Awake(){
 		SpawnPlayer ();
@@ -22,15 +22,13 @@ public class PlayerController : AbstractCreature {
 
 	void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
-        currentHealth = maxHealth;
+		currentHealth = maxHealth;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (!inCombat) {
 			Move (speed);
-		} else {
-			//ProcessCombat();
 		}
 	}
 
@@ -41,7 +39,6 @@ public class PlayerController : AbstractCreature {
 
 		if (Mathf.Abs(moveHorizontal) > 0.1 || Mathf.Abs(moveVertical) > 0.1) {
 			rb2d.velocity = new Vector2 (moveHorizontal, moveVertical) * speed;
-
 			// Update animation controller
 			if (moveHorizontal > 0) {
 				//East
@@ -56,12 +53,8 @@ public class PlayerController : AbstractCreature {
 				//South
 				this.GetComponent<Animator>().SetInteger("Direction", 4);
 			}
-
 		} else {
 			rb2d.velocity = new Vector2 (0, 0);
-
-			// Set the animation to idle
-			//this.GetComponent<Animator>().SetInteger("Direction", -1);
 		}
 
 		if (!Input.anyKey)
@@ -71,67 +64,56 @@ public class PlayerController : AbstractCreature {
 		}
 	}
 
-	/*private void ProcessCombat() {
-		if (Input.GetKeyDown(KeyCode.Space)) {
-			//readyToAttack = targetCreature != null;
-		}
-
-		if (Input.GetMouseButtonDown(0)) {
-			ClickOnTarget ();
-		}
-	}*/
-
 	public override IEnumerator PerformTurn(List<AbstractCreature> validTargetList){
 		bool turnEnded = false;
 		bool targetSelected = false;
-        int maxEnemiesHit = 1;
-        int enemiesUnderAttack = 0;
-        AbstractCreature potentialTarget = null;
-        List<AbstractCreature> targetsBeingAttacked = new List<AbstractCreature>();
+		int maxEnemiesHit = 1;
+		int enemiesUnderAttack = 0;
+		AbstractCreature potentialTarget = null;
+		List<AbstractCreature> targetsBeingAttacked = new List<AbstractCreature>();
 
 		while (!turnEnded) {
-            if(potentialTarget== null)
-            {
-                this.ctc.updateText("Click Enemy to mark for attack.\n Target: ");
-            }
+			if(potentialTarget== null)
+			{
+				this.ctc.updateText("Click Enemy to mark for attack.\n Target: ");
+			}
 
-            Debug.Log ("Player turn");
-            yield return new WaitUntil(() => Input.anyKey);
+			Debug.Log ("Player turn");
+			yield return new WaitUntil(() => Input.anyKey);
 			if(Input.GetKeyDown(KeyCode.E)){
 				turnEnded = true;
 			}
 
 			if(Input.GetKeyDown(KeyCode.M)){
-                Debug.Log("Move action intiated. Click where you want to go!");
-                Camera cam = Camera.main;
-                transform.position = cam.ScreenToWorldPoint(Input.mousePosition);
+				Debug.Log("Move action intiated. Click where you want to go!");
+				Camera cam = Camera.main;
+				transform.position = cam.ScreenToWorldPoint(Input.mousePosition);
 			}
 
-            if (Input.GetKeyDown(KeyCode.I))
-            {
-                //Use some item
-            }
+			if (Input.GetKeyDown(KeyCode.I))
+			{
+				//Use some item
+			}
 
-			if(Input.GetMouseButtonDown(0) && !targetSelected){
-                potentialTarget = (ClickOnTarget());
-                if(potentialTarget == null)
-                {        
-                    continue;
-                }
-                this.ctc.updateText("Click Enemy to mark for attack.\nTarget: " +
-                potentialTarget.name + "\n Health: " + potentialTarget.currentHealth +
-                "\n\nPress Space to preform attack.");
-                if (potentialTarget != null && enemiesUnderAttack != maxEnemiesHit) {
-                    targetsBeingAttacked.Add(potentialTarget);
-                    enemiesUnderAttack++;
+			if(Input.GetMouseButtonDown(0)){
+				potentialTarget = (ClickOnTarget());
+				if(potentialTarget == null)
+				{        
+					continue;
+				}
+				this.ctc.updateText("Click Enemy to mark for attack.\nTarget: " +
+				potentialTarget.name + "\n Health: " + potentialTarget.currentHealth +
+				"\n\nPress Space to preform attack.");
+				if (potentialTarget != null && enemiesUnderAttack != maxEnemiesHit) {
+					targetsBeingAttacked.Add(potentialTarget);
+					enemiesUnderAttack++;
 					targetSelected = true;
 				}
 			} 
 
-
 			if (Input.GetKeyDown (KeyCode.Space) && targetSelected && enemiesUnderAttack == maxEnemiesHit) {
 				MakeAttack (targetsBeingAttacked);
-                turnEnded = true;
+				turnEnded = true;
 			}
 		}
 
@@ -184,37 +166,36 @@ public class PlayerController : AbstractCreature {
 		transform.position = GameObject.Find ("PlayerSpawnPoint").transform.position;
 	}
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Food"))
-        {
-            if (currentHealth + 5 > maxHealth)
-            {
-                currentHealth = maxHealth;
-            } else
-            {
-                currentHealth += 5;
-            }
-            playerUIController.PickupEvent("Healed for 5 hit points!");
-            Destroy(other.gameObject);
-        }
+	void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.gameObject.CompareTag("Food"))
+		{
+			if (currentHealth + 5 > maxHealth)
+			{
+				currentHealth = maxHealth;
+			} else
+			{
+				currentHealth += 5;
+			}
+			playerUIController.PickupEvent("Healed for 5 hit points!");
+			Destroy(other.gameObject);
+		}
 
-        if (other.gameObject.CompareTag("Weapon"))
-        {
-            playerUIController.PickupEvent("Picked up a weapon! Your strength has increased by 1 point!");
-            attackPower += 1;
-            Destroy(other.gameObject);
-        }
+		if (other.gameObject.CompareTag("Weapon"))
+		{
+			playerUIController.PickupEvent("Picked up a weapon! Your strength has increased by 1 point!");
+			attackPower += 1;
+			Destroy(other.gameObject);
+		}
 
-        if (other.gameObject.CompareTag("Armor"))
-        {
-            playerUIController.PickupEvent("You got some armor! Your health has permanently increased by 2 points!");
-            currentHealth += 2;
-            maxHealth += 2;
-            Destroy(other.gameObject);
-        }
-
-    }
+		if (other.gameObject.CompareTag("Armor"))
+		{
+			playerUIController.PickupEvent("You got some armor! Your health has permanently increased by 2 points!");
+			currentHealth += 2;
+			maxHealth += 2;
+			Destroy(other.gameObject);
+		}
+	}
 
 	void OnCollisionEnter2D(Collision2D other){
 		if(other.gameObject.CompareTag("Enemy")){
@@ -227,9 +208,5 @@ public class PlayerController : AbstractCreature {
 			ctc.enableText();
 			ctc.updateText("Click Enemy to mark for attack: ");
 		}
-
-
-
-    
 	}
 }

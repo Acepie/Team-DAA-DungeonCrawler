@@ -21,7 +21,7 @@ public class AbstractEnemy : AbstractCreature {
 		rb2d = GetComponent<Rigidbody2D> ();
 		ani = GetComponent<Animator> ();
 		lastMoveTimeStamp = -moveCD;
-        currentHealth = maxHealth;
+		currentHealth = maxHealth;
 	}
 	
 	// Update is called once per frame
@@ -30,7 +30,6 @@ public class AbstractEnemy : AbstractCreature {
 			Move (speed);
 		}
 	}
-
 
 	public override IEnumerator PerformTurn(List<AbstractCreature> targets){
 		MakeAttack (targets);
@@ -57,7 +56,6 @@ public class AbstractEnemy : AbstractCreature {
 			ani.SetInteger ("Direction", moveDirection);
 			lastMoveTimeStamp = Time.time;
 		}
-
 
 		switch (moveDirection) {
 		case 1:
@@ -92,13 +90,9 @@ public class AbstractEnemy : AbstractCreature {
 		revertToNormalSprite();
 	}
 
-	public virtual void swapToCombatSprite(){
+	public virtual void swapToCombatSprite(){}
 
-	}
-
-	public virtual void revertToNormalSprite(){
-
-	}
+	public virtual void revertToNormalSprite(){}
 
 	public override void StartTurn(){}
 }

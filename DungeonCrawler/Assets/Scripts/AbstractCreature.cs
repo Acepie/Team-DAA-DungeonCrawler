@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class AbstractCreature : MonoBehaviour {
 
 	public int currentHealth;
-    public int maxHealth;
+	public int maxHealth;
 	public float speed;
 
 	protected bool inCombat;
