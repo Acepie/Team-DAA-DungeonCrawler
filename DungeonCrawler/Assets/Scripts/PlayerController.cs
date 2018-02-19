@@ -40,14 +40,18 @@ public class PlayerController : AbstractCreature {
 			rb2d.velocity = new Vector2 (moveHorizontal, moveVertical) * speed;
 
 			// Update animation controller
-			if (moveVertical > 0) {
-				this.GetComponent<Animator>().SetInteger("Direction", 0);
-			} else if (moveVertical < 0) {
+			if (moveHorizontal > 0) {
+				//East
 				this.GetComponent<Animator>().SetInteger("Direction", 1);
-			} else if (moveHorizontal > 0) {
+			} else if (moveHorizontal < 0) {
+				//West
 				this.GetComponent<Animator>().SetInteger("Direction", 2);
-			} else {
+			} else if (moveVertical > 0) {
+				//North
 				this.GetComponent<Animator>().SetInteger("Direction", 3);
+			} else {
+				//South
+				this.GetComponent<Animator>().SetInteger("Direction", 4);
 			}
 
 		} else {
