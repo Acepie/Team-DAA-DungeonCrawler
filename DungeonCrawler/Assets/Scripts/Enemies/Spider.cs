@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sorcereress : AbstractEnemy
+public class Spider : MonoBehaviour
 {
 
 }
