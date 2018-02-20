@@ -4,15 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /* Handles the skills for the player
-    *Skillbar - Array of skills attached to the player object. Set on Awake()
-    *skillText - UI Text element that informs player of outcome of performing a skill
-    *fadeTextPlaying - Bool to keep track of if fadeText coroutine is playing to prevent overlap
-    *skillDescription - Potential UI element for skill flavor text
-    *skillPerformed - Bool to determine if skill was performed succesfully. Used for player to determine if action point cost should be consumed and end turn conditions
-    *coroutine - FadeText Coroutine
+	*Skillbar - Array of skills attached to the player object. Set on Awake()
+	*skillText - UI Text element that informs player of outcome of performing a skill
+	*fadeTextPlaying - Bool to keep track of if fadeText coroutine is playing to prevent overlap
+	*skillDescription - Potential UI element for skill flavor text
+	*skillPerformed - Bool to determine if skill was performed succesfully. Used for player to determine if action point cost should be consumed and end turn conditions
+	*coroutine - FadeText Coroutine
 */
 
-public class SkillHandler : MonoBehaviour {
+public class SkillHandler : MonoBehaviour
+{
 
     private AbstractSkill[] skillBar;
     public Text skillText;
@@ -42,7 +43,7 @@ public class SkillHandler : MonoBehaviour {
     }
 
     // Performs a skill at a given index within the skillbar
-    public void performSkillAtIndex(int i, AbstractCreature target)
+    public void performSkillAtIndex(int i, AbstractCreature target, PlayerData data)
     {
         i -= 1;
         if (i < 0 || i >= skillBar.Length)
@@ -51,9 +52,10 @@ public class SkillHandler : MonoBehaviour {
             SkillEvent("No skill found!");
             skillPerformed = false;
             return;
-        } else
+        }
+        else
         {
-            SkillEvent(skillBar[i].attemptSkill(target));
+            SkillEvent(skillBar[i].attemptSkill(target, data));
             skillPerformed = skillBar[i].skillSuccessful;
         }
     }
@@ -67,6 +69,14 @@ public class SkillHandler : MonoBehaviour {
             {
                 s.decrementCooldownCountdown();
             }
+        }
+    }
+
+    public void resetCooldowns()
+    {
+        foreach (AbstractSkill s in skillBar)
+        {
+            s.resetCooldown();
         }
     }
 

@@ -2,20 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AbstractEnemy : AbstractCreature {
+public class AbstractEnemy : AbstractCreature
+{
 
-	private float moveDuration;
-	private float lastMoveTimeStamp;
-	public float moveCD = 1.0f;
-	private int maxAttackDamage = 1;
+    private float moveDuration;
+    private float lastMoveTimeStamp;
+    public float moveCD = 1.0f;
+    private int maxAttackDamage = 1;
 
 
-	private float aggroRadius;
-	private int moveDirection;
+    private float aggroRadius;
+    private int moveDirection;
 
-	Rigidbody2D rb2d;
+    Rigidbody2D rb2d;
 
-	Animator ani;
+    Animator ani;
 
     public RuntimeAnimatorController combatAnimControl;
     public RuntimeAnimatorController normalAnimControl;
@@ -28,87 +29,95 @@ public class AbstractEnemy : AbstractCreature {
 
 
     // Use this for initialization
-    void Start () {
-		rb2d = GetComponent<Rigidbody2D> ();
-		ani = GetComponent<Animator> ();
-		lastMoveTimeStamp = -moveCD;
-		currentHealth = maxHealth;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		if (!inCombat) {
-			Move (speed);
-		}
-	}
+    void Start()
+    {
+        rb2d = GetComponent<Rigidbody2D>();
+        ani = GetComponent<Animator>();
+        lastMoveTimeStamp = -moveCD;
+        currentHealth = maxHealth;
+    }
 
-	public override IEnumerator PerformTurn(List<AbstractCreature> targets){
-		MakeAttack (targets);
-		yield return null;
-	}
-	public override void  MakeAttack(List<AbstractCreature> targets){
+    // Update is called once per frame
+    void Update()
+    {
+        if (!inCombat)
+        {
+            Move(speed);
+        }
+    }
 
-		int attackDamage = 0;
-		attackDamage = Random.Range (1, maxAttackDamage + 1);
-		AbstractCreature target = targets[Random.Range(0, targets.Count)];
-		Debug.Log("Enemy attacking " + target.name);
-		Debug.Log (target.name + " has"  + target.currentHealth + "health");
-		target.UnderAttack(attackDamage);
-	}
+    public override IEnumerator PerformTurn(List<AbstractCreature> targets)
+    {
+        MakeAttack(targets);
+        yield return null;
+    }
+    public void MakeAttack(List<AbstractCreature> targets)
+    {
 
-	public override void OnDeath(){
-		Destroy (this.gameObject);
-		//Animate Death
-	}
+        int attackDamage = 0;
+        attackDamage = Random.Range(1, maxAttackDamage + 1);
+        AbstractCreature target = targets[Random.Range(0, targets.Count)];
+        target.UnderAttack(attackDamage);
+    }
 
-	public override void Move(float speed){
-		if (Time.time - lastMoveTimeStamp > moveCD) {
-			moveDirection = Random.Range (1, 5);
-			ani.SetInteger ("Direction", moveDirection);
-			lastMoveTimeStamp = Time.time;
-		}
+    public override void OnDeath()
+    {
+        Destroy(this.gameObject);
+        //Animate Death
+    }
 
-		switch (moveDirection) {
-		case 1:
-				rb2d.velocity = new Vector2 (speed, 0);
-				break;
-		case 2:
-				rb2d.velocity = new Vector2 (-speed, 0);
-				break;
-		case 3:
-				rb2d.velocity = new Vector2 (0, speed);
-				break;
-		case 4:
-				rb2d.velocity = new Vector2 (0, -speed);
-				break;
-		}
-	}
+    public override void Move(float speed)
+    {
+        if (Time.time - lastMoveTimeStamp > moveCD)
+        {
+            moveDirection = Random.Range(1, 5);
+            ani.SetInteger("Direction", moveDirection);
+            lastMoveTimeStamp = Time.time;
+        }
 
-	public override bool TurnOver()
-	{
-		return true;
-	}
+        switch (moveDirection)
+        {
+            case 1:
+                rb2d.velocity = new Vector2(speed, 0);
+                break;
+            case 2:
+                rb2d.velocity = new Vector2(-speed, 0);
+                break;
+            case 3:
+                rb2d.velocity = new Vector2(0, speed);
+                break;
+            case 4:
+                rb2d.velocity = new Vector2(0, -speed);
+                break;
+        }
+    }
 
-	public override void CombatStarted ()
-	{
-		speed = 0;
-		swapToCombatAnimations ();
-	}
+    public override bool TurnOver()
+    {
+        return true;
+    }
 
-	public override void CombatEnded ()
-	{
-		base.CombatEnded ();
-		revertToNormalAnimations();
-	}
+    public override void CombatStarted()
+    {
+        speed = 0;
+        swapToCombatAnimations();
+    }
+
+    public override void CombatEnded()
+    {
+        base.CombatEnded();
+        revertToNormalAnimations();
+    }
 
     private void swapToCombatAnimations()
     {
         ani.runtimeAnimatorController = combatAnimControl;
     }
 
-    private void revertToNormalAnimations(){
+    private void revertToNormalAnimations()
+    {
         ani.runtimeAnimatorController = normalAnimControl;
     }
 
-	public override void StartTurn(){}
+    public override void StartTurn() { }
 }

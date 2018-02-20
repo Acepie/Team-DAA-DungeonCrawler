@@ -2,21 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicAttack : AbstractSkill {
+public class BasicAttack : AbstractSkill
+{
 
-    private int attackDamage = 1;
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         skillName = "Basic Attack";
-        skillDescription = "Deal " + attackDamage + " damage to the target ";
-        skillOnUseText = "Hit for " + attackDamage + " damage";
+        skillDescription = "A basic attack that deals damage to the target";
         skillCost = 1;
         skillCooldown = 1;
-	}
+    }
 
-    protected override bool performSkill(AbstractCreature target)
+    protected override bool performSkill(AbstractCreature target, PlayerData data)
     {
-        target.UnderAttack(attackDamage);
+        int damage = data.attackpower;
+        skillOnUseText = "Hit for " + damage + " damage";
+        target.UnderAttack(damage);
         return true;
     }
 }

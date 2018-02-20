@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /* Skill interface for inheritance.
-    *skillCooldown - Number of turns skills will be unavailable
-    *turnsUntilOffCD - Number of remaining turns until skill is available. Based on skillCooldown
-    *skillCost - 'Action Point' cost to use skill, potential feature for future
-    *skillName - Name of skill
-    *skillDescription - Text to display on skill hover - UI element
-    *skillOnUseText - Combat Log text to display when the skill is used successfully
+	*skillCooldown - Number of turns skills will be unavailable
+	*turnsUntilOffCD - Number of remaining turns until skill is available. Based on skillCooldown
+	*skillCost - 'Action Point' cost to use skill, potential feature for future
+	*skillName - Name of skill
+	*skillDescription - Text to display on skill hover - UI element
+	*skillOnUseText - Combat Log text to display when the skill is used successfully
 */
 
-public abstract class AbstractSkill : MonoBehaviour {
+public abstract class AbstractSkill : MonoBehaviour
+{
 
     protected int skillCooldown;
     protected int turnsUntilOffCD;
@@ -27,9 +28,9 @@ public abstract class AbstractSkill : MonoBehaviour {
     /* Attempt to perform the skill. Takes in a target for the skill to be used on
        *Returns a string detailing information about the usage of the skill for the skillHandler to use
     */
-    public string attemptSkill(AbstractCreature target)
+    public string attemptSkill(AbstractCreature target, PlayerData data)
     {
-        if (performSkill(target))
+        if (performSkill(target, data))
         {
             skillSuccessful = true;
             return this.skillOnUseText;
@@ -50,7 +51,7 @@ public abstract class AbstractSkill : MonoBehaviour {
     }
 
     // Performs the skill and all its effects
-    protected abstract bool performSkill(AbstractCreature target);
+    protected abstract bool performSkill(AbstractCreature target, PlayerData data);
 
     public bool skillOnCooldown()
     {
@@ -60,9 +61,14 @@ public abstract class AbstractSkill : MonoBehaviour {
     //Decrements the number of turns remaining until the skill is available to be used again
     public void decrementCooldownCountdown()
     {
-        if(turnsUntilOffCD > 0)
+        if (turnsUntilOffCD > 0)
         {
             turnsUntilOffCD -= 1;
         }
+    }
+
+    public void resetCooldown()
+    {
+        turnsUntilOffCD = 0;
     }
 }

@@ -2,27 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlamAttack : AbstractSkill {
+public class SlamAttack : AbstractSkill
+{
 
-    int attackDamage = 3;
+    public int attackDamage;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         skillName = "Slam!";
         skillCooldown = 2;
         skillCost = 1;
-        skillOnUseText = "Slammed for " + attackDamage + " damage!";
         skillDescription = "Slam your opponent for massive damage! Cooldown of: " + skillCooldown;
-	}
+    }
 
-    protected override bool performSkill(AbstractCreature target)
+    protected override bool performSkill(AbstractCreature target, PlayerData data)
     {
         if (!skillOnCooldown())
         {
-            target.UnderAttack(attackDamage);
+            int damage = attackDamage + data.attackpower;
+            skillOnUseText = "Slammed for " + damage + " damage!";
+            target.UnderAttack(damage);
             turnsUntilOffCD = 2;
             return true;
-        } else
+        }
+        else
         {
             return false;
         }
