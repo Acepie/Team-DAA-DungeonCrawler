@@ -91,11 +91,6 @@ public class AbstractEnemy : AbstractCreature
         }
     }
 
-    public override bool TurnOver()
-    {
-        return true;
-    }
-
     public override void CombatStarted()
     {
         speed = 0;

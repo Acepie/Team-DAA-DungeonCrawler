@@ -14,11 +14,14 @@ public class BasicAttack : AbstractSkill
         skillCooldown = 1;
     }
 
-    protected override bool performSkill(AbstractCreature target, PlayerData data)
+    protected override bool performSkill(List<AbstractCreature> targets, PlayerData data)
     {
+        if (targets.Count != 1) {
+            return false;
+        }
         int damage = data.attackpower;
         skillOnUseText = "Hit for " + damage + " damage";
-        target.UnderAttack(damage);
+        targets[0].UnderAttack(damage);
         return true;
     }
 }

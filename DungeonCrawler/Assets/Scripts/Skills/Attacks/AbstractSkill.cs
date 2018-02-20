@@ -28,9 +28,9 @@ public abstract class AbstractSkill : MonoBehaviour
     /* Attempt to perform the skill. Takes in a target for the skill to be used on
        *Returns a string detailing information about the usage of the skill for the skillHandler to use
     */
-    public string attemptSkill(AbstractCreature target, PlayerData data)
+    public string attemptSkill(List<AbstractCreature> targets, PlayerData data)
     {
-        if (performSkill(target, data))
+        if (performSkill(targets, data))
         {
             skillSuccessful = true;
             return this.skillOnUseText;
@@ -51,7 +51,7 @@ public abstract class AbstractSkill : MonoBehaviour
     }
 
     // Performs the skill and all its effects
-    protected abstract bool performSkill(AbstractCreature target, PlayerData data);
+    protected abstract bool performSkill(List<AbstractCreature> target, PlayerData data);
 
     public bool skillOnCooldown()
     {

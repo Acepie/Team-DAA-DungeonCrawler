@@ -12882,7 +12882,7 @@ MonoBehaviour:
     currentHealth: 10
     maxHealth: 10
     attackpower: 1
-  speed: 2
+  speed: 5
   ctc: {fileID: 622591444}
   playerUIController: {fileID: 1693985747}
 --- !u!212 &1166084601
@@ -13389,7 +13389,7 @@ GameObject:
   - component: {fileID: 1677481649}
   - component: {fileID: 1677481650}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: PlayerHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13700,7 +13700,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1902876896}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -30.68, y: 0.04, z: -0.13809495}
+  m_LocalPosition: {x: 3.4, y: 18.3, z: -0.13809495}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

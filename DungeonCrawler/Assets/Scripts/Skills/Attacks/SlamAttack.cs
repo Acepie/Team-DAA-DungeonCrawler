@@ -16,19 +16,16 @@ public class SlamAttack : AbstractSkill
         skillDescription = "Slam your opponent for massive damage! Cooldown of: " + skillCooldown;
     }
 
-    protected override bool performSkill(AbstractCreature target, PlayerData data)
+    protected override bool performSkill(List<AbstractCreature> targets, PlayerData data)
     {
-        if (!skillOnCooldown())
-        {
-            int damage = attackDamage + data.attackpower;
-            skillOnUseText = "Slammed for " + damage + " damage!";
-            target.UnderAttack(damage);
-            turnsUntilOffCD = 2;
-            return true;
-        }
-        else
-        {
+        if (skillOnCooldown() || targets.Count != 1) {
             return false;
         }
+
+        int damage = attackDamage + data.attackpower;
+        skillOnUseText = "Slammed for " + damage + " damage!";
+        targets[0].UnderAttack(damage);
+        turnsUntilOffCD = 2;
+        return true;
     }
 }

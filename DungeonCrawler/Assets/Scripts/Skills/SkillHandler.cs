@@ -43,7 +43,7 @@ public class SkillHandler : MonoBehaviour
     }
 
     // Performs a skill at a given index within the skillbar
-    public void performSkillAtIndex(int i, AbstractCreature target, PlayerData data)
+    public void performSkillAtIndex(int i, List<AbstractCreature> targets, PlayerData data)
     {
         i -= 1;
         if (i < 0 || i >= skillBar.Length)
@@ -55,7 +55,7 @@ public class SkillHandler : MonoBehaviour
         }
         else
         {
-            SkillEvent(skillBar[i].attemptSkill(target, data));
+            SkillEvent(skillBar[i].attemptSkill(targets, data));
             skillPerformed = skillBar[i].skillSuccessful;
         }
     }

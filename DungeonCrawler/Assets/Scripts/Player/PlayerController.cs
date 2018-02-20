@@ -11,8 +11,6 @@ public class PlayerController : AbstractCreature
     // Used for combat UI
     public CombatTextController ctc;
     public PlayerUIController playerUIController;
-
-    bool turnEnded;
     private SkillHandler skillHandler;
 
     void Awake()
@@ -75,32 +73,23 @@ public class PlayerController : AbstractCreature
     }
 
     /* Coroutine that process the player's Turn. Check for end turn condition (currently set to after using any skill/attack).
-	While end turn condition is not met we get player input to determine what they can do. Options are: End the turn, move their character, or use a skill
-	*/
-
+    While end turn condition is not met we get player input to determine what they can do. Options are: End the turn, move their character, or use a skill
+    */
     public override IEnumerator PerformTurn(List<AbstractCreature> validTargetList)
     {
 
         //Reduce current CD of any skills on CD by 1
         skillHandler.decrementSkillsCooldown();
 
-        turnEnded = false;
-        bool targetSelected = false;
+        bool turnEnded = false;
         bool hasMoved = false;
         AbstractCreature potentialTarget = null;
 
         //Potential values needed for multiattacks
-        int maxEnemiesHit = 1;
-        int enemiesUnderAttack = 0;
-        List<AbstractCreature> targetsBeingAttacked = new List<AbstractCreature>();
+        HashSet<AbstractCreature> targetsBeingAttacked = new HashSet<AbstractCreature>();
 
         while (!turnEnded)
         {
-            if (potentialTarget == null)
-            {
-                this.ctc.updateText("Click Enemy to mark for attack.\n Target: ");
-            }
-
             yield return new WaitUntil(() => Input.anyKey);
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -126,30 +115,38 @@ public class PlayerController : AbstractCreature
                 potentialTarget = ClickOnTarget();
                 if (potentialTarget == null)
                 {
+                    targetsBeingAttacked.Clear();
                     continue;
                 }
-                this.ctc.updateText("Click Enemy to mark for attack.\nTarget: " +
-                potentialTarget.name + "\n Health: " + potentialTarget.data.currentHealth +
-                "\n\nPress 1 to preform attack. Press 2 for a slam attack!");
-                if (potentialTarget != null && enemiesUnderAttack != maxEnemiesHit)
-                {
-                    targetsBeingAttacked.Add(potentialTarget);
-                    enemiesUnderAttack++;
-                    targetSelected = true;
+
+                if (!validTargetList.Contains(potentialTarget)) {
+                    continue;
                 }
+
+                if (targetsBeingAttacked.Contains(potentialTarget)) {
+                    targetsBeingAttacked.Remove(potentialTarget);
+                } else {
+                    targetsBeingAttacked.Add(potentialTarget);
+                }
+
+                string combatText = "Click an enemy to mark for attack.\nTargets:\n";
+                foreach(var t in targetsBeingAttacked) {
+                    combatText += t.name + ":\t Health: " + t.data.currentHealth + "\n";
+                }
+                combatText += "\nPress 1 to perform attack. Press 2 for a slam attack!";
+                this.ctc.updateText(combatText);
             }
 
-            if (Input.GetKeyDown(KeyCode.Alpha1) && targetSelected && enemiesUnderAttack == maxEnemiesHit)
+            if (Input.GetKeyDown(KeyCode.Alpha1) && targetsBeingAttacked.Count > 0)
             {
-                skillHandler.performSkillAtIndex(1, potentialTarget, data);
-                //MakeAttack (targetsBeingAttacked);
+                skillHandler.performSkillAtIndex(1, new List<AbstractCreature>(targetsBeingAttacked), data);
                 turnEnded = skillHandler.skillPerformed;
             }
 
-            if (Input.GetKeyDown(KeyCode.Alpha2) && targetSelected)
+            if (Input.GetKeyDown(KeyCode.Alpha2) && targetsBeingAttacked.Count > 0)
             {
 
-                skillHandler.performSkillAtIndex(2, potentialTarget, data);
+                skillHandler.performSkillAtIndex(2, new List<AbstractCreature>(targetsBeingAttacked), data);
                 turnEnded = skillHandler.skillPerformed;
             }
         }
@@ -174,11 +171,6 @@ public class PlayerController : AbstractCreature
     public override void OnDeath()
     {
         Debug.Log("Defeated!!!");
-    }
-
-    public override bool TurnOver()
-    {
-        return turnEnded;
     }
 
     public override void StartTurn()

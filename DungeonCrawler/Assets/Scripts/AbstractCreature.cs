@@ -24,8 +24,6 @@ public abstract class AbstractCreature : MonoBehaviour
 
     public abstract void OnDeath();
 
-    public abstract bool TurnOver();
-
     public abstract void StartTurn();
 
     public virtual void CombatStarted()

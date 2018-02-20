@@ -11,13 +11,10 @@ public class CombatController : MonoBehaviour
     List<AbstractCreature> players;
 
     /* Create our combat controller for a single combat.
-	  Create a circle collider to determine all combatants that should be in this combat.
-	  All creatures within that combat are considered in combat, and set appropriately.
-	  Create list of nonplayers/players in combat for valid targets during appropraite turns
-	  */
-
-
-
+    Create a circle collider to determine all combatants that should be in this combat.
+    All creatures within that combat are considered in combat, and set appropriately.
+    Create list of nonplayers/players in combat for valid targets during appropraite turns
+    */
     void Awake()
     {
         ContactFilter2D cf2d = new ContactFilter2D();
@@ -101,23 +98,19 @@ public class CombatController : MonoBehaviour
         HasWon(combatant, targetList);
 
         combatant.StartTurn();
-        do
+        yield return StartCoroutine(combatant.PerformTurn(targetList));
+
+        // kill any dead targets
+        targetList.FindAll((target) =>
         {
-            yield return StartCoroutine(combatant.PerformTurn(targetList));
+            return target.IsDead();
+        }).ForEach((d) =>
+        {
+            targetList.Remove(d);
+            d.OnDeath();
+        });
 
-            // kill any dead targets
-            targetList.FindAll((target) =>
-            {
-                return target.IsDead();
-            }).ForEach((d) =>
-            {
-                targetList.Remove(d);
-                d.OnDeath();
-            });
-            HasWon(combatant, targetList);
-            yield return null;
-        } while (!combatant.TurnOver());
-
+        HasWon(combatant, targetList);
         turnCount = (turnCount + 1) % combatants.Count;
         yield return null;
     }
