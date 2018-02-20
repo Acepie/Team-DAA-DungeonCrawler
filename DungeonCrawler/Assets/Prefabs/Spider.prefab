@@ -117,8 +117,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4570a353f7efc1b479b14a4e0047ed26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 5
-  maxHealth: 5
+  data:
+    currentHealth: 5
+    maxHealth: 5
+    attackpower: 1
   speed: 1.2
   moveCD: 1
   combatAnimControl: {fileID: 9100000, guid: 60c8c502d6ca40049aaf83c49a8393e6, type: 2}

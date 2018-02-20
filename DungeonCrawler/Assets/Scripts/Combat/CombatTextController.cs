@@ -11,25 +11,11 @@ public class CombatTextController : MonoBehaviour
     private Text t;
     private float startTime;
     private float displayTime = 2.0f;
-    private bool needsToDisable;
 
     // Use this for initialization
     void Start()
     {
         this.t = this.GetComponent<Text>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-        // determine if we need to disable the text field. 
-        if (needsToDisable && (Time.time - startTime >= displayTime))
-        {
-            // If we've waited long enough
-            t.text = "";
-            t.enabled = false;
-        }
     }
 
     public void updateText(string newText)
@@ -40,21 +26,19 @@ public class CombatTextController : MonoBehaviour
 
     public void displayWinner(string newText)
     {
-        enableText();
-        t.text = newText;
-        this.startTime = Time.time;
-        needsToDisable = true;
+        updateText(newText);
+        StartCoroutine("disableText");
 
     }
 
     public void enableText()
     {
         t.enabled = true;
-        needsToDisable = false;
     }
 
-    public void disableText()
+    IEnumerator disableText()
     {
+        yield return new WaitForSeconds(displayTime);
         t.enabled = false;
     }
 }

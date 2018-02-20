@@ -99,7 +99,6 @@ public class CombatController : MonoBehaviour
 
         // if no valid targets then combat should end
         HasWon(combatant, targetList);
-        //yield return null;
 
         combatant.StartTurn();
         do

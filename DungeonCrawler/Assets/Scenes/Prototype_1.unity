@@ -12878,13 +12878,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf6df0e02f03c09478fb61ec31a58844, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 10
-  maxHealth: 10
+  data:
+    currentHealth: 10
+    maxHealth: 10
+    attackpower: 1
   speed: 2
   ctc: {fileID: 622591444}
   playerUIController: {fileID: 1693985747}
-  data:
-    attackpower: 1
 --- !u!212 &1166084601
 SpriteRenderer:
   m_ObjectHideFlags: 0

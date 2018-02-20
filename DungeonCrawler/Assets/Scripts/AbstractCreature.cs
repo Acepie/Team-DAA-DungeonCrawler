@@ -5,8 +5,7 @@ using UnityEngine;
 public abstract class AbstractCreature : MonoBehaviour
 {
 
-    public int currentHealth;
-    public int maxHealth;
+    public PlayerData data;
     public float speed;
 
     protected bool inCombat;
@@ -15,12 +14,12 @@ public abstract class AbstractCreature : MonoBehaviour
 
     public virtual void UnderAttack(int damageTaken)
     {
-        currentHealth -= damageTaken;
+        data.currentHealth -= damageTaken;
     }
 
     public virtual bool IsDead()
     {
-        return currentHealth <= 0;
+        return data.currentHealth <= 0;
     }
 
     public abstract void OnDeath();

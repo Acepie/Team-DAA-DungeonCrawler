@@ -117,8 +117,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df95e521bc04143419a1c33aa69d262c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 7
-  maxHealth: 7
+  data:
+    currentHealth: 7
+    maxHealth: 7
+    attackpower: 2
   speed: 1.2
   moveCD: 1
   combatAnimControl: {fileID: 9100000, guid: 9c3e6297995d12c4eb7832d976d4c139, type: 2}
