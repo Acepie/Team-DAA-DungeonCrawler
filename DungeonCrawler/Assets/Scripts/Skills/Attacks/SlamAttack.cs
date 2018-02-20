@@ -11,19 +11,20 @@ public class SlamAttack : AbstractSkill {
         skillName = "Slam!";
         skillCooldown = 2;
         skillCost = 1;
+        skillOnUseText = "Slammed for " + attackDamage + " damage!";
         skillDescription = "Slam your opponent for massive damage! Cooldown of: " + skillCooldown;
 	}
 
-    public override void performSkill()
+    protected override bool performSkill(AbstractCreature target)
     {
         if (!skillOnCooldown())
         {
             target.UnderAttack(attackDamage);
             turnsUntilOffCD = 2;
+            return true;
         } else
         {
-            // "Skill is on cooldown!"
-            //Notify player somehow!
+            return false;
         }
     }
 }

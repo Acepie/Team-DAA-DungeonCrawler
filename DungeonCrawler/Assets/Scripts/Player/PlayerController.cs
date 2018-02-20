@@ -67,12 +67,17 @@ public class PlayerController : AbstractCreature {
 	}
 
 	public override IEnumerator PerformTurn(List<AbstractCreature> validTargetList){
+
+        //Reduce current CD of any skills on CD by 1
         skillHandler.decrementSkillsCooldown();
+
         turnEnded = false;
 		bool targetSelected = false;
-		int maxEnemiesHit = 1;
+        AbstractCreature potentialTarget = null;
+
+        //Potential values needed for multiattacks
+        int maxEnemiesHit = 1;
 		int enemiesUnderAttack = 0;
-		AbstractCreature potentialTarget = null;
 		List<AbstractCreature> targetsBeingAttacked = new List<AbstractCreature>();
 
 		while (!turnEnded) {
@@ -114,17 +119,16 @@ public class PlayerController : AbstractCreature {
 			} 
 
 			if (Input.GetKeyDown (KeyCode.Alpha1) && targetSelected && enemiesUnderAttack == maxEnemiesHit) {
-                skillHandler.getSkillAtIndex(1).selectTarget(potentialTarget);
-                skillHandler.getSkillAtIndex(1).performSkill();
-				//MakeAttack (targetsBeingAttacked);
-				turnEnded = true;
+                skillHandler.performSkillAtIndex(1, potentialTarget);
+                //MakeAttack (targetsBeingAttacked);
+                turnEnded = skillHandler.skillPerformed;
 			}
 
             if(Input.GetKeyDown (KeyCode.Alpha2) && targetSelected)
             {
-                skillHandler.getSkillAtIndex(2).selectTarget(potentialTarget);
-                skillHandler.getSkillAtIndex(2).performSkill();
-                turnEnded = true;
+
+                skillHandler.performSkillAtIndex(2, potentialTarget);
+                turnEnded = skillHandler.skillPerformed;
             }
 		}
 

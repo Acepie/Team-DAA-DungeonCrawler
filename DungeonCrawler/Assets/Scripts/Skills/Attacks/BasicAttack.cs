@@ -9,13 +9,14 @@ public class BasicAttack : AbstractSkill {
 	void Start () {
         skillName = "Basic Attack";
         skillDescription = "Deal " + attackDamage + " damage to the target ";
-
+        skillOnUseText = "Hit for " + attackDamage + " damage";
         skillCost = 1;
         skillCooldown = 1;
 	}
 
-    public override void performSkill()
+    protected override bool performSkill(AbstractCreature target)
     {
         target.UnderAttack(attackDamage);
+        return true;
     }
 }

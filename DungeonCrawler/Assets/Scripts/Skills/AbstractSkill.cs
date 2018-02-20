@@ -11,15 +11,33 @@ public abstract class AbstractSkill : MonoBehaviour {
 
     protected string skillName;
     protected string skillDescription;
+    protected string skillOnUseText;
 
-    protected AbstractCreature target;
+    public bool skillSuccessful;
 
-    public virtual void selectTarget(AbstractCreature t)
+    public string attemptSkill(AbstractCreature target)
     {
-        target = t;
+        if (performSkill(target))
+        {
+            skillSuccessful = true;
+            return this.skillOnUseText;
+        }
+        else
+        {
+            if (this.skillOnCooldown())
+            {
+                skillSuccessful = false;
+                return this.skillName + " is on cooldown for " + turnsUntilOffCD + " more turns";
+            }
+            else
+            {
+                skillSuccessful = false;
+                return "Skill performed unsuccessfully";
+            }
+        }
     }
 
-    public abstract void performSkill();
+    protected abstract bool performSkill(AbstractCreature target);
 
     public bool skillOnCooldown()
     {
