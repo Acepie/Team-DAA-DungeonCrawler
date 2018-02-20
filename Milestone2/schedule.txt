@@ -1,0 +1,125 @@
+Checkpoint 1
+(✔) Game has a room with walls the player can't walk through (M)
+(✔) Game progresses in turns (M)
+      UPDATE:
+	(✔) Combat is in turns
+	(✔) Over world exploration is fluid
+(✔) Be able to move and attack with character (M)
+(✔) Enemies able to move and attack character (M)
+(✔) Enemies can be killed (M)
+(X) Enemies deal variable damage (M)
+(X) Ranged attack and melee for player and monsters (S)
+(✔) Enemies have aggro radius & simple pathfinding (S)
+
+
+Checkpoint 2
+3 different classes to play with/as (M)
+      Update:
+	Classes should have unique skills (S)
+3 different abilities to each class (M)
+UI available for the player to see health/mana/skills (M)
+Must have at least 3 levels (M)
+Levels have traps and treasures (S)
+Equipment for the player to pick up (S)
+Player interactables exist (S) 
+Allow player to restart (S)
+Secret rooms (C)
+Dialogue/ story elements (C)
+
+
+Final
+Player death = game over (M)
+Level up (M)
+Sprites (M)
+Enemies have different skills akin to player (S)
+Randomized level generation (C)
+Random enemy spawn locations (C)
+Semi-permenance from previous playthroughs (C)
+Central hub between levels or between playthroughs (C)
+
+See below for more details and ideas
+
+
++-------+
+| Musts |
++-------+
+Game System:
+-Game progresses in turns
+  * Wait on player input
+  * Automatically move monsters
+-Player death = game over
+
+Player:
+-Be able to move and attack with character
+-3 different classes to play with/as
+-Level up
+-3 different abilities to each class
+-UI available for the player to see health/mana/skills
+
+Enemies:
+-Be able to move and attack character
+  * Block player movement
+  * Move randomly
+  * Move preprogrammed
+-Can be killed
+-Deal variable damage
+
+Levels:
+-Must have at least 3 levels
+  * Walls that block the player from moving
+  * Transition between levels
+
+Sprites:
+-Player character
+-Walls/ floor
+-Monster
+
++---------+
+| Should: |
++---------+
+
+Player:
+-Allow player to restart
+  * Level
+  * Game
+
+-Equipment
+  * "Replace Current" inventory system
+  * Weapons
+  * Sprites
+
+Enemies:
+-Vulnerabilities/Resistances to damage types
+-Aggro radius & simple pathfinding
+-Different skills akin to player (3 for should, more than 3 are could)
+  * Ranged
+  * Defence
+  * Magic
+  * AOE
+  * etc.
+
+Levels:
+-Have traps
+-Have treasures
+-Player interactables
+  * Keys
+
++---------+
+| Coulds: |
++---------+
+
+Player:
+-Semi-permenance from previous playthroughs (stat boosts, items, char unlocks)
+
+
+Enemies:
+-Random enemy spawn locations
+-Enemy journal log, detailing vulnerabilities/resistances & descriptions
+
+
+Levels:
+-Randomized level generation
+-Secret rooms
+-Central hub between levels or between playthroughs
+
+
