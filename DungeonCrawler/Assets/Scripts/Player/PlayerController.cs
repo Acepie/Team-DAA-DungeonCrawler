@@ -17,14 +17,16 @@ public class PlayerController : AbstractCreature {
     public int attackPower;
     private AbstractCreature targetCreature;
     private SkillHandler skillHandler;
+
     void Awake(){
 		SpawnPlayer ();
-	}
+        rb2d = GetComponent<Rigidbody2D>();
+        skillHandler = GetComponent<SkillHandler>();
+        currentHealth = maxHealth;
+    }
 
 	void Start () {
-		rb2d = GetComponent<Rigidbody2D> ();
-        skillHandler = GetComponent<SkillHandler>();
-		currentHealth = maxHealth;
+
 	}
 	
 	// Update is called once per frame
@@ -66,6 +68,10 @@ public class PlayerController : AbstractCreature {
 		}
 	}
 
+    /* Coroutine that process the player's Turn. Check for end turn condition (currently set to after using any skill/attack).
+    While end turn condition is not met we get player input to determine what they can do. Options are: End the turn, move their character, or use a skill
+    */
+
 	public override IEnumerator PerformTurn(List<AbstractCreature> validTargetList){
 
         //Reduce current CD of any skills on CD by 1
@@ -73,6 +79,7 @@ public class PlayerController : AbstractCreature {
 
         turnEnded = false;
 		bool targetSelected = false;
+        bool hasMoved = false;
         AbstractCreature potentialTarget = null;
 
         //Potential values needed for multiattacks
@@ -91,10 +98,12 @@ public class PlayerController : AbstractCreature {
 				turnEnded = true;
 			}
 
-			if(Input.GetKeyDown(KeyCode.M)){
-				Debug.Log("Move action intiated. Click where you want to go!");
-				Camera cam = Camera.main;
+			if(Input.GetKeyDown(KeyCode.M) && !hasMoved){
+				ctc.updateText("Move action intiated. Click where you want to go!");
+                yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+                Camera cam = Camera.main;
 				transform.position = cam.ScreenToWorldPoint(Input.mousePosition);
+                hasMoved = true;
 			}
 
 			if (Input.GetKeyDown(KeyCode.I))

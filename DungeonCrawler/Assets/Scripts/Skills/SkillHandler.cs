@@ -3,6 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/* Handles the skills for the player
+    *Skillbar - Array of skills attached to the player object. Set on Awake()
+    *skillText - UI Text element that informs player of outcome of performing a skill
+    *fadeTextPlaying - Bool to keep track of if fadeText coroutine is playing to prevent overlap
+    *skillDescription - Potential UI element for skill flavor text
+    *skillPerformed - Bool to determine if skill was performed succesfully. Used for player to determine if action point cost should be consumed and end turn conditions
+    *coroutine - FadeText Coroutine
+*/
+
 public class SkillHandler : MonoBehaviour {
 
     private AbstractSkill[] skillBar;
@@ -19,10 +28,7 @@ public class SkillHandler : MonoBehaviour {
         skillBar = GetComponents<AbstractSkill>();
     }
 
-    void Start() {
-
-    }
-
+    //Allow player to set their own skills for a future skillbar
     public void setSkillAtIndex(int i, AbstractSkill skilltoSet)
     {
         //Incoming  value will be of keyboard input (1-9), set i to match array indexing
@@ -35,6 +41,7 @@ public class SkillHandler : MonoBehaviour {
         skillBar[i] = skilltoSet;
     }
 
+    // Performs a skill at a given index within the skillbar
     public void performSkillAtIndex(int i, AbstractCreature target)
     {
         i -= 1;
@@ -51,6 +58,7 @@ public class SkillHandler : MonoBehaviour {
         }
     }
 
+    //Decrements all skill's remaining cooldown until available again
     public void decrementSkillsCooldown()
     {
         foreach (AbstractSkill s in skillBar)
@@ -62,6 +70,7 @@ public class SkillHandler : MonoBehaviour {
         }
     }
 
+    //Displays text for usage of a skill
     private void SkillEvent(string s)
     {
         if (fadeTextPlaying)
@@ -74,6 +83,7 @@ public class SkillHandler : MonoBehaviour {
         StartCoroutine(coroutine);
     }
 
+    //Fades the skillText
     private IEnumerator fadeText(Text t, float duration)
     {
         fadeTextPlaying = true;

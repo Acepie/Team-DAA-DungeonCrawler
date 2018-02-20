@@ -9,6 +9,14 @@ public class CombatController : MonoBehaviour{
 	List<AbstractCreature> nonplayers;
 	List<AbstractCreature> players;
 
+    /* Create our combat controller for a single combat.
+      Create a circle collider to determine all combatants that should be in this combat.
+      All creatures within that combat are considered in combat, and set appropriately.
+      Create list of nonplayers/players in combat for valid targets during appropraite turns
+      */
+
+
+
 	void Awake() {
 		ContactFilter2D cf2d = new ContactFilter2D();
 		cf2d.layerMask = 12; // Layer 12 is Player Layer, Where enemies will be as well
@@ -49,6 +57,7 @@ public class CombatController : MonoBehaviour{
 		StartCoroutine("DoCombat");
 	}
 
+
 	IEnumerator DoCombat(){
 		while (true) {
 			AbstractCreature combatant = combatants[turnCount];
@@ -79,8 +88,6 @@ public class CombatController : MonoBehaviour{
 
 		combatant.StartTurn();
 		do {
-			//combatant.MakeAttack(targetList);
-
 			yield return StartCoroutine(combatant.PerformTurn(targetList));
 
 			// kill any dead targets

@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 55913801}
   - component: {fileID: 55913800}
   m_Layer: 5
-  m_Name: Skill Text
+  m_Name: SkillText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13018,7 +13018,7 @@ GameObject:
   - component: {fileID: 1181758952}
   - component: {fileID: 1181758951}
   m_Layer: 5
-  m_Name: Player Health
+  m_Name: PlayerHealth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13138,7 +13138,7 @@ GameObject:
   - component: {fileID: 1273456428}
   - component: {fileID: 1273456427}
   m_Layer: 5
-  m_Name: Player Pickup Notification
+  m_Name: PlayerPickupNotification
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
