@@ -23,7 +23,7 @@ public class PlayerUIController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		healthText.text = "Health: " + player.currentHealth.ToString() + "/" + player.maxHealth.ToString();
-    playerHealthSlider.fillAmount = ((float)player.currentHealth) / ((float)player.maxHealth);
+        //playerHealthSlider.fillAmount = ((float)player.currentHealth) / ((float)player.maxHealth);
 	}
 
 	public void PickupEvent(string s)

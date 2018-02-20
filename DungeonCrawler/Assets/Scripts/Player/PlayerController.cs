@@ -7,16 +7,17 @@ public class PlayerController : AbstractCreature {
 
 
 	Rigidbody2D rb2d;
-	bool hasAttacked;
-	private bool readyToAttack;
-	public int attackPower;
-	private AbstractCreature targetCreature;
 
 	// Used for combat UI
 	public CombatTextController ctc;
 	public PlayerUIController playerUIController;
 
-	void Awake(){
+    bool turnEnded;
+    bool hasAttacked;
+    public int attackPower;
+    private AbstractCreature targetCreature;
+
+    void Awake(){
 		SpawnPlayer ();
 	}
 
@@ -65,7 +66,7 @@ public class PlayerController : AbstractCreature {
 	}
 
 	public override IEnumerator PerformTurn(List<AbstractCreature> validTargetList){
-		bool turnEnded = false;
+        turnEnded = false;
 		bool targetSelected = false;
 		int maxEnemiesHit = 1;
 		int enemiesUnderAttack = 0;
@@ -78,7 +79,6 @@ public class PlayerController : AbstractCreature {
 				this.ctc.updateText("Click Enemy to mark for attack.\n Target: ");
 			}
 
-			Debug.Log ("Player turn");
 			yield return new WaitUntil(() => Input.anyKey);
 			if(Input.GetKeyDown(KeyCode.E)){
 				turnEnded = true;
@@ -141,6 +141,9 @@ public class PlayerController : AbstractCreature {
 				} else {
 					t.UnderAttack (attackPower);
 					hasAttacked = true;
+
+                    // Currently ending turn after attacking, should create a button to click that ends the player's turn once no more actions can be taken
+                    turnEnded = true;
 				}
 			}
 		}
@@ -153,13 +156,12 @@ public class PlayerController : AbstractCreature {
 
 	public override bool TurnOver()
 	{
-		return hasAttacked;
+		return turnEnded;
 	}
 
 	public override void StartTurn()
 	{
 		hasAttacked = false;
-		readyToAttack = false;
 	}
 
 	public void SpawnPlayer(){

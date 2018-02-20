@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1924186500491498}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.58, y: 6.08, z: 0}
+  m_LocalPosition: {x: 12.68, y: 7.76, z: 0}
   m_LocalScale: {x: 2, y: 2.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -122,7 +122,9 @@ MonoBehaviour:
   speed: 1.2
   moveCD: 1
   combatsprite: {fileID: 21300000, guid: 187c54a6fb4f71141ac2829dceaae9e7, type: 3}
+  normalSprite: {fileID: 21300000, guid: 2e0a82499eb2dd44b8a2c2a8b2c61d8a, type: 3}
   combatAnimControl: {fileID: 9100000, guid: 9c3e6297995d12c4eb7832d976d4c139, type: 2}
+  normalAnimControl: {fileID: 9100000, guid: dbb52a3b8dc66754c8c6fc92d00e54e4, type: 2}
 --- !u!212 &212802252192443726
 SpriteRenderer:
   m_ObjectHideFlags: 1

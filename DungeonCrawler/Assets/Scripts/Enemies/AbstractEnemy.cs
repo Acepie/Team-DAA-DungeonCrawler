@@ -16,8 +16,19 @@ public class AbstractEnemy : AbstractCreature {
 	Rigidbody2D rb2d;
 
 	Animator ani;
-	// Use this for initialization
-	void Start () {
+
+    public RuntimeAnimatorController combatAnimControl;
+    public RuntimeAnimatorController normalAnimControl;
+
+    void Awake()
+    {
+        ani = GetComponent<Animator>();
+    }
+
+
+
+    // Use this for initialization
+    void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
 		ani = GetComponent<Animator> ();
 		lastMoveTimeStamp = -moveCD;
@@ -81,18 +92,23 @@ public class AbstractEnemy : AbstractCreature {
 	public override void CombatStarted ()
 	{
 		speed = 0;
-		swapToCombatSprite ();
+		swapToCombatAnimations ();
 	}
 
 	public override void CombatEnded ()
 	{
 		base.CombatEnded ();
-		revertToNormalSprite();
+		revertToNormalAnimations();
 	}
 
-	public virtual void swapToCombatSprite(){}
+    private void swapToCombatAnimations()
+    {
+        ani.runtimeAnimatorController = combatAnimControl;
+    }
 
-	public virtual void revertToNormalSprite(){}
+    private void revertToNormalAnimations(){
+        ani.runtimeAnimatorController = normalAnimControl;
+    }
 
 	public override void StartTurn(){}
 }

@@ -11986,7 +11986,7 @@ Tilemap:
   - serializedVersion: 1
     m_DirtyIndex: 0
   - serializedVersion: 1
-    m_DirtyIndex: 118
+    m_DirtyIndex: 0
   - serializedVersion: 1
     m_DirtyIndex: 0
 --- !u!19719996 &166927694
@@ -12398,11 +12398,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4824041460917272, guid: 8c2a1491f69a22540a6a8a8b08c9e69f, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -19.85
+      value: -19.9
       objectReference: {fileID: 0}
     - target: {fileID: 4824041460917272, guid: 8c2a1491f69a22540a6a8a8b08c9e69f, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 6.85
+      value: 7.22
       objectReference: {fileID: 0}
     - target: {fileID: 4824041460917272, guid: 8c2a1491f69a22540a6a8a8b08c9e69f, type: 2}
       propertyPath: m_LocalPosition.z
@@ -12768,9 +12768,9 @@ MonoBehaviour:
   currentHealth: 0
   maxHealth: 10
   speed: 2
-  attackPower: 2
   ctc: {fileID: 622591444}
   playerUIController: {fileID: 1693985747}
+  attackPower: 2
 --- !u!212 &1166084601
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -13124,6 +13124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthText: {fileID: 1181758951}
   eventText: {fileID: 1273456427}
+  playerHealthSlider: {fileID: 0}
 --- !u!4 &1693985748
 Transform:
   m_ObjectHideFlags: 0
