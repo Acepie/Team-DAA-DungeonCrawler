@@ -8,7 +8,7 @@ public class PlayerUIController : MonoBehaviour {
 	private static PlayerController player;
 	public Text healthText;
 	public Text eventText;
-  public Image playerHealthSlider;
+    public Image playerHealthSlider;
 
 	private bool fadeTextPlaying;
 	private IEnumerator coroutine;
@@ -17,6 +17,7 @@ public class PlayerUIController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		player = GameObject.Find("player").GetComponent<PlayerController>();
+        Debug.Log(player.name);
 		
 	}
 	

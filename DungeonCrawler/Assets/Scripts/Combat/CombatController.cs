@@ -5,7 +5,6 @@ using UnityEngine;
 public class CombatController : MonoBehaviour{
 
 	List<AbstractCreature> combatants;
-	private int roundCount;
 	private int turnCount;
 	List<AbstractCreature> nonplayers;
 	List<AbstractCreature> players;
@@ -45,8 +44,6 @@ public class CombatController : MonoBehaviour{
 		}
 		
 		Destroy(combatRadius);
-
-		roundCount = 0;
 		turnCount = 0;
 
 		StartCoroutine("DoCombat");

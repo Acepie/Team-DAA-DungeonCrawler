@@ -16,13 +16,14 @@ public class PlayerController : AbstractCreature {
     bool hasAttacked;
     public int attackPower;
     private AbstractCreature targetCreature;
-
+    private SkillHandler skillHandler;
     void Awake(){
 		SpawnPlayer ();
 	}
 
 	void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
+        skillHandler = GetComponent<SkillHandler>();
 		currentHealth = maxHealth;
 	}
 	
@@ -66,6 +67,7 @@ public class PlayerController : AbstractCreature {
 	}
 
 	public override IEnumerator PerformTurn(List<AbstractCreature> validTargetList){
+        skillHandler.decrementSkillsCooldown();
         turnEnded = false;
 		bool targetSelected = false;
 		int maxEnemiesHit = 1;
@@ -103,7 +105,7 @@ public class PlayerController : AbstractCreature {
 				}
 				this.ctc.updateText("Click Enemy to mark for attack.\nTarget: " +
 				potentialTarget.name + "\n Health: " + potentialTarget.currentHealth +
-				"\n\nPress Space to preform attack.");
+				"\n\nPress 1 to preform attack. Press 2 for a slam attack!");
 				if (potentialTarget != null && enemiesUnderAttack != maxEnemiesHit) {
 					targetsBeingAttacked.Add(potentialTarget);
 					enemiesUnderAttack++;
@@ -111,10 +113,19 @@ public class PlayerController : AbstractCreature {
 				}
 			} 
 
-			if (Input.GetKeyDown (KeyCode.Space) && targetSelected && enemiesUnderAttack == maxEnemiesHit) {
-				MakeAttack (targetsBeingAttacked);
+			if (Input.GetKeyDown (KeyCode.Alpha1) && targetSelected && enemiesUnderAttack == maxEnemiesHit) {
+                skillHandler.getSkillAtIndex(1).selectTarget(potentialTarget);
+                skillHandler.getSkillAtIndex(1).performSkill();
+				//MakeAttack (targetsBeingAttacked);
 				turnEnded = true;
 			}
+
+            if(Input.GetKeyDown (KeyCode.Alpha2) && targetSelected)
+            {
+                skillHandler.getSkillAtIndex(2).selectTarget(potentialTarget);
+                skillHandler.getSkillAtIndex(2).performSkill();
+                turnEnded = true;
+            }
 		}
 
 		yield return null;
