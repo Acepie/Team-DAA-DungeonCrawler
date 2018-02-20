@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,6 +8,7 @@ public class PlayerUIController : MonoBehaviour {
 	private static PlayerController player;
 	public Text healthText;
 	public Text eventText;
+  public Image playerHealthSlider;
 
 	private bool fadeTextPlaying;
 	private IEnumerator coroutine;
@@ -22,6 +23,7 @@ public class PlayerUIController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		healthText.text = "Health: " + player.currentHealth.ToString() + "/" + player.maxHealth.ToString();
+    playerHealthSlider.fillAmount = ((float)player.currentHealth) / ((float)player.maxHealth);
 	}
 
 	public void PickupEvent(string s)
