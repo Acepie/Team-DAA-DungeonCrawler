@@ -14,3 +14,6 @@ https://opengameart.org/content/fantasy-monster-animal-sprites
 Lisence:
 Creative Commons - BY, ShareAlike, 3.0
 https://creativecommons.org/licenses/by-sa/3.0/
+
+Rule Tiles:
+https://github.com/Unity-Technologies/2d-extras
