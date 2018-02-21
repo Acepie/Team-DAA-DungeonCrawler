@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [System.Serializable]
-public class PlayerData
+public class CombatData
 {
     public int currentHealth;
     public int maxHealth;

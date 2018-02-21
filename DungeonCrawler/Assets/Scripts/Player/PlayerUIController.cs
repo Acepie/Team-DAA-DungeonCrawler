@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerUIController : MonoBehaviour
 {
 
-    private static PlayerController player;
+    private static CombatData data;
     public Text healthText;
     public Text eventText;
     public Slider playerHealthSlider;
@@ -18,14 +18,14 @@ public class PlayerUIController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        player = GameObject.Find("player").GetComponent<PlayerController>();
+        data = GameObject.Find("player").GetComponent<PlayerController>().data;
     }
 
     // Update is called once per frame
     void Update()
     {
-        healthText.text = "Health: " + player.data.currentHealth.ToString() + "/" + player.data.maxHealth.ToString();
-        playerHealthSlider.value = ((float)player.data.currentHealth) / ((float)player.data.maxHealth);
+        healthText.text = "Health: " + data.currentHealth.ToString() + "/" + data.maxHealth.ToString();
+        playerHealthSlider.value = ((float)data.currentHealth) / ((float)data.maxHealth);
     }
 
     public void PickupEvent(string s)

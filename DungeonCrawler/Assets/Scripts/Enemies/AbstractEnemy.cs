@@ -4,12 +4,8 @@ using UnityEngine;
 
 public class AbstractEnemy : AbstractCreature
 {
-
-    private float moveDuration;
     private float lastMoveTimeStamp;
     public float moveCD = 1.0f;
-    private int maxAttackDamage = 1;
-
 
     private float aggroRadius;
     private int moveDirection;
@@ -21,15 +17,8 @@ public class AbstractEnemy : AbstractCreature
     public RuntimeAnimatorController combatAnimControl;
     public RuntimeAnimatorController normalAnimControl;
 
-    void Awake()
-    {
-        ani = GetComponent<Animator>();
-    }
-
-
-
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
         ani = GetComponent<Animator>();
@@ -47,16 +36,10 @@ public class AbstractEnemy : AbstractCreature
 
     public override IEnumerator PerformTurn(List<AbstractCreature> targets)
     {
-        MakeAttack(targets);
-        yield return null;
-    }
-    public void MakeAttack(List<AbstractCreature> targets)
-    {
-
-        int attackDamage = 0;
-        attackDamage = Random.Range(1, maxAttackDamage + 1);
+        int attackDamage = Random.Range(1, data.attackpower + 1);
         AbstractCreature target = targets[Random.Range(0, targets.Count)];
         target.UnderAttack(attackDamage);
+        yield return null;
     }
 
     public override void OnDeath()
@@ -112,6 +95,4 @@ public class AbstractEnemy : AbstractCreature
     {
         ani.runtimeAnimatorController = normalAnimControl;
     }
-
-    public override void StartTurn() { }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class AbstractCreature : MonoBehaviour
 {
 
-    public PlayerData data;
+    public CombatData data;
     public float speed;
 
     protected bool inCombat;
@@ -24,7 +24,7 @@ public abstract class AbstractCreature : MonoBehaviour
 
     public abstract void OnDeath();
 
-    public abstract void StartTurn();
+    public virtual void StartTurn(){}
 
     public virtual void CombatStarted()
     {

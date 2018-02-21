@@ -9,7 +9,6 @@ public class CombatTextController : MonoBehaviour
 
 
     private Text t;
-    private float startTime;
     private float displayTime = 2.0f;
 
     // Use this for initialization

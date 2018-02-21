@@ -133,7 +133,6 @@ public class CombatController : MonoBehaviour
             else
             {
                 GameObject.Find("Canvas/CombatCenterText").GetComponent<CombatTextController>().displayWinner("Monsters won!");
-
             }
 
             Destroy(this.gameObject);
