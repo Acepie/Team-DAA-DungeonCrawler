@@ -12299,7 +12299,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -30}
-  m_SizeDelta: {x: 293.33, y: 89.93}
+  m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &622591444
 MonoBehaviour:
@@ -12535,11 +12535,6 @@ Prefab:
     - target: {fileID: 4824041460917272, guid: 8c2a1491f69a22540a6a8a8b08c9e69f, type: 2}
       propertyPath: m_RootOrder
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114222179970737188, guid: 8c2a1491f69a22540a6a8a8b08c9e69f,
-        type: 2}
-      propertyPath: speed
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8c2a1491f69a22540a6a8a8b08c9e69f, type: 2}
@@ -12860,6 +12855,7 @@ GameObject:
   - component: {fileID: 1166084607}
   - component: {fileID: 1166084606}
   - component: {fileID: 1166084608}
+  - component: {fileID: 1166084609}
   m_Layer: 12
   m_Name: player
   m_TagString: Player
@@ -13044,6 +13040,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillSuccessful: 0
   attackDamage: 2
+--- !u!114 &1166084609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1166084599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0927a01e4627f04c96fdf9aa6c3fb24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillSuccessful: 0
 --- !u!1 &1181758949
 GameObject:
   m_ObjectHideFlags: 0
@@ -13700,7 +13708,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1902876896}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.4, y: 18.3, z: -0.13809495}
+  m_LocalPosition: {x: -30.7, y: 0.1, z: -0.13809495}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

@@ -43,7 +43,7 @@ public class SkillHandler : MonoBehaviour
     }
 
     // Performs a skill at a given index within the skillbar
-    public void performSkillAtIndex(int i, List<AbstractCreature> targets, PlayerData data)
+    public void performSkillAtIndex(int i, List<AbstractCreature> targets, CombatData data)
     {
         i -= 1;
         if (i < 0 || i >= skillBar.Length)

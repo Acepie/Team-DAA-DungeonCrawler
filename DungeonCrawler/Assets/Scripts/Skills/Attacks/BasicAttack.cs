@@ -14,9 +14,10 @@ public class BasicAttack : AbstractSkill
         skillCooldown = 1;
     }
 
-    protected override bool performSkill(List<AbstractCreature> targets, PlayerData data)
+    protected override bool performSkill(List<AbstractCreature> targets, CombatData data)
     {
         if (targets.Count != 1) {
+            skillOnUseText = "Can only attack 1 target";
             return false;
         }
         int damage = data.attackpower;

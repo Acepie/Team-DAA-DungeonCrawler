@@ -129,11 +129,11 @@ public class PlayerController : AbstractCreature
                     targetsBeingAttacked.Add(potentialTarget);
                 }
 
-                string combatText = "Click an enemy to mark for attack.\nTargets:\n";
+                string combatText = "Click an enemy to mark/unmark for attack.\nTargets:\n";
                 foreach(var t in targetsBeingAttacked) {
                     combatText += t.name + ":\t Health: " + t.data.currentHealth + "\n";
                 }
-                combatText += "\nPress 1 to perform attack. Press 2 for a slam attack!";
+                combatText += "\nPress 1 to perform attack. Press 2 for a slam attack! Press 3 for a multihit attack.";
                 this.ctc.updateText(combatText);
             }
 
@@ -145,13 +145,24 @@ public class PlayerController : AbstractCreature
 
             if (Input.GetKeyDown(KeyCode.Alpha2) && targetsBeingAttacked.Count > 0)
             {
-
                 skillHandler.performSkillAtIndex(2, new List<AbstractCreature>(targetsBeingAttacked), data);
+                turnEnded = skillHandler.skillPerformed;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha3) && targetsBeingAttacked.Count > 0)
+            {
+                skillHandler.performSkillAtIndex(3, new List<AbstractCreature>(targetsBeingAttacked), data);
                 turnEnded = skillHandler.skillPerformed;
             }
         }
 
         yield return null;
+    }
+
+    public override void StartTurn() {
+        
+        string combatText = "Click an enemy to mark/unmark for attack.\n";
+        this.ctc.updateText(combatText);
     }
 
     private AbstractCreature ClickOnTarget()
@@ -162,7 +173,6 @@ public class PlayerController : AbstractCreature
         if (hit.collider != null && hit.collider.GetComponent<AbstractCreature>() is AbstractEnemy)
         {
             targetCreature = hit.collider.gameObject.GetComponent<AbstractCreature>();
-
         }
 
         return targetCreature;
@@ -171,10 +181,6 @@ public class PlayerController : AbstractCreature
     public override void OnDeath()
     {
         Debug.Log("Defeated!!!");
-    }
-
-    public override void StartTurn()
-    {
     }
 
     public void SpawnPlayer()
@@ -216,16 +222,12 @@ public class PlayerController : AbstractCreature
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("Enemy") && !inCombat)
         {
             inCombat = true;
             GameObject combat = new GameObject("CombatInstance");
             combat.transform.position = transform.position;
             combat.AddComponent<CombatController>();
-
-            // Turn on the UI
-            ctc.enableText();
-            ctc.updateText("Click Enemy to mark for attack: ");
         }
     }
 

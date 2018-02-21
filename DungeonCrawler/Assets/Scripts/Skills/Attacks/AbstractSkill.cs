@@ -28,30 +28,23 @@ public abstract class AbstractSkill : MonoBehaviour
     /* Attempt to perform the skill. Takes in a target for the skill to be used on
        *Returns a string detailing information about the usage of the skill for the skillHandler to use
     */
-    public string attemptSkill(List<AbstractCreature> targets, PlayerData data)
+    public string attemptSkill(List<AbstractCreature> targets, CombatData data)
     {
-        if (performSkill(targets, data))
+        if (this.skillOnCooldown())
         {
-            skillSuccessful = true;
-            return this.skillOnUseText;
+            skillSuccessful = false;
+            return this.skillName + " is on cooldown for " + turnsUntilOffCD + " more turns";
         }
-        else
-        {
-            if (this.skillOnCooldown())
-            {
-                skillSuccessful = false;
-                return this.skillName + " is on cooldown for " + turnsUntilOffCD + " more turns";
-            }
-            else
-            {
-                skillSuccessful = false;
-                return "Skill performed unsuccessfully";
-            }
+
+        skillSuccessful = performSkill(targets, data);
+        if (skillSuccessful) {
+            turnsUntilOffCD = skillCooldown;
         }
+        return this.skillOnUseText;
     }
 
     // Performs the skill and all its effects
-    protected abstract bool performSkill(List<AbstractCreature> target, PlayerData data);
+    protected abstract bool performSkill(List<AbstractCreature> target, CombatData data);
 
     public bool skillOnCooldown()
     {
