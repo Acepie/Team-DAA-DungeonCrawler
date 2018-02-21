@@ -25,7 +25,7 @@ public class PlayerUIController : MonoBehaviour
     void Update()
     {
         healthText.text = "Health: " + player.currentHealth.ToString() + "/" + player.maxHealth.ToString();
-        playerHealthSlider.value = ((float)player.currentHealth) / ((float)player.maxHealth);
+      //  playerHealthSlider.value = ((float)player.currentHealth) / ((float)player.maxHealth);
     }
 
     public void PickupEvent(string s)

@@ -8,6 +8,9 @@ TagManager:
   - Food
   - Armor
   - Weapon
+  - Door
+  - Key
+  - EndZone
   layers:
   - Default
   - TransparentFX
@@ -24,7 +27,7 @@ TagManager:
   - Player
   - 
   - 
-  - 
+  - Background
   - 
   - 
   - 
