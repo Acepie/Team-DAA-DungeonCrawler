@@ -1,7 +1,7 @@
 2-D RPG
 
 Top down, turnbased dungeon crawl game.
-Navigate dangerous traps, fight powerfull
+Navigate dangerous traps, fight powerful
 monsters, grow in skill and level. 
 
 This game is loosly inspired on games such as:

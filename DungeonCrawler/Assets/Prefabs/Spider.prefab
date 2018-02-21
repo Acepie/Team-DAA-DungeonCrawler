@@ -118,9 +118,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-    currentHealth: 5
+    currentHealth: 0
     maxHealth: 5
-    attackpower: 1
+    attackpower: 0
   speed: 1
   moveCD: 1
   combatAnimControl: {fileID: 9100000, guid: 60c8c502d6ca40049aaf83c49a8393e6, type: 2}

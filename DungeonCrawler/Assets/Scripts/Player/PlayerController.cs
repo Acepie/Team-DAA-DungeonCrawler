@@ -20,6 +20,7 @@ public class PlayerController : AbstractCreature
         rb2d = GetComponent<Rigidbody2D>();
         skillHandler = GetComponent<SkillHandler>();
         keysFound = new HashSet<string>();
+        data.currentHealth = data.maxHealth;
     }
 
     // Update is called once per frame
