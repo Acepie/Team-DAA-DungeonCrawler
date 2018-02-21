@@ -22,7 +22,6 @@ public class PlayerController : AbstractCreature
         rb2d = GetComponent<Rigidbody2D>();
         skillHandler = GetComponent<SkillHandler>();
         keysFound = new HashSet<string>();
-        data.attackpower = 1;
     }
 
     // Update is called once per frame
