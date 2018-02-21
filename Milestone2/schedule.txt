@@ -1,4 +1,4 @@
-Checkpoint 1
+﻿Checkpoint 1
 (✔) Game has a room with walls the player can't walk through (M)
 (✔) Game progresses in turns (M)
       UPDATE:
@@ -7,7 +7,7 @@ Checkpoint 1
 (✔) Be able to move and attack with character (M)
 (✔) Enemies able to move and attack character (M)
 (✔) Enemies can be killed (M)
-(X) Enemies deal variable damage (M)
+(X) Enemies deal variable damage (M) (Implemented, but enemies currently only deal 1 damage)
 (X) Ranged attack and melee for player and monsters (S)
 (✔) Enemies have aggro radius & simple pathfinding (S)
 

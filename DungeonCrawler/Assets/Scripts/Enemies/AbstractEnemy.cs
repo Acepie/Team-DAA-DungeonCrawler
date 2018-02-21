@@ -34,6 +34,7 @@ public class AbstractEnemy : AbstractCreature
         rb2d = GetComponent<Rigidbody2D>();
         ani = GetComponent<Animator>();
         lastMoveTimeStamp = -moveCD;
+        data.currentHealth = data.maxHealth;
     }
 
     // Update is called once per frame
