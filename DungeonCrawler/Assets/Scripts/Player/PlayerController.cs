@@ -12,12 +12,14 @@ public class PlayerController : AbstractCreature
     public CombatTextController ctc;
     public PlayerUIController playerUIController;
     private SkillHandler skillHandler;
+    private HashSet<string> keysFound;
 
     void Awake()
     {
         SpawnPlayer();
         rb2d = GetComponent<Rigidbody2D>();
         skillHandler = GetComponent<SkillHandler>();
+        keysFound = new HashSet<string>();
     }
 
     // Update is called once per frame
@@ -218,6 +220,19 @@ public class PlayerController : AbstractCreature
             data.maxHealth += 2;
             Destroy(other.gameObject);
         }
+
+        if (other.gameObject.CompareTag("Key"))
+        {
+            playerUIController.PickupEvent("You found a key! I wonder what it unlocks...");
+
+            keysFound.Add(other.gameObject.GetComponent<KeyItem>().keyName);
+            Destroy(other.gameObject);
+        }
+
+        if (other.gameObject.CompareTag("EndZone"))
+        {
+            playerUIController.PickupEvent("Level Ended! Progressing to next level");
+        }
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -228,6 +243,18 @@ public class PlayerController : AbstractCreature
             GameObject combat = new GameObject("CombatInstance");
             combat.transform.position = transform.position;
             combat.AddComponent<CombatController>();
+        }
+
+        if (other.gameObject.CompareTag("Door"))
+        {
+            if (keysFound.Contains(other.gameObject.GetComponent<LockedDoor>().keyToUnlock))
+            {
+                playerUIController.PickupEvent("The door unlocks!");
+                Destroy(other.gameObject);
+            } else
+            {
+                playerUIController.PickupEvent("You don't have the right key to open this door");
+            }
         }
     }
 
