@@ -13,7 +13,6 @@ public class PlayerController : AbstractCreature
     public PlayerUIController playerUIController;
 
     bool turnEnded;
-    public PlayerData data;
     private SkillHandler skillHandler;
     private HashSet<string> keysFound;
 
@@ -133,7 +132,7 @@ public class PlayerController : AbstractCreature
                     continue;
                 }
                 this.ctc.updateText("Click Enemy to mark for attack.\nTarget: " +
-                potentialTarget.name + "\n Health: " + potentialTarget.currentHealth +
+                potentialTarget.name + "\n Health: " + potentialTarget.data.currentHealth +
                 "\n\nPress 1 to preform attack. Press 2 for a slam attack!");
                 if (potentialTarget != null && enemiesUnderAttack != maxEnemiesHit)
                 {
@@ -198,13 +197,13 @@ public class PlayerController : AbstractCreature
     {
         if (other.gameObject.CompareTag("Food"))
         {
-            if (currentHealth + 5 > maxHealth)
+            if (data.currentHealth + 5 > data.maxHealth)
             {
-                currentHealth = maxHealth;
+                data.currentHealth = data.maxHealth;
             }
             else
             {
-                currentHealth += 5;
+                data.currentHealth += 5;
             }
             playerUIController.PickupEvent("Healed for 5 hit points!");
             Destroy(other.gameObject);
@@ -220,8 +219,8 @@ public class PlayerController : AbstractCreature
         if (other.gameObject.CompareTag("Armor"))
         {
             playerUIController.PickupEvent("You got some armor! Your health has permanently increased by 2 points!");
-            currentHealth += 2;
-            maxHealth += 2;
+            data.currentHealth += 2;
+            data.maxHealth += 2;
             Destroy(other.gameObject);
         }
 
