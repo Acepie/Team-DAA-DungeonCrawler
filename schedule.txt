@@ -12,7 +12,12 @@ Enemies deal variable damage (M)
 Ranged attack and melee for player and monsters (S)
 Enemies have aggro radius & simple pathfinding (S)
 
-
+Feedback:
+"Character should move faster." Problem: Too long periods of nothingness/ little conflict.
+     Sol: Keep map size small, have interesting interactables within rooms.
+"Combat was primarily avoided." Problem: No reason to engage in combat.
+     Sol: Add EXP/Gold/Item drops to monsters to incentivize combat.
+     
 Checkpoint 2
 3 different classes to play with/as (M)
 3 different abilities to each class (M)
