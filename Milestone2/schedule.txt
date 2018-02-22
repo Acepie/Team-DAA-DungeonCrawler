@@ -30,6 +30,30 @@ Secret rooms (C)
 Dialogue/ story elements (C)
 
 
+From playtest updates for Checkpoint 2:
+Level Design
+ - More things to interact with
+ - Smaller levels
+    - Makes interactables closer
+ - Keys need matching doors
+
+UI
+ - Skills Bar
+ - Scrolling Text in one spot
+ - Enemy Health
+ - Damage Pop-Ups
+ - Highlight targeted enemies
+
+Combat
+ - Skills
+ - Auto focus enemies
+ - Consider having a keyboard only combat selecter
+ - Agro radius feels a little arbitrary
+
+
+
+
+
 Final
 Player death = game over (M)
 Level up (M)
