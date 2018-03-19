@@ -13,6 +13,7 @@ public class PlayerController : AbstractCreature
     public PlayerUIController playerUIController;
     private SkillHandler skillHandler;
     private HashSet<string> keysFound;
+    private Animator animator;
 
     void Awake()
     {
@@ -21,6 +22,7 @@ public class PlayerController : AbstractCreature
         skillHandler = GetComponent<SkillHandler>();
         keysFound = new HashSet<string>();
         data.currentHealth = data.maxHealth;
+        animator = this.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -42,36 +44,12 @@ public class PlayerController : AbstractCreature
         {
             rb2d.velocity = new Vector2(moveHorizontal, moveVertical) * speed;
             // Update animation controller
-            if (moveHorizontal > 0)
-            {
-                //East
-                this.GetComponent<Animator>().SetInteger("Direction", 1);
-            }
-            else if (moveHorizontal < 0)
-            {
-                //West
-                this.GetComponent<Animator>().SetInteger("Direction", 2);
-            }
-            else if (moveVertical > 0)
-            {
-                //North
-                this.GetComponent<Animator>().SetInteger("Direction", 3);
-            }
-            else
-            {
-                //South
-                this.GetComponent<Animator>().SetInteger("Direction", 4);
-            }
+            animator.SetFloat("DirectionX", moveHorizontal);
+            animator.SetFloat("DirectionY", moveVertical);
         }
         else
         {
             rb2d.velocity = new Vector2(0, 0);
-        }
-
-        if (!Input.anyKey)
-        {
-            // If nothing is being pressed, then move to idle animation
-            this.GetComponent<Animator>().SetInteger("Direction", -1);
         }
     }
 
@@ -86,7 +64,6 @@ public class PlayerController : AbstractCreature
 
         bool turnEnded = false;
         bool hasMoved = false;
-        AbstractCreature potentialTarget = null;
 
         //Potential values needed for multiattacks
         HashSet<AbstractCreature> targetsBeingAttacked = new HashSet<AbstractCreature>();
@@ -115,7 +92,7 @@ public class PlayerController : AbstractCreature
 
             if (Input.GetMouseButtonDown(0))
             {
-                potentialTarget = ClickOnTarget();
+                AbstractCreature potentialTarget = ClickOnTarget();
                 if (potentialTarget == null)
                 {
                     targetsBeingAttacked.Clear();
@@ -193,33 +170,9 @@ public class PlayerController : AbstractCreature
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Food"))
+        if (other.gameObject.CompareTag("Pickup"))
         {
-            if (data.currentHealth + 5 > data.maxHealth)
-            {
-                data.currentHealth = data.maxHealth;
-            }
-            else
-            {
-                data.currentHealth += 5;
-            }
-            playerUIController.PickupEvent("Healed for 5 hit points!");
-            Destroy(other.gameObject);
-        }
-
-        if (other.gameObject.CompareTag("Weapon"))
-        {
-            playerUIController.PickupEvent("Picked up a weapon! Your strength has increased by 1 point!");
-            data.attackpower += 1;
-            Destroy(other.gameObject);
-        }
-
-        if (other.gameObject.CompareTag("Armor"))
-        {
-            playerUIController.PickupEvent("You got some armor! Your health has permanently increased by 2 points!");
-            data.currentHealth += 2;
-            data.maxHealth += 2;
-            Destroy(other.gameObject);
+            other.gameObject.GetComponent<AbstractPickupItem>().collect(playerUIController, data);
         }
 
         if (other.gameObject.CompareTag("Key"))

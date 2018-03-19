@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4431422623279290}
   - component: {fileID: 212613229327815278}
   - component: {fileID: 58286716572821744}
+  - component: {fileID: 114995864684116218}
   m_Layer: 0
   m_Name: Armor
   m_TagString: Armor
@@ -56,6 +57,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.1
+--- !u!114 &114995864684116218
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1810495833070718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecf6ca054e176cd4586c7b933595c264, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  armorAmount: 2
 --- !u!212 &212613229327815278
 SpriteRenderer:
   m_ObjectHideFlags: 1
