@@ -10,14 +10,17 @@
 (X) Enemies deal variable damage (M) (Implemented, but enemies currently only deal 1 damage)
 (X) Ranged attack and melee for player and monsters (S)
 (✔) Enemies have aggro radius & simple pathfinding (S)
-
+(✔) Skills
+	(✔) Different attak types
+	(✔) Cooldowns
 
 Checkpoint 2
+Mana Bar regulates skill use
 3 different classes to play with/as (M)
       Update:
 	Classes should have unique skills (S)
 3 different abilities to each class (M)
-UI available for the player to see health/mana/skills (M)
+(✔)UI available for the player to see health/mana/skills (M)
 Must have at least 3 levels (M)
 Levels have traps and treasures (S)
 Equipment for the player to pick up (S)
@@ -27,10 +30,34 @@ Secret rooms (C)
 Dialogue/ story elements (C)
 
 
+From playtest updates for Checkpoint 2:
+Level Design
+ - More things to interact with
+ - Smaller levels
+    - Makes interactables closer
+ - Keys need matching doors
+
+UI
+ - Skills Bar
+ - Scrolling Text in one spot
+ - Enemy Health
+ - Damage Pop-Ups
+ - Highlight targeted enemies
+
+Combat
+ - Skills
+ - Auto focus enemies
+ - Consider having a keyboard only combat selecter
+ - Agro radius feels a little arbitrary
+
+
+
+
+
 Final
 Player death = game over (M)
 Level up (M)
-Sprites (M)
+(✔)Sprites (M)
 Enemies have different skills akin to player (S)
 Randomized level generation (C)
 Random enemy spawn locations (C)

@@ -1,0 +1,34 @@
+Playtest notes and main ideas:
+
+Level Design
+ - More things to interact with
+ - Smaller levels
+    - Makes interactables closer
+ - Keys need matching doors
+
+UI
+ - Skills Bar
+ - Scrolling Text in one spot
+ - Enemy Health
+ - Damage Pop-Ups
+ - Highlight targeted enemies
+
+Combat
+ - Skills
+ - Auto focus enemies
+ - Consider having a keyboard only combat selecter
+ - Agro radius feels a little arbitrary
+
+
+Playtest raw notes:
+No incentive to fight
+	Will be added will levels etc.
+Text was a little small for such a high resolution screen
+"Never felt in danger"
+Clicking on enemies was pretty hard
+Most people enjoyed staying in the overworld during combat
+Players assumed touching enemies = death
+
+
+
+
