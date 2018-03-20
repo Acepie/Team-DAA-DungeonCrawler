@@ -98,7 +98,7 @@ Animator:
   m_GameObject: {fileID: 1924186500491498}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: dbb52a3b8dc66754c8c6fc92d00e54e4, type: 2}
+  m_Controller: {fileID: 22100000, guid: a92461ffafe0ef24d9ddfbf1bfb7a179, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -123,8 +123,8 @@ MonoBehaviour:
     attackpower: 2
   speed: 1.2
   moveCD: 1
-  combatAnimControl: {fileID: 9100000, guid: 9c3e6297995d12c4eb7832d976d4c139, type: 2}
-  normalAnimControl: {fileID: 9100000, guid: dbb52a3b8dc66754c8c6fc92d00e54e4, type: 2}
+  combatAnimControl: {fileID: 22100000, guid: f4a30d521ec53af46b6336887d7a76a6, type: 2}
+  normalAnimControl: {fileID: 22100000, guid: a92461ffafe0ef24d9ddfbf1bfb7a179, type: 2}
 --- !u!212 &212802252192443726
 SpriteRenderer:
   m_ObjectHideFlags: 1

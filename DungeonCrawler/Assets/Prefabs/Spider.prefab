@@ -20,10 +20,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4824041460917272}
   - component: {fileID: 212115735613052258}
-  - component: {fileID: 114222179970737188}
   - component: {fileID: 50667526366024288}
   - component: {fileID: 61635433036954202}
   - component: {fileID: 95731667655424150}
+  - component: {fileID: 114222179970737188}
   m_Layer: 12
   m_Name: Spider
   m_TagString: Enemy
@@ -98,7 +98,7 @@ Animator:
   m_GameObject: {fileID: 1202529344318048}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 867dfdb6ba92e0a469070a0f896bc554, type: 2}
+  m_Controller: {fileID: 22100000, guid: 3942f05073260414caaef840af74fdeb, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -123,8 +123,8 @@ MonoBehaviour:
     attackpower: 1
   speed: 1
   moveCD: 1
-  combatAnimControl: {fileID: 9100000, guid: 60c8c502d6ca40049aaf83c49a8393e6, type: 2}
-  normalAnimControl: {fileID: 9100000, guid: 867dfdb6ba92e0a469070a0f896bc554, type: 2}
+  combatAnimControl: {fileID: 22100000, guid: e152b19a802a97b4597cc34c567dd758, type: 2}
+  normalAnimControl: {fileID: 22100000, guid: 3942f05073260414caaef840af74fdeb, type: 2}
 --- !u!212 &212115735613052258
 SpriteRenderer:
   m_ObjectHideFlags: 1
