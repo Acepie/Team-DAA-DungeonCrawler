@@ -8,9 +8,8 @@ public class Boss : AbstractEnemy {
 
     public override void OnDeath()
     {
-        GameObject keyItem = Instantiate(dropKey);
+        GameObject keyItem = Instantiate(dropKey, transform.position, Quaternion.identity);
         keyItem.GetComponent<KeyItem>().keyName = "LevelEndDoorKey";
-        keyItem.transform.position = this.transform.position;
         Destroy(this.gameObject);
     }
 }
