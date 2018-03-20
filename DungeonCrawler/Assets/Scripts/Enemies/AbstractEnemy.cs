@@ -49,7 +49,7 @@ public class AbstractEnemy : AbstractCreature
 
     public override void OnDeath()
     {
-        if (Random.value > 0.5 && dropItem) {
+        if (dropRate > Random.value && dropItem) {
             GameObject item = Instantiate(dropItem, transform.position, Quaternion.identity);
         }
 
