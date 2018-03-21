@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : AbstractCreature
 {
@@ -161,6 +162,7 @@ public class PlayerController : AbstractCreature
     public override void OnDeath()
     {
         Debug.Log("Defeated!!!");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void SpawnPlayer()
