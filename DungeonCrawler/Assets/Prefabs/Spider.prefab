@@ -125,8 +125,9 @@ MonoBehaviour:
   moveCD: 1
   combatAnimControl: {fileID: 22100000, guid: e152b19a802a97b4597cc34c567dd758, type: 2}
   normalAnimControl: {fileID: 22100000, guid: 3942f05073260414caaef840af74fdeb, type: 2}
-  dropItem: {fileID: 1888648712246898, guid: 94e102f3e37f18d46b210d8a320f21a4, type: 2}
-  dropRate: 0.25
+  dropItems:
+  - {fileID: 1888648712246898, guid: 94e102f3e37f18d46b210d8a320f21a4, type: 2}
+  dropRate: 0.3
 --- !u!212 &212115735613052258
 SpriteRenderer:
   m_ObjectHideFlags: 1
