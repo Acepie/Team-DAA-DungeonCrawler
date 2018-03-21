@@ -90,9 +90,12 @@ public class PlayerController : AbstractCreature
 
         //Potential values needed for multiattacks
         HashSet<AbstractCreature> targetsBeingAttacked = new HashSet<AbstractCreature>();
-
+        int count = 0;
         while (!turnEnded)
         {
+            
+            count++;
+            Debug.Log(count);
             yield return new WaitUntil(() => Input.anyKey);
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -115,6 +118,7 @@ public class PlayerController : AbstractCreature
 
             if (Input.GetMouseButtonDown(0))
             {
+                Debug.Log("Clicking");
                 potentialTarget = ClickOnTarget();
                 if (potentialTarget == null)
                 {
@@ -136,26 +140,28 @@ public class PlayerController : AbstractCreature
                 foreach(var t in targetsBeingAttacked) {
                     combatText += t.name + ":\t Health: " + t.data.currentHealth + "\n";
                 }
-                combatText += "\nPress 1 to perform attack. Press 2 for a slam attack! Press 3 for a multihit attack.";
+                combatText += "\nPress 1 to perform attack. Press 2 for a slam attack! Press 3 for a multihit attack. Press 4 for a fireball" ;
                 this.ctc.updateText(combatText);
             }
 
-            if (Input.GetKeyDown(KeyCode.Alpha1) && targetsBeingAttacked.Count > 0)
+            if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                skillHandler.performSkillAtIndex(1, new List<AbstractCreature>(targetsBeingAttacked), data);
-                turnEnded = skillHandler.skillPerformed;
+                turnEnded = skillHandler.performSkillAtIndex(1, new List<AbstractCreature>(targetsBeingAttacked), data, this);
             }
 
-            if (Input.GetKeyDown(KeyCode.Alpha2) && targetsBeingAttacked.Count > 0)
+            if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                skillHandler.performSkillAtIndex(2, new List<AbstractCreature>(targetsBeingAttacked), data);
-                turnEnded = skillHandler.skillPerformed;
+                turnEnded =  skillHandler.performSkillAtIndex(2, new List<AbstractCreature>(targetsBeingAttacked), data, this);
             }
 
-            if (Input.GetKeyDown(KeyCode.Alpha3) && targetsBeingAttacked.Count > 0)
+            if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                skillHandler.performSkillAtIndex(3, new List<AbstractCreature>(targetsBeingAttacked), data);
-                turnEnded = skillHandler.skillPerformed;
+                turnEnded =  skillHandler.performSkillAtIndex(3, new List<AbstractCreature>(targetsBeingAttacked), data, this);
+            }
+
+            if(Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                turnEnded = skillHandler.performSkillAtIndex(4, new List<AbstractCreature>(targetsBeingAttacked), data, this);
             }
         }
 

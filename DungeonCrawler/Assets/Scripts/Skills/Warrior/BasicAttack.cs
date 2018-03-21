@@ -5,6 +5,8 @@ using UnityEngine;
 public class BasicAttack : AbstractSkill
 {
 
+    public Sprite skillIcon;
+
     // Use this for initialization
     void Start()
     {
@@ -12,6 +14,7 @@ public class BasicAttack : AbstractSkill
         skillDescription = "A basic attack that deals damage to the target";
         skillCost = 1;
         skillCooldown = 1;
+        skillRadius = 2;
     }
 
     protected override bool performSkill(List<AbstractCreature> targets, CombatData data)

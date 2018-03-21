@@ -18,6 +18,8 @@ public abstract class AbstractSkill : MonoBehaviour
     protected int turnsUntilOffCD;
 
     protected int skillCost;
+    protected float skillRadius;
+    private GameObject skillRadiusIndicator;
 
     protected string skillName;
     protected string skillDescription;
@@ -25,22 +27,56 @@ public abstract class AbstractSkill : MonoBehaviour
 
     public bool skillSuccessful;
 
+    protected bool skillPrepared = false;
+
     /* Attempt to perform the skill. Takes in a target for the skill to be used on
        *Returns a string detailing information about the usage of the skill for the skillHandler to use
     */
-    public string attemptSkill(List<AbstractCreature> targets, CombatData data)
-    {
+    public string attemptSkill(List<AbstractCreature> targets, CombatData data, AbstractCreature skillUser)
+    {  
         if (this.skillOnCooldown())
         {
-            skillSuccessful = false;
             return this.skillName + " is on cooldown for " + turnsUntilOffCD + " more turns";
         }
 
-        skillSuccessful = performSkill(targets, data);
-        if (skillSuccessful) {
-            turnsUntilOffCD = skillCooldown;
+        if (targets.Count == 0)
+        {
+            return "No targets selected!";
         }
-        return this.skillOnUseText;
+
+        foreach (AbstractCreature t in targets)
+        {
+            if (Vector3.Distance(skillUser.transform.position, t.transform.position) > skillRadius)
+            {
+                return "Target out of range";
+            } 
+        }
+
+        skillSuccessful = performSkill(targets, data);
+        if (skillSuccessful)
+        {
+            turnsUntilOffCD = skillCooldown;
+            return this.skillOnUseText;
+        }
+        else
+            return "Unable to use " + this.skillName + " at this time" ;
+        
+    }
+
+    public string prepareSkill(List<AbstractCreature> targets, CombatData data, AbstractCreature skillUser)
+    {
+        skillSuccessful = false;
+        if (skillPrepared)
+        {
+            Destroy(skillRadiusIndicator);
+            skillPrepared = false;
+            return attemptSkill(targets, data, skillUser);
+        }
+        skillPrepared = true;
+        skillRadiusIndicator = (GameObject)Instantiate(Resources.Load("SRI"));
+        skillRadiusIndicator.transform.localScale = skillRadiusIndicator.transform.localScale * skillRadius;
+        skillRadiusIndicator.transform.position = skillUser.transform.position;
+        return this.skillName + " is ready to be used";
     }
 
     // Performs the skill and all its effects

@@ -43,20 +43,19 @@ public class SkillHandler : MonoBehaviour
     }
 
     // Performs a skill at a given index within the skillbar
-    public void performSkillAtIndex(int i, List<AbstractCreature> targets, CombatData data)
+    public bool performSkillAtIndex(int i, List<AbstractCreature> targets, CombatData data, AbstractCreature skillUser)
     {
         i -= 1;
         if (i < 0 || i >= skillBar.Length)
         {
             //Attempting to get a skill out of array bounds
             SkillEvent("No skill found!");
-            skillPerformed = false;
-            return;
+            return false;
         }
         else
         {
-            SkillEvent(skillBar[i].attemptSkill(targets, data));
-            skillPerformed = skillBar[i].skillSuccessful;
+            SkillEvent(skillBar[i].prepareSkill(targets, data, skillUser));
+            return skillBar[i].skillSuccessful;
         }
     }
 
