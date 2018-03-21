@@ -31989,7 +31989,7 @@ MonoBehaviour:
   data:
     currentHealth: 0
     maxHealth: 15
-    attackpower: 0
+    attackpower: 2
   speed: 0
   moveCD: 1
   combatAnimControl: {fileID: 0}
