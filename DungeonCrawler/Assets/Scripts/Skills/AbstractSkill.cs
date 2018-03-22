@@ -21,9 +21,12 @@ public abstract class AbstractSkill : MonoBehaviour
     protected float skillRadius;
     private GameObject skillRadiusIndicator;
 
+    protected AbstractCreature skillUser;
+
     protected string skillName;
     protected string skillDescription;
     protected string skillOnUseText;
+    protected int ignoreLayer;
 
     public bool skillSuccessful;
 
@@ -32,7 +35,7 @@ public abstract class AbstractSkill : MonoBehaviour
     /* Attempt to perform the skill. Takes in a target for the skill to be used on
        *Returns a string detailing information about the usage of the skill for the skillHandler to use
     */
-    public string attemptSkill(List<AbstractCreature> targets, CombatData data, AbstractCreature skillUser)
+    public string attemptSkill(List<AbstractCreature> targets, CombatData data)
     {  
         if (this.skillOnCooldown())
         {
@@ -46,10 +49,24 @@ public abstract class AbstractSkill : MonoBehaviour
 
         foreach (AbstractCreature t in targets)
         {
-            if (Vector3.Distance(skillUser.transform.position, t.transform.position) > skillRadius)
+            Vector3 start = skillUser.transform.position;
+            Vector3 end = t.transform.position;
+            Vector3 direction = end - start;
+            //Debug.Log(Vector3.Distance(start, end));
+            if (Vector3.Distance(start, end) > skillRadius)
             {
                 return "Target out of range";
-            } 
+            }
+
+            ignoreLayer = 1 << 12;
+            ignoreLayer = ~ignoreLayer;
+
+            RaycastHit2D rayHit = Physics2D.Raycast(start, direction, skillRadius, ignoreLayer);
+           // Debug.Log(rayHit.collider);
+            if(rayHit.collider != t.GetComponent<Collider2D>())
+            {
+                return "Target out of sight";
+            }
         }
 
         skillSuccessful = performSkill(targets, data);
@@ -63,14 +80,15 @@ public abstract class AbstractSkill : MonoBehaviour
         
     }
 
-    public string prepareSkill(List<AbstractCreature> targets, CombatData data, AbstractCreature skillUser)
+    public string prepareSkill(List<AbstractCreature> targets, CombatData data, AbstractCreature su)
     {
+        skillUser = su;
         skillSuccessful = false;
         if (skillPrepared)
         {
             Destroy(skillRadiusIndicator);
             skillPrepared = false;
-            return attemptSkill(targets, data, skillUser);
+            return attemptSkill(targets, data);
         }
         skillPrepared = true;
         skillRadiusIndicator = (GameObject)Instantiate(Resources.Load("SRI"));
@@ -90,6 +108,7 @@ public abstract class AbstractSkill : MonoBehaviour
     //Decrements the number of turns remaining until the skill is available to be used again
     public void decrementCooldownCountdown()
     {
+        
         if (turnsUntilOffCD > 0)
         {
             turnsUntilOffCD -= 1;

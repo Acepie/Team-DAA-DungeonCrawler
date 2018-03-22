@@ -14,6 +14,7 @@ public class SlamAttack : AbstractSkill
         skillCooldown = 2;
         skillCost = 1;
         skillDescription = "Slam your opponent for massive damage! Cooldown of: " + skillCooldown;
+        skillRadius = 2;
     }
 
     protected override bool performSkill(List<AbstractCreature> targets, CombatData data)
