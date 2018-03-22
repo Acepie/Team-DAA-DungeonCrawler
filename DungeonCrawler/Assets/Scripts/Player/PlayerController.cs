@@ -185,6 +185,11 @@ public class PlayerController : AbstractCreature
             Destroy(other.gameObject);
         }
 
+        if (other.gameObject.CompareTag("Switch"))
+        {
+            other.gameObject.GetComponent<Switch>().ActivateSwitch();
+        }
+
         if (other.gameObject.CompareTag("EndZone"))
         {
             playerUIController.PickupEvent("Level Ended! Progressing to next level");

@@ -9,6 +9,7 @@ TagManager:
   - Key
   - EndZone
   - Pickup
+  - Switch
   layers:
   - Default
   - TransparentFX
