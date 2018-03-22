@@ -20,11 +20,15 @@ GameObject:
   m_Component:
   - component: {fileID: 4824041460917272}
   - component: {fileID: 212115735613052258}
-  - component: {fileID: 114222179970737188}
   - component: {fileID: 50667526366024288}
   - component: {fileID: 61635433036954202}
   - component: {fileID: 95731667655424150}
+<<<<<<< HEAD
   m_Layer: 13
+=======
+  - component: {fileID: 114527973068959792}
+  m_Layer: 12
+>>>>>>> master
   m_Name: Spider
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -98,7 +102,7 @@ Animator:
   m_GameObject: {fileID: 1202529344318048}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 867dfdb6ba92e0a469070a0f896bc554, type: 2}
+  m_Controller: {fileID: 22100000, guid: 3942f05073260414caaef840af74fdeb, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -106,7 +110,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114222179970737188
+--- !u!114 &114527973068959792
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -114,7 +118,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1202529344318048}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4570a353f7efc1b479b14a4e0047ed26, type: 3}
+  m_Script: {fileID: 11500000, guid: c85161a38b44a2345b9ed6c061587a7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   data:
@@ -123,8 +127,10 @@ MonoBehaviour:
     attackpower: 1
   speed: 1
   moveCD: 1
-  combatAnimControl: {fileID: 9100000, guid: 60c8c502d6ca40049aaf83c49a8393e6, type: 2}
-  normalAnimControl: {fileID: 9100000, guid: 867dfdb6ba92e0a469070a0f896bc554, type: 2}
+  combatAnimControl: {fileID: 22100000, guid: e152b19a802a97b4597cc34c567dd758, type: 2}
+  normalAnimControl: {fileID: 22100000, guid: 3942f05073260414caaef840af74fdeb, type: 2}
+  dropItem: {fileID: 1888648712246898, guid: 94e102f3e37f18d46b210d8a320f21a4, type: 2}
+  dropRate: 0.1
 --- !u!212 &212115735613052258
 SpriteRenderer:
   m_ObjectHideFlags: 1

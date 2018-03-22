@@ -17,6 +17,10 @@ public class AbstractEnemy : AbstractCreature
     public RuntimeAnimatorController combatAnimControl;
     public RuntimeAnimatorController normalAnimControl;
 
+    public GameObject dropItem;
+    [Range(0, 1)]
+    public float dropRate;
+
     // Use this for initialization
     void Awake()
     {
@@ -45,8 +49,11 @@ public class AbstractEnemy : AbstractCreature
 
     public override void OnDeath()
     {
+        if (dropRate > Random.value && dropItem) {
+            GameObject item = Instantiate(dropItem, transform.position, Quaternion.identity);
+        }
+
         Destroy(this.gameObject);
-        //Animate Death
     }
 
     public override void Move(float speed)
@@ -77,6 +84,7 @@ public class AbstractEnemy : AbstractCreature
 
     public override void CombatStarted()
     {
+        base.CombatStarted();
         speed = 0;
         swapToCombatAnimations();
     }
