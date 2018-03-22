@@ -15,12 +15,16 @@ using UnityEngine.UI;
 public class SkillHandler : MonoBehaviour
 {
 
+    //Refactor skillHandler to receive a skill from hotbar and attempt to perform that skill. To allow control of toggleable radiuses for different skills
+
     private AbstractSkill[] skillBar;
+    AbstractSkill skillToUse;
     public Text skillText;
     private bool fadeTextPlaying;
     public Text skillDescription;
 
     public bool skillPerformed;
+    private bool skillRadiusToggle = false;
 
     private IEnumerator coroutine;
 
@@ -40,6 +44,12 @@ public class SkillHandler : MonoBehaviour
             return;
         }
         skillBar[i] = skilltoSet;
+    }
+
+    public AbstractSkill getSkillAtIndex(int i)
+    {
+        i -= 1;
+        return skillBar[i];
     }
 
     // Performs a skill at a given index within the skillbar

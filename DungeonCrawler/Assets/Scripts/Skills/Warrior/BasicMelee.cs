@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicAttack : AbstractSkill
+public class BasicMelee : AbstractSkill
 {
 
     public Sprite skillIcon;

@@ -18,7 +18,7 @@ public class PlayerUIController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        data = GameObject.Find("player").GetComponent<PlayerController>().data;
+        data = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().data;
     }
 
     // Update is called once per frame

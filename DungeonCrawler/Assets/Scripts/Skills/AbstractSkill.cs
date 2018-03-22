@@ -18,14 +18,17 @@ public abstract class AbstractSkill : MonoBehaviour
     protected int turnsUntilOffCD;
 
     protected int skillCost;
-    protected float skillRadius;
+    public float skillRadius;
     private GameObject skillRadiusIndicator;
 
     protected AbstractCreature skillUser;
 
     protected string skillName;
+    public string SkillName { get { return skillName; } }
     protected string skillDescription;
+    public string SkillDescription { get { return skillDescription; } }
     protected string skillOnUseText;
+    public string SkillOnUseText { get { return skillOnUseText; } }
     protected int ignoreLayer;
 
     public bool skillSuccessful;
@@ -37,16 +40,19 @@ public abstract class AbstractSkill : MonoBehaviour
     */
     public string attemptSkill(List<AbstractCreature> targets, CombatData data)
     {  
+        //Checks to make sure skill is not on CD
         if (this.skillOnCooldown())
         {
             return this.skillName + " is on cooldown for " + turnsUntilOffCD + " more turns";
         }
 
+        //Confirms a target is selected
         if (targets.Count == 0)
         {
             return "No targets selected!";
         }
 
+        //Checks to make sure target(s) are in range
         foreach (AbstractCreature t in targets)
         {
             Vector3 start = skillUser.transform.position;

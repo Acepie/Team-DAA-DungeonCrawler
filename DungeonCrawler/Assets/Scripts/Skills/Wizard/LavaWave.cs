@@ -9,9 +9,9 @@ public class LavaWave : AbstractProjectile {
     // Use this for initialization
     void Start () {
         skillName = "Lava Wave";
-        skillDescription = "Shoot forth a cascading wave of lava";
+        skillDescription = "Shoot forth a cascading wave of lava. Cooldown of: " + skillCooldown;
         skillCost = 2;
-        skillCooldown = 1;
+        skillCooldown = 2;
         skillRadius = 10;
     }
 

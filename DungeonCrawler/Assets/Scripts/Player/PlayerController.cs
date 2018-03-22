@@ -124,7 +124,10 @@ public class PlayerController : AbstractCreature
                 foreach (var t in targetsBeingAttacked) {
                     combatText += t.name + ":\t Health: " + t.data.currentHealth + "\n";
                 }
-                combatText += "\nPress 1 to perform attack. Press 2 for a slam attack! Press 3 for a multihit attack. Press 4 for a fireball. Press 5 for a lava Wave";
+                combatText += "\nSkill available: (1) " + skillHandler.getSkillAtIndex(1).SkillName +
+                    "\n (2)" + skillHandler.getSkillAtIndex(2).SkillName +
+                    "\n (3)" + skillHandler.getSkillAtIndex(3).SkillName +
+                    "\n (4)" + skillHandler.getSkillAtIndex(4).SkillName;
                 this.ctc.updateText(combatText);
             }
 
@@ -146,11 +149,6 @@ public class PlayerController : AbstractCreature
             if(Input.GetKeyDown(KeyCode.Alpha4) && !attackMade)
             {
                 attackMade = skillHandler.performSkillAtIndex(4, new List<AbstractCreature>(targetsBeingAttacked), data, this);
-            }
-
-            if (Input.GetKeyDown(KeyCode.Alpha5) && !attackMade)
-            {
-                attackMade = skillHandler.performSkillAtIndex(5, new List<AbstractCreature>(targetsBeingAttacked), data, this);
             }
 
             if (attackMade)

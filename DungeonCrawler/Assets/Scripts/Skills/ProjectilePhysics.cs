@@ -16,7 +16,6 @@ public class ProjectilePhysics : MonoBehaviour {
     // Update is called once per frame
      void Update()
     {
-        Debug.Log(Vector3.Distance(startPos, transform.position));
         if (Vector3.Distance(transform.position, startPos) > maxTravelDistance)
         {
             Destroy(this.gameObject);
@@ -28,8 +27,7 @@ public class ProjectilePhysics : MonoBehaviour {
         Debug.Log(other.gameObject.tag);
         if ((other.gameObject.CompareTag("Enemy")  || other.gameObject.CompareTag("Player")) && other.gameObject.tag != skillUser.tag)
         {
-            other.gameObject.GetComponent<AbstractCreature>().UnderAttack(1);
-            
+            other.gameObject.GetComponent<AbstractCreature>().UnderAttack(1);        
         }
         else if (other.gameObject.CompareTag("Wall"))
         {
