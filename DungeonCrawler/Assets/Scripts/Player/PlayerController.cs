@@ -100,18 +100,23 @@ public class PlayerController : AbstractCreature
                     continue;
                 }
 
-                if (!validTargetList.Contains(potentialTarget)) {
+                if (!validTargetList.Contains(potentialTarget))
+                {
                     continue;
                 }
 
-                if (targetsBeingAttacked.Contains(potentialTarget)) {
+                if (targetsBeingAttacked.Contains(potentialTarget))
+                {
                     targetsBeingAttacked.Remove(potentialTarget);
-                } else {
+                }
+                else
+                {
                     targetsBeingAttacked.Add(potentialTarget);
                 }
 
                 string combatText = "Click an enemy to mark/unmark for attack.\nTargets:\n";
-                foreach(var t in targetsBeingAttacked) {
+                foreach (var t in targetsBeingAttacked)
+                {
                     combatText += t.name + ":\t Health: " + t.data.currentHealth + "\n";
                 }
                 combatText += "\nPress 1 to perform attack. Press 2 for a slam attack! Press 3 for a multihit attack.";
@@ -140,8 +145,9 @@ public class PlayerController : AbstractCreature
         yield return null;
     }
 
-    public override void StartTurn() {
-        
+    public override void StartTurn()
+    {
+
         string combatText = "Click an enemy to mark/unmark for attack.\n";
         this.ctc.updateText(combatText);
     }
@@ -188,6 +194,7 @@ public class PlayerController : AbstractCreature
         if (other.gameObject.CompareTag("Switch"))
         {
             other.gameObject.GetComponent<Switch>().ActivateSwitch();
+            playerUIController.PickupEvent("A switch has activated! I wonder what it does...");
         }
 
         if (other.gameObject.CompareTag("EndZone"))
@@ -208,11 +215,18 @@ public class PlayerController : AbstractCreature
 
         if (other.gameObject.CompareTag("Door"))
         {
-            if (keysFound.Contains(other.gameObject.GetComponent<LockedDoor>().keyToUnlock))
+            LockedDoor door = other.gameObject.GetComponent<LockedDoor>();
+            if (!door)
+            {
+                return;
+            }
+
+            if (keysFound.Contains(door.keyToUnlock))
             {
                 playerUIController.PickupEvent("The door unlocks!");
                 Destroy(other.gameObject);
-            } else
+            }
+            else
             {
                 playerUIController.PickupEvent("You don't have the right key to open this door");
             }

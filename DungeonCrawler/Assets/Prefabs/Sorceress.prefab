@@ -121,7 +121,7 @@ MonoBehaviour:
     currentHealth: 0
     maxHealth: 7
     attackpower: 2
-  speed: 1.2
+  speed: 1
   moveCD: 1
   combatAnimControl: {fileID: 22100000, guid: f4a30d521ec53af46b6336887d7a76a6, type: 2}
   normalAnimControl: {fileID: 22100000, guid: a92461ffafe0ef24d9ddfbf1bfb7a179, type: 2}
