@@ -128,7 +128,7 @@ MonoBehaviour:
   dropItems:
   - {fileID: 1637233739888350, guid: 5394af506709d3c44a34c92a8a3b87c5, type: 2}
   - {fileID: 1810495833070718, guid: 41ddc2adb5735c4439c03b845c58f06e, type: 2}
-  dropRate: 0.2
+  dropRate: 0.5
 --- !u!212 &212802252192443726
 SpriteRenderer:
   m_ObjectHideFlags: 1

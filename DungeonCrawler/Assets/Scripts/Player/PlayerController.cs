@@ -200,6 +200,7 @@ public class PlayerController : AbstractCreature
         if (other.gameObject.CompareTag("EndZone"))
         {
             playerUIController.PickupEvent("Level Ended! Progressing to next level");
+            other.gameObject.GetComponent<LevelLoader>().LoadLevel();
         }
     }
 

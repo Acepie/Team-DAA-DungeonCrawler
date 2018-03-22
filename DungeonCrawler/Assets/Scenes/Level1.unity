@@ -30137,6 +30137,7 @@ GameObject:
   - component: {fileID: 876575398}
   - component: {fileID: 876575397}
   - component: {fileID: 876575399}
+  - component: {fileID: 876575400}
   m_Layer: 0
   m_Name: NextLevelTeleport
   m_TagString: EndZone
@@ -30217,6 +30218,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.1
+--- !u!114 &876575400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 876575396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54eac7afcab1311498dc1aa05e4e6ae7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelToLoad: Level2
 --- !u!1001 &880067262
 Prefab:
   m_ObjectHideFlags: 0
@@ -31674,7 +31687,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1902876896}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.52, y: 6.88, z: -0.13809495}
+  m_LocalPosition: {x: -13.52, y: 7.04, z: -0.13809495}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
