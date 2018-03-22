@@ -62,22 +62,20 @@ public class PlayerController : AbstractCreature
         //Reduce current CD of any skills on CD by 1
         skillHandler.decrementSkillsCooldown();
 
-        string combatText = "Press E to end your turn \nClick an enemy to mark/unmark for attack.\nTargets:\n";
-        this.ctc.updateText(combatText);
+
         bool turnEnded = false;
         bool hasMoved = false;
-<<<<<<< HEAD
         bool attackMade = false;
         AbstractCreature potentialTarget = null;
-=======
->>>>>>> master
+
 
         //Potential values needed for multiattacks
         HashSet<AbstractCreature> targetsBeingAttacked = new HashSet<AbstractCreature>();
         int count = 0;
         while (!turnEnded)
-        {        
-            if(attackMade && hasMoved)
+        {
+
+            if (attackMade && hasMoved)
             {
                 turnEnded = true;
             }   
@@ -104,7 +102,7 @@ public class PlayerController : AbstractCreature
 
             if (Input.GetMouseButtonDown(0))
             {
-                AbstractCreature potentialTarget = ClickOnTarget();
+                 potentialTarget = ClickOnTarget();
                 if (potentialTarget == null)
                 {
                     targetsBeingAttacked.Clear();
@@ -120,14 +118,14 @@ public class PlayerController : AbstractCreature
                 } else {
                     targetsBeingAttacked.Add(potentialTarget);
                 }
+                string combatText = "Press E to end your turn \nClick an enemy to mark/unmark for attack.\nTargets:\n";
+                
 
-                 
-                this.ctc.updateText(combatText);
                 foreach (var t in targetsBeingAttacked) {
                     combatText += t.name + ":\t Health: " + t.data.currentHealth + "\n";
                 }
                 combatText += "\nPress 1 to perform attack. Press 2 for a slam attack! Press 3 for a multihit attack. Press 4 for a fireball. Press 5 for a lava Wave";
-                
+                this.ctc.updateText(combatText);
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha1) && !attackMade)
@@ -157,9 +155,8 @@ public class PlayerController : AbstractCreature
 
             if (attackMade)
             {
-                combatText = "Attack made! Press E to end your turn";
+               this.ctc.updateText("Attack made! Press E to end your turn");
             }
-            this.ctc.updateText(combatText);
         }
 
         yield return null;
