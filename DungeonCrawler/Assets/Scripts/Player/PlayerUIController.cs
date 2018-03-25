@@ -10,7 +10,9 @@ public class PlayerUIController : MonoBehaviour
     public Text healthText;
     public Text eventText;
     public Slider playerHealthSlider;
+    public GameObject arrow;
 
+    private Canvas canv;
     private bool fadeTextPlaying;
     private IEnumerator coroutine;
 
@@ -18,6 +20,7 @@ public class PlayerUIController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        canv = GameObject.Find("Canvas").GetComponent<Canvas>();
         data = GameObject.Find("player").GetComponent<PlayerController>().data;
     }
 
@@ -52,5 +55,16 @@ public class PlayerUIController : MonoBehaviour
         }
         t.color = new Color(t.color.r, t.color.g, t.color.b, 0);
         fadeTextPlaying = false;
+    }
+
+    public GameObject drawCombatArrows(AbstractCreature target)
+    {
+        var newArrow = Instantiate(this.arrow, new Vector3(0,0,0), Quaternion.identity);
+        newArrow.transform.parent = this.canv.transform;
+        Vector3 camPos = Camera.main.WorldToScreenPoint(target.transform.position);
+        camPos.y += 13;
+        camPos.x -= 13;
+        newArrow.GetComponent<Image>().rectTransform.position = camPos;
+        return newArrow;
     }
 }

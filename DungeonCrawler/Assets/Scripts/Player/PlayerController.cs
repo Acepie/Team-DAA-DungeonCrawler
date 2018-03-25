@@ -60,13 +60,17 @@ public class PlayerController : AbstractCreature
     {
 
         //Reduce current CD of any skills on CD by 1
-        skillHandler.decrementSkillsCooldown();
+        //TODO: Fix the below line of code
+        //skillHandler.decrementSkillsCooldown();
 
         bool turnEnded = false;
         bool hasMoved = false;
 
         //Potential values needed for multiattacks
-        HashSet<AbstractCreature> targetsBeingAttacked = new HashSet<AbstractCreature>();
+        //A collection of arrows drawn on the ui
+        Dictionary<AbstractCreature, GameObject> targetsBeingAttacked = new Dictionary<AbstractCreature, GameObject>();
+
+
 
         while (!turnEnded)
         {
@@ -95,6 +99,11 @@ public class PlayerController : AbstractCreature
                 AbstractCreature potentialTarget = ClickOnTarget();
                 if (potentialTarget == null)
                 {
+                    foreach (var key in targetsBeingAttacked.Keys)
+                    {
+                        // Destroy all the UI objects pointing to the targets
+                        Destroy(targetsBeingAttacked[key]);
+                    }
                     targetsBeingAttacked.Clear();
                     continue;
                 }
@@ -103,14 +112,15 @@ public class PlayerController : AbstractCreature
                     continue;
                 }
 
-                if (targetsBeingAttacked.Contains(potentialTarget)) {
+                if (targetsBeingAttacked.ContainsKey(potentialTarget)) {
+                    Destroy(targetsBeingAttacked[potentialTarget]);
                     targetsBeingAttacked.Remove(potentialTarget);
                 } else {
-                    targetsBeingAttacked.Add(potentialTarget);
+                    targetsBeingAttacked.Add(potentialTarget, playerUIController.drawCombatArrows(potentialTarget));
                 }
 
                 string combatText = "Click an enemy to mark/unmark for attack.\nTargets:\n";
-                foreach(var t in targetsBeingAttacked) {
+                foreach(var t in targetsBeingAttacked.Keys) {
                     combatText += t.name + ":\t Health: " + t.data.currentHealth + "\n";
                 }
                 combatText += "\nPress 1 to perform attack. Press 2 for a slam attack! Press 3 for a multihit attack.";
@@ -119,23 +129,31 @@ public class PlayerController : AbstractCreature
 
             if (Input.GetKeyDown(KeyCode.Alpha1) && targetsBeingAttacked.Count > 0)
             {
-                skillHandler.performSkillAtIndex(1, new List<AbstractCreature>(targetsBeingAttacked), data);
+                var listOfCreatures = new List<AbstractCreature>(targetsBeingAttacked.Keys);
+                skillHandler.performSkillAtIndex(1, listOfCreatures, data);
                 turnEnded = skillHandler.skillPerformed;
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha2) && targetsBeingAttacked.Count > 0)
             {
-                skillHandler.performSkillAtIndex(2, new List<AbstractCreature>(targetsBeingAttacked), data);
+                var listOfCreatures = new List<AbstractCreature>(targetsBeingAttacked.Keys);
+                skillHandler.performSkillAtIndex(2, listOfCreatures, data);
                 turnEnded = skillHandler.skillPerformed;
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha3) && targetsBeingAttacked.Count > 0)
             {
-                skillHandler.performSkillAtIndex(3, new List<AbstractCreature>(targetsBeingAttacked), data);
+                var listOfCreatures = new List<AbstractCreature>(targetsBeingAttacked.Keys);
+                skillHandler.performSkillAtIndex(3, listOfCreatures, data);
                 turnEnded = skillHandler.skillPerformed;
             }
         }
 
+        foreach (var key in targetsBeingAttacked.Keys)
+        {
+            // Destroy any lingering ui elements
+            Destroy(targetsBeingAttacked[key]);
+        }
         yield return null;
     }
 
