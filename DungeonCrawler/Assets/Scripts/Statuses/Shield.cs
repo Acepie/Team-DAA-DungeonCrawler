@@ -14,6 +14,7 @@ public class Shield : AbstractStatus {
         statusName = s;
     }
 
+    public int ShieldHealth { get {return shieldHealth;}}
 
     public override void applyStatus(AbstractCreature target)
     {

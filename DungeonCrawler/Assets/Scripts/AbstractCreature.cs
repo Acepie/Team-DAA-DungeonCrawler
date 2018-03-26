@@ -34,7 +34,7 @@ public abstract class AbstractCreature : MonoBehaviour
 
     public abstract void OnDeath();
 
-    public virtual void StartTurn(){}
+    public abstract void StartTurn();
 
     public virtual void CombatStarted()
     {

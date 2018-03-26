@@ -18,7 +18,7 @@ public class LavaWave : AbstractProjectile {
 
     protected override bool performSkill(List<AbstractCreature> target, CombatData data)
     {
-        fireProjectle(target[0].transform.position);
+        fireProjectle(target[0].transform.position, data.AttackPower);
         return true;
     }
 

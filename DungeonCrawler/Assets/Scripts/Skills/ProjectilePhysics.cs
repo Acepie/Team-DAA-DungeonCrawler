@@ -7,11 +7,10 @@ public class ProjectilePhysics : MonoBehaviour {
     public Vector3 startPos;
     public float maxTravelDistance;
     public AbstractCreature skillUser;
+    private int projectileDamage;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+    public int ProjectileDamage { set { projectileDamage = value; } }
+
 
     // Update is called once per frame
      void Update()
@@ -27,7 +26,7 @@ public class ProjectilePhysics : MonoBehaviour {
         Debug.Log(other.gameObject.tag);
         if ((other.gameObject.CompareTag("Enemy")  || other.gameObject.CompareTag("Player")) && other.gameObject.tag != skillUser.tag)
         {
-            other.gameObject.GetComponent<AbstractCreature>().UnderAttack(1);        
+            other.gameObject.GetComponent<AbstractCreature>().UnderAttack(projectileDamage);        
         }
         else if (other.gameObject.CompareTag("Wall"))
         {

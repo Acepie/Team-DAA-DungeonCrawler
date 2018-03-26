@@ -39,6 +39,8 @@ GameObject:
   - component: {fileID: 4746853303390924}
   - component: {fileID: 212178741513212938}
   - component: {fileID: 114676626154957770}
+  - component: {fileID: 114999144932284686}
+  - component: {fileID: 114928943278889276}
   - component: {fileID: 50782446331247918}
   - component: {fileID: 61218233120562698}
   - component: {fileID: 95959665023635536}
@@ -197,6 +199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillRadius: 0
+  parent: {fileID: 0}
   skillSuccessful: 0
   skillIcon: {fileID: 0}
 --- !u!114 &114462676552742136
@@ -211,6 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillRadius: 8
+  parent: {fileID: 0}
   skillSuccessful: 0
 --- !u!114 &114676626154957770
 MonoBehaviour:
@@ -226,7 +230,11 @@ MonoBehaviour:
   data:
     currentHealth: 0
     maxHealth: 10
-    attackpower: 1
+    attackPower: 30
+    rawAttackPower: 0
+    temporaryHealth: 0
+    stunned: 0
+  statusController: {fileID: 0}
   speed: 5
   ctc: {fileID: 0}
   playerUIController: {fileID: 0}
@@ -241,9 +249,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 341ebe9a1c1241b4098b0f812f5a4613, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 0}
   skillText: {fileID: 0}
   skillDescription: {fileID: 0}
-  skillPerformed: 0
+--- !u!114 &114928943278889276
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1864253727473308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70d35f3d86eae7f459c243fe361e9f22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114950058112435012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -256,9 +275,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillRadius: 0
+  parent: {fileID: 0}
   skillSuccessful: 0
   projectileSpeed: 0
   projectile: {fileID: 0}
+--- !u!114 &114999144932284686
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1864253727473308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ec711b415039144b9a031abc958dcaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!124 &124815567878226880
 Behaviour:
   m_ObjectHideFlags: 1

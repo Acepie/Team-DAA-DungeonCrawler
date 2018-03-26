@@ -23,7 +23,6 @@ public abstract class AbstractSkill : MonoBehaviour
     protected GameObject skillRadiusIndicator;
     public GameObject SkillRadiusIndicator { get { return skillRadiusIndicator; } set { skillRadiusIndicator = value; } }
 
-    protected AbstractCreature skillUser;
     [SerializeField]
     protected AbstractCreature parent;
 
@@ -50,7 +49,7 @@ public abstract class AbstractSkill : MonoBehaviour
     /* Attempt to perform the skill. Takes in a target for the skill to be used on
        *Returns a string detailing information about the usage of the skill for the skillHandler to use
     */
-    public string attemptSkill(List<AbstractCreature> targets, CombatData data)
+    public virtual string attemptSkill(List<AbstractCreature> targets, CombatData data)
     {
         skillPrepared = false;
         //Checks to make sure skill is not on CD

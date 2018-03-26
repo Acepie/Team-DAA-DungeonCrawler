@@ -11,6 +11,7 @@ TagManager:
   - EndZone
   - UIManager
   - Switch
+  - Wall
   layers:
   - Default
   - TransparentFX

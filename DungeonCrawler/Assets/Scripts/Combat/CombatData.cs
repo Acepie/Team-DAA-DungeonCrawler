@@ -16,6 +16,8 @@ public class CombatData
     private int rawAttackPower;
     [SerializeField]
     private int temporaryHealth;
+    [SerializeField]
+    private bool stunned;
 
     public int CurrentHealth
     {
@@ -43,6 +45,12 @@ public class CombatData
     {
         get { return temporaryHealth; }
         set { temporaryHealth = value; }
+    }
+
+    public bool Stunned
+    {
+        get { return stunned; }
+        set { stunned = value; }
     }
 
     public CombatData(int health, int attack)

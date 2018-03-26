@@ -63,9 +63,6 @@ public class PlayerController : AbstractCreature
     public override IEnumerator PerformTurn(List<AbstractCreature> validTargetList)
     {
 
-        //Reduce current CD of any skills on CD by 1
-        skillHandler.decrementSkillsCooldown();
-
 
         bool turnEnded = false;
         bool hasMoved = false;
@@ -89,7 +86,6 @@ public class PlayerController : AbstractCreature
             if (Input.GetKeyDown(KeyCode.E))
             {
                 turnEnded = true;
-                endTurn();
             }
 
             if (Input.GetKeyDown(KeyCode.M) && !hasMoved)
@@ -174,7 +170,10 @@ public class PlayerController : AbstractCreature
 
     public override void StartTurn()
     {
-
+        //Reduce current CD of any skills on CD by 1
+        skillHandler.decrementSkillsCooldown();
+        //Reduce all statuses by 1 turn
+        statusController.reduceStatusDuration();
         string combatText = getInstructionText();
         this.ctc.updateText(combatText);
     }
@@ -283,7 +282,6 @@ public class PlayerController : AbstractCreature
 
     protected override void endTurn()
     {
-        statusController.reduceStatusDuration();
         Debug.Log("Player ending turn");
     }
 }

@@ -9,16 +9,19 @@ public abstract class AbstractProjectile : AbstractSkill
     protected Vector3 projectileDirection;
     public Rigidbody2D projectile;
     protected Vector3 startPos;
+    protected int projectileDamage;
 
 
-    protected void fireProjectle(Vector3 endPos)
+    protected void fireProjectle(Vector3 endPos, int damage)
     {
         
-        projectileDirection = endPos - skillUser.transform.position;
-        Rigidbody2D projectileClone = (Rigidbody2D)Instantiate(projectile, skillUser.transform.position, skillUser.transform.rotation);
+        projectileDirection = endPos - parent.transform.position;
+        Rigidbody2D projectileClone = (Rigidbody2D)Instantiate(projectile, parent.transform.position, parent.transform.rotation);
         projectileClone.velocity = projectileSpeed * projectileDirection;
-        projectileClone.GetComponent<ProjectilePhysics>().startPos = skillUser.transform.position;
-        projectileClone.GetComponent<ProjectilePhysics>().skillUser = skillUser;
+
+        projectileClone.GetComponent<ProjectilePhysics>().startPos = parent.transform.position;
+        projectileClone.GetComponent<ProjectilePhysics>().skillUser = parent;
+        projectileClone.GetComponent<ProjectilePhysics>().ProjectileDamage = damage;
     }
 
 

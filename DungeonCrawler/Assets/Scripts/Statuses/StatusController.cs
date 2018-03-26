@@ -26,7 +26,8 @@ public class StatusController : MonoBehaviour {
             {
                 s.TurnsUntilRemoved -= 1;
             }
-            else
+
+            if(s.TurnsUntilRemoved == 0)
             {
                 s.removeStatus(this.GetComponent<AbstractCreature>());
             }
