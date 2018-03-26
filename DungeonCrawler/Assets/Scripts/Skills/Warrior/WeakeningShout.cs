@@ -15,7 +15,7 @@ public class WeakeningShout : AbstractCloseAoe {
         skillDescription = "Weaken your enemies. Reducing their damage dealt by 50%.\nCooldown: "+ skillCooldown;
         skillRadius = 4;
 
-        w = new Weakened(2, 0.50f);
+        w = new Weakened(2, 0.50f, "Weakened");
     }
 	
 	// Update is called once per frame

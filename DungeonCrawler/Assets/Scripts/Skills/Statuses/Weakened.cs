@@ -14,22 +14,20 @@ public class Weakened : AbstractStatus {
         statusName = "Weakened";
     }
 
-    public Weakened(int d, float a)
+    public Weakened(int d, float a, string s)
     {
         statusDuration = d;
         attackModifier = a;
-
     }
 
-    public override void applyStatus(AbstractCreature target, int duration)
+    public override void applyStatus(AbstractCreature target)
     {
-        TurnsUntilRemoved = StatusDuration;
+        TurnsUntilRemoved = statusDuration;
         target.data.AttackPower = (int)Math.Floor(target.data.AttackPower * attackModifier);
     }
 
     public override void removeStatus(AbstractCreature target)
     {
-        Debug.Log("removing");
         target.data.AttackPower = target.data.RawAttackPower;
     }
 }

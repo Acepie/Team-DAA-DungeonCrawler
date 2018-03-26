@@ -8,15 +8,16 @@ public abstract class AbstractStatus {
     protected int statusDuration;
     protected int turnsUntilRemoved;
     protected string statusName;
-    public int StatusDuration { get { return statusDuration; } }
     public int TurnsUntilRemoved
     {
         get { return turnsUntilRemoved; }
         set { turnsUntilRemoved = value; }
     }
 
+    public string StatusName { get { return statusName; } }
 
-    public abstract void applyStatus(AbstractCreature target, int duration);
+
+    public abstract void applyStatus(AbstractCreature target);
     public abstract void removeStatus(AbstractCreature target);
 
 }

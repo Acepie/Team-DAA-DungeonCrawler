@@ -31037,11 +31037,27 @@ Transform:
   m_PrefabParentObject: {fileID: 4729164021983310, guid: 1bf26779d86be4548bf17503739edf58,
     type: 2}
   m_PrefabInternal: {fileID: 1793512061}
+--- !u!1 &1602224342 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1702203653249938, guid: 19785279ecb89854d9c3099ae9f168bc,
+    type: 2}
+  m_PrefabInternal: {fileID: 1091640396}
 --- !u!4 &1602224343 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4282306771842152, guid: 19785279ecb89854d9c3099ae9f168bc,
     type: 2}
   m_PrefabInternal: {fileID: 1091640396}
+--- !u!114 &1602224344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1602224342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ec711b415039144b9a031abc958dcaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1616944243 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4729164021983310, guid: 1bf26779d86be4548bf17503739edf58,
@@ -31892,6 +31908,7 @@ MonoBehaviour:
     maxHealth: 15
     attackPower: 0
     rawAttackPower: 0
+    temporaryHealth: 0
   statusController: {fileID: 0}
   speed: 0
   moveCD: 1

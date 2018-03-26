@@ -15,7 +15,7 @@ public class StatusController : MonoBehaviour {
     public void addStatus(AbstractStatus s)
     {
         statuses.Add(s);
-        s.applyStatus(this.GetComponent<AbstractCreature>(), s.StatusDuration);
+        s.applyStatus(this.GetComponent<AbstractCreature>());
     }
 
     public void reduceStatusDuration()

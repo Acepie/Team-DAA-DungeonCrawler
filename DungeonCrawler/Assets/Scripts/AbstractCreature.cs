@@ -15,6 +15,15 @@ public abstract class AbstractCreature : MonoBehaviour
 
     public virtual void UnderAttack(int damageTaken)
     {
+        if(data.TemporaryHealth > 0)
+        {
+            data.TemporaryHealth -= damageTaken;
+            if(data.TemporaryHealth < 0)
+            {
+                //Overflow damage
+                data.CurrentHealth += data.TemporaryHealth;
+            }
+        } else
         data.CurrentHealth -= damageTaken;
     }
 
