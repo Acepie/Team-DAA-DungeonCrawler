@@ -17,7 +17,7 @@ public class Volley : AbstractSkill
 
     protected override bool performSkill(List<AbstractCreature> targets, CombatData data)
     {
-        int damage = data.attackpower;
+        int damage = data.AttackPower;
         skillOnUseText = "Hit all targets for " + damage + " damage";
         targets.ForEach((t) =>
         {

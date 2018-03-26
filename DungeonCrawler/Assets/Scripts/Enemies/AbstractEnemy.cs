@@ -6,7 +6,8 @@ public class AbstractEnemy : AbstractCreature
 {
     private float lastMoveTimeStamp;
     public float moveCD = 1.0f;
-
+    [SerializeField]
+    protected int exp;
     private float aggroRadius;
     private int moveDirection;
 
@@ -26,8 +27,8 @@ public class AbstractEnemy : AbstractCreature
     {
         rb2d = GetComponent<Rigidbody2D>();
         ani = GetComponent<Animator>();
+        statusController = GetComponent<StatusController>();
         lastMoveTimeStamp = -moveCD;
-        data.currentHealth = data.maxHealth;
     }
 
     // Update is called once per frame
@@ -39,11 +40,14 @@ public class AbstractEnemy : AbstractCreature
         }
     }
 
+
     public override IEnumerator PerformTurn(List<AbstractCreature> targets)
     {
-        int attackDamage = Random.Range(1, data.attackpower + 1);
+        int attackDamage = data.AttackPower;
+        Debug.Log("dealt " + attackDamage + " to " + targets[0]);
         AbstractCreature target = targets[Random.Range(0, targets.Count)];
         target.UnderAttack(attackDamage);
+        endTurn();
         yield return null;
     }
 
@@ -53,7 +57,7 @@ public class AbstractEnemy : AbstractCreature
             GameObject dropItem = dropItems[Random.Range(0, dropItems.Count)];
             GameObject item = Instantiate(dropItem, transform.position, Quaternion.identity);
         }
-
+        PlayerLevelManager.addExp(exp);
         Destroy(this.gameObject);
     }
 
@@ -104,5 +108,11 @@ public class AbstractEnemy : AbstractCreature
     private void revertToNormalAnimations()
     {
         ani.runtimeAnimatorController = normalAnimControl;
+    }
+
+    protected override void endTurn()
+    {
+        statusController.reduceStatusDuration();
+        Debug.Log("enemy end turn");
     }
 }

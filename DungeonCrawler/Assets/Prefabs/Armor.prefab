@@ -68,7 +68,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecf6ca054e176cd4586c7b933595c264, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  armorAmount: 2
+  armorAmount: 10
 --- !u!212 &212613229327815278
 SpriteRenderer:
   m_ObjectHideFlags: 1

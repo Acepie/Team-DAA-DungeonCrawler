@@ -40,4 +40,5 @@ public class CombatTextController : MonoBehaviour
         yield return new WaitForSeconds(displayTime);
         t.enabled = false;
     }
+
 }

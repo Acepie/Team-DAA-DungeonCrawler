@@ -8,7 +8,7 @@ public abstract class AbstractCloseAoe : AbstractSkill {
     private GameObject aoe;
 
     
-    protected Collider2D[] getNearbyTargets()
+    protected List<AbstractCreature> getNearbyTargets()
     {
         Transform parent = this.GetComponentInParent<Transform>();
         aoe = new GameObject("aoe");
@@ -38,6 +38,13 @@ public abstract class AbstractCloseAoe : AbstractSkill {
         combatantColliders = new Collider2D[100]; //Max of 100 creatures in a combat
         int numOfCombatants = skillRadiusCol.OverlapCollider(cf2d, combatantColliders);
         Destroy(aoe);
-        return combatantColliders;
+        int i = 0;
+        List<AbstractCreature> creaturesInCollision = new List<AbstractCreature>();
+        while(combatantColliders[i] != null)
+        {
+            creaturesInCollision.Add(combatantColliders[i].GetComponent<AbstractCreature>());
+            i++;
+        }
+        return creaturesInCollision;
     }
 }

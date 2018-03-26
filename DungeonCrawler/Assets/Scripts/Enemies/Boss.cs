@@ -6,6 +6,12 @@ public class Boss : AbstractEnemy {
 
     public GameObject dropKey;
 
+    void Start()
+    {
+        data = new CombatData(200, 15);
+        exp = 150;
+    }
+
     public override void OnDeath()
     {
         GameObject keyItem = Instantiate(dropKey, transform.position, Quaternion.identity);

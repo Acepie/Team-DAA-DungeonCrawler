@@ -6,6 +6,7 @@ public abstract class AbstractCreature : MonoBehaviour
 {
 
     public CombatData data;
+    public StatusController statusController;
     public float speed;
 
     protected bool inCombat;
@@ -14,12 +15,12 @@ public abstract class AbstractCreature : MonoBehaviour
 
     public virtual void UnderAttack(int damageTaken)
     {
-        data.currentHealth -= damageTaken;
+        data.CurrentHealth -= damageTaken;
     }
 
     public virtual bool IsDead()
     {
-        return data.currentHealth <= 0;
+        return data.CurrentHealth <= 0;
     }
 
     public abstract void OnDeath();
@@ -38,4 +39,5 @@ public abstract class AbstractCreature : MonoBehaviour
     }
 
     public abstract IEnumerator PerformTurn(List<AbstractCreature> targets);
+    protected abstract void endTurn();
 }

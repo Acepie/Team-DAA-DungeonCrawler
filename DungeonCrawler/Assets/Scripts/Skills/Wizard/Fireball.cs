@@ -23,7 +23,7 @@ public class Fireball : AbstractSkill {
             return false;
         }
 
-        int damage = data.attackpower;
+        int damage = data.AttackPower;
         skillOnUseText = "Hit for " + damage + " damage";
         target[0].UnderAttack(damage);
         return true;

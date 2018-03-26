@@ -2,15 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AbstractStatus : MonoBehaviour {
+public abstract class AbstractStatus {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    protected int statusDuration;
+    protected int turnsUntilRemoved;
+    protected string statusName;
+    public int StatusDuration { get { return statusDuration; } }
+    public int TurnsUntilRemoved
+    {
+        get { return turnsUntilRemoved; }
+        set { turnsUntilRemoved = value; }
+    }
+
+
+    public abstract void applyStatus(AbstractCreature target, int duration);
+    public abstract void removeStatus(AbstractCreature target);
+
 }

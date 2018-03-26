@@ -47,6 +47,8 @@ GameObject:
   - component: {fileID: 114378995717451204}
   - component: {fileID: 114249744312387928}
   - component: {fileID: 114327727114688826}
+  - component: {fileID: 114315318928036776}
+  - component: {fileID: 114605961236238210}
   m_Layer: 8
   m_Name: Warrior
   m_TagString: Player
@@ -213,10 +215,23 @@ MonoBehaviour:
   data:
     currentHealth: 0
     maxHealth: 10
-    attackpower: 1
-  speed: 5
+    attackPower: 0
+    rawAttackPower: 0
+  statusController: {fileID: 0}
+  speed: 4
   ctc: {fileID: 0}
   playerUIController: {fileID: 0}
+--- !u!114 &114315318928036776
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1959786037162124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ec711b415039144b9a031abc958dcaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114327727114688826
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -243,7 +258,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillRadius: 0
   skillSuccessful: 0
-  attackDamage: 2
+  attackBonus: 0
+--- !u!114 &114605961236238210
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1959786037162124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70d35f3d86eae7f459c243fe361e9f22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114779104088071186
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class SlamAttack : AbstractSkill
 {
-
-    public int attackDamage;
+    [SerializeField]
+    private float attackBonus;
 
     // Use this for initialization
     void Start()
     {
+        attackBonus = 0.5f;
         skillName = "Slam";
         skillCooldown = 2;
         skillCost = 1;
@@ -24,7 +25,7 @@ public class SlamAttack : AbstractSkill
             return false;
         }
 
-        int damage = attackDamage + data.attackpower;
+        int damage = data.AttackPower + (int)(data.AttackPower * attackBonus);
         skillOnUseText = "Slammed for " + damage + " damage!";
         targets[0].UnderAttack(damage);
         return true;

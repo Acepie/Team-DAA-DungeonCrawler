@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class PlayerController : AbstractCreature
 {
@@ -18,12 +19,14 @@ public class PlayerController : AbstractCreature
 
     void Awake()
     {
+        data = new CombatData(100, 10);
         SpawnPlayer();
         rb2d = GetComponent<Rigidbody2D>();
         skillHandler = GetComponent<SkillHandler>();
+        statusController = GetComponent<StatusController>();
         keysFound = new HashSet<string>();
-        data.currentHealth = data.maxHealth;
-        animator = this.GetComponent<Animator>();
+        
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -85,6 +88,7 @@ public class PlayerController : AbstractCreature
             if (Input.GetKeyDown(KeyCode.E))
             {
                 turnEnded = true;
+                endTurn();
             }
 
             if (Input.GetKeyDown(KeyCode.M) && !hasMoved)
@@ -127,7 +131,7 @@ public class PlayerController : AbstractCreature
                
                 foreach (var t in targetsBeingAttacked)
                 {
-                    combatText += t.name + ":\t Health: " + t.data.currentHealth + "\n";
+                    combatText += t.name + ":\t Health: " + t.data.CurrentHealth + "\n";
                 }
                 combatText += "\nSkill available: (1) " + skillHandler.getSkillAtIndex(1).SkillName +
                     "\n (2)" + skillHandler.getSkillAtIndex(2).SkillName +
@@ -257,5 +261,11 @@ public class PlayerController : AbstractCreature
     {
         base.CombatEnded();
         skillHandler.resetCooldowns();
+    }
+
+    protected override void endTurn()
+    {
+        statusController.reduceStatusDuration();
+        Debug.Log("Player ending turn");
     }
 }

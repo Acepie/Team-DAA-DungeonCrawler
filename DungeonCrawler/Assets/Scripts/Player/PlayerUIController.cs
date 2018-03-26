@@ -24,8 +24,8 @@ public class PlayerUIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        healthText.text = "Health: " + data.currentHealth.ToString() + "/" + data.maxHealth.ToString();
-        playerHealthSlider.value = ((float)data.currentHealth) / ((float)data.maxHealth);
+        healthText.text = "Health: " + data.CurrentHealth.ToString() + "/" + data.MaxHealth.ToString();
+        playerHealthSlider.value = ((float)data.CurrentHealth) / ((float)data.MaxHealth);
     }
 
     public void PickupEvent(string s)

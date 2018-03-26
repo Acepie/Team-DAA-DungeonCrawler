@@ -169,10 +169,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
-    m_FontStyle: 0
+    m_FontSize: 16
+    m_FontStyle: 1
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -34540,10 +34540,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
-    m_FontStyle: 0
+    m_FontSize: 16
+    m_FontStyle: 1
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -34848,7 +34848,7 @@ GameObject:
   - component: {fileID: 1693985747}
   m_Layer: 0
   m_Name: PlayerUI Manager
-  m_TagString: Untagged
+  m_TagString: UIManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35376,6 +35376,7 @@ GameObject:
   - component: {fileID: 2048233293}
   - component: {fileID: 2048233294}
   - component: {fileID: 2048233295}
+  - component: {fileID: 2048233296}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Enemy
@@ -35397,12 +35398,15 @@ MonoBehaviour:
   data:
     currentHealth: 0
     maxHealth: 15
-    attackpower: 0
+    attackPower: 0
+    rawAttackPower: 0
+  statusController: {fileID: 0}
   speed: 0
   moveCD: 1
+  exp: 0
   combatAnimControl: {fileID: 0}
   normalAnimControl: {fileID: 0}
-  dropItem: {fileID: 0}
+  dropItems: []
   dropRate: 0
   dropKey: {fileID: 1537334541607736, guid: 9ad03afc245cfdd4bb81e650e3428a35, type: 2}
 --- !u!212 &2048233291
@@ -35514,6 +35518,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &2048233296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2048233289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ec711b415039144b9a031abc958dcaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2133184674 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4277932675890152, guid: 9ad03afc245cfdd4bb81e650e3428a35,
@@ -35558,6 +35573,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 114254462591056056, guid: 0b6b4496d506cf248bcd9440e114cdcc,
+        type: 2}
+      propertyPath: ctc
+      value: 
+      objectReference: {fileID: 622591444}
+    - target: {fileID: 114254462591056056, guid: 0b6b4496d506cf248bcd9440e114cdcc,
+        type: 2}
+      propertyPath: playerUIController
+      value: 
+      objectReference: {fileID: 1693985747}
     - target: {fileID: 114840946327775156, guid: 0b6b4496d506cf248bcd9440e114cdcc,
         type: 2}
       propertyPath: skillText
@@ -35568,12 +35593,7 @@ Prefab:
       propertyPath: skillDescription
       value: 
       objectReference: {fileID: 1273456427}
-    - target: {fileID: 114254462591056056, guid: 0b6b4496d506cf248bcd9440e114cdcc,
-        type: 2}
-      propertyPath: ctc
-      value: 
-      objectReference: {fileID: 622591444}
-    - target: {fileID: 114254462591056056, guid: 0b6b4496d506cf248bcd9440e114cdcc,
+    - target: {fileID: 114605961236238210, guid: 0b6b4496d506cf248bcd9440e114cdcc,
         type: 2}
       propertyPath: playerUIController
       value: 

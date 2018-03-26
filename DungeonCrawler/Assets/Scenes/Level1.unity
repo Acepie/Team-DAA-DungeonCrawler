@@ -30671,7 +30671,7 @@ GameObject:
   - component: {fileID: 1166084606}
   - component: {fileID: 1166084608}
   - component: {fileID: 1166084609}
-  m_Layer: 12
+  m_Layer: 8
   m_Name: player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -30728,7 +30728,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1101807915
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: f7ca41b758aa08a488b12b054d7bcead, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -30827,7 +30827,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8ea1d056c988804ca43dbf5b96f27ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillRadius: 0
   skillSuccessful: 0
+  skillIcon: {fileID: 0}
 --- !u!114 &1166084607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30853,6 +30855,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98049a36b0998d249a6ae17cf2cc43e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillRadius: 0
   skillSuccessful: 0
   attackDamage: 2
 --- !u!114 &1166084609
@@ -30866,6 +30869,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0927a01e4627f04c96fdf9aa6c3fb24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillRadius: 0
   skillSuccessful: 0
 --- !u!1 &1181758949
 GameObject:
@@ -32042,7 +32046,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1101807915
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 931d228629d2f5947b00c9cc421eeae3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

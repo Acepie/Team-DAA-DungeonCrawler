@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class Food : AbstractPickupItem {
 
-    public int health = 5;
+    public int health = 15;
 
 	public override void onCollect(PlayerUIController uiController, CombatData data) {
-        if (data.currentHealth + health > data.maxHealth)
+        if (data.CurrentHealth + health > data.MaxHealth)
         {
-            data.currentHealth = data.maxHealth;
+            data.CurrentHealth = data.MaxHealth;
         }
         else
         {
-            data.currentHealth += health;
+            data.CurrentHealth += health;
         }
-        uiController.PickupEvent("Healed for 5 hit points!");
+        uiController.PickupEvent("Healed for " + health + " hit points!");
     }
 }

@@ -23,7 +23,7 @@ public class BasicRanged : AbstractSkill {
             skillOnUseText = "Can only attack 1 target";
             return false;
         }
-        int damage = data.attackpower;
+        int damage = data.AttackPower;
         skillOnUseText = "Hit for " + damage + " damage";
         targets[0].UnderAttack(damage);
         return true;

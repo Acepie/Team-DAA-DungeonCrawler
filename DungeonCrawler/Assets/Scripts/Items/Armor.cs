@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Armor : AbstractPickupItem {
 
-    public int armorAmount = 2;
+    public int armorAmount = 10;
 
 	public override void onCollect(PlayerUIController uiController, CombatData data) {
-        uiController.PickupEvent("You got some armor! Your health has permanently increased by 2 points!");
-        data.currentHealth += armorAmount;
-        data.maxHealth += armorAmount;
+        uiController.PickupEvent("You got some armor! Your health has permanently increased by " + armorAmount + " points!");
+        data.CurrentHealth += armorAmount;
+        data.MaxHealth += armorAmount;
     }
 }

@@ -10,6 +10,7 @@ TagManager:
   - EndZone
   - Pickup
   - Switch
+  - UIManager
   layers:
   - Default
   - TransparentFX
@@ -19,8 +20,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - Player
+  - enemy
   - 
   - 
   - 
