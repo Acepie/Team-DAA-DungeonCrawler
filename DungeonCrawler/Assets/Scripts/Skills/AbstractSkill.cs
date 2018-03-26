@@ -55,11 +55,10 @@ public abstract class AbstractSkill : MonoBehaviour
         //Checks to make sure target(s) are in range
         foreach (AbstractCreature t in targets)
         {
-            Vector3 start = skillUser.transform.position;
-            Vector3 end = t.transform.position;
-            Vector3 direction = end - start;
-            //Debug.Log(Vector3.Distance(start, end));
-            if (Vector3.Distance(start, end) > skillRadius)
+            Vector2 start = skillUser.transform.position;
+            Vector2 end = t.transform.position;
+            Vector2 direction = end - start;
+            if (Vector2.Distance(start, end) > skillRadius)
             {
                 return "Target out of range";
             }

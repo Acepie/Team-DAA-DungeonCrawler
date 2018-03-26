@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 20801686100884810}
   - component: {fileID: 124661390639093050}
   - component: {fileID: 81010746634358124}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 114415553464025374}
   - component: {fileID: 114728509961802100}
   - component: {fileID: 114894997847860382}
-  m_Layer: 12
+  m_Layer: 8
   m_Name: Wizard
   m_TagString: Player
   m_Icon: {fileID: 0}

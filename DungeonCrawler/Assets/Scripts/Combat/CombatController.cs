@@ -18,12 +18,7 @@ public class CombatController : MonoBehaviour
     void Awake()
     {
         ContactFilter2D cf2d = new ContactFilter2D();
-        int playerLayer = 8;
-        int enemyLayer = 9;
-        int playerMask = 1 << playerLayer;
-        int enemyMask = 1 << enemyLayer;
-        
-        cf2d.layerMask = playerMask | enemyMask;
+        cf2d.layerMask = LayerMask.GetMask("Player", "Enemy");
         cf2d.useLayerMask = true;
 
         CircleCollider2D combatRadius = gameObject.AddComponent<CircleCollider2D>();
