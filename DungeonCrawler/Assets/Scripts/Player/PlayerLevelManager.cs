@@ -34,7 +34,7 @@ public class PlayerLevelManager : MonoBehaviour {
     private static void levelUp()
     {
         currentLevel++;
-        player.data.AttackPower += 10;
+        player.data.AttackPower += 5;
         player.data.MaxHealth += 10;
         player.data.CurrentHealth += 10;
         playerUIController.PickupEvent("You leveled up! Health increased by 10. Damage increased by 10");
