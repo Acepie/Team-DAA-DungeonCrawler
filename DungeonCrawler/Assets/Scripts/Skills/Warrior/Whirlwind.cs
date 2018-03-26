@@ -27,11 +27,14 @@ public class Whirlwind : AbstractCloseAoe
     {
         List<AbstractCreature> targets = getNearbyTargets();
         int i = 0;
+        SkillOnUseText = "Hit ";
         foreach (AbstractCreature t in targets)
         {
             if (t.GetComponent<AbstractCreature>().name != this.GetComponentInParent<Transform>().name)
             {
                 t.UnderAttack(data.AttackPower);
+                SkillOnUseText += t.name + " for " + data.AttackPower + " damage!\n";
+                
             }
         }
         return true;

@@ -16,6 +16,7 @@ public class PlayerController : AbstractCreature
     private SkillHandler skillHandler;
     private HashSet<string> keysFound;
     private Animator animator;
+    private HashSet<AbstractCreature> lastTargets;
 
     void Awake()
     {
@@ -25,7 +26,6 @@ public class PlayerController : AbstractCreature
         skillHandler = GetComponent<SkillHandler>();
         statusController = GetComponent<StatusController>();
         keysFound = new HashSet<string>();
-        
         animator = GetComponent<Animator>();
     }
 
@@ -123,16 +123,14 @@ public class PlayerController : AbstractCreature
                 {
                     targetsBeingAttacked.Add(potentialTarget);
                 }
+
+                lastTargets = targetsBeingAttacked;
                 string combatText = "Press E to end your turn \nClick an enemy to mark/unmark for attack.\nTargets:\n";
                
                 foreach (var t in targetsBeingAttacked)
                 {
                     combatText += t.name + ":\t Health: " + t.data.CurrentHealth + "\n";
                 }
-                /*combatText += "\nSkill available: (1) " + skillHandler.getSkillAtIndex(1).SkillName +
-                    "\n (2)" + skillHandler.getSkillAtIndex(2).SkillName +
-                    "\n (3)" + skillHandler.getSkillAtIndex(3).SkillName +
-                    "\n (4)" + skillHandler.getSkillAtIndex(4).SkillName;*/
                 combatText = getInstructionText();
                 combatText += getTargetText(targetsBeingAttacked);
                 combatText += skillHandler.getSkillsText();

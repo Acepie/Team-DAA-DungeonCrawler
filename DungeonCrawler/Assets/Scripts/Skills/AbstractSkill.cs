@@ -20,27 +20,39 @@ public abstract class AbstractSkill : MonoBehaviour
     protected int skillCost;
     
     public float skillRadius;
-    private GameObject skillRadiusIndicator;
+    protected GameObject skillRadiusIndicator;
+    public GameObject SkillRadiusIndicator { get { return skillRadiusIndicator; } set { skillRadiusIndicator = value; } }
 
     protected AbstractCreature skillUser;
+    [SerializeField]
+    protected AbstractCreature parent;
 
     protected string skillName;
     public string SkillName { get { return skillName; } }
     protected string skillDescription;
     public string SkillDescription { get  { return skillDescription; } }
     protected string skillOnUseText;
-    public string SkillOnUseText { get { return skillOnUseText; } }
+    public string SkillOnUseText
+    {
+        get { return skillOnUseText; }
+        set { skillOnUseText = value; }
+    }
     protected int ignoreLayer;
 
-    public bool skillSuccessful;
+    public bool skillSuccessful = false;
 
     protected bool skillPrepared = false;
 
+    void Awake()
+    {
+        parent = GetComponentInParent<AbstractCreature>();
+    }
     /* Attempt to perform the skill. Takes in a target for the skill to be used on
        *Returns a string detailing information about the usage of the skill for the skillHandler to use
     */
     public string attemptSkill(List<AbstractCreature> targets, CombatData data)
-    {  
+    {
+        skillPrepared = false;
         //Checks to make sure skill is not on CD
         if (this.skillOnCooldown())
         {
@@ -56,7 +68,7 @@ public abstract class AbstractSkill : MonoBehaviour
         //Checks to make sure target(s) are in range
         foreach (AbstractCreature t in targets)
         {
-            Vector2 start = skillUser.transform.position;
+            Vector2 start = parent.transform.position;
             Vector2 end = t.transform.position;
             Vector2 direction = end - start;
             if (Vector2.Distance(start, end) > skillRadius)
@@ -66,7 +78,7 @@ public abstract class AbstractSkill : MonoBehaviour
 
             //Need to ignore layer of object that uses skill 
             //because raycast originates inside of game object and instantly collidesd
-            ignoreLayer = 1 << skillUser.gameObject.layer;
+            ignoreLayer = 1 << parent.gameObject.layer;
             ignoreLayer = ~ignoreLayer;
 
             RaycastHit2D rayHit = Physics2D.Raycast(start, direction, skillRadius, ignoreLayer);
@@ -87,21 +99,22 @@ public abstract class AbstractSkill : MonoBehaviour
         
     }
 
-    public string prepareSkill(List<AbstractCreature> targets, CombatData data, AbstractCreature su)
+    public string prepareSkill()
     {
-        skillUser = su;
         skillSuccessful = false;
-        if (skillPrepared)
-        {
-            Destroy(skillRadiusIndicator);
-            skillPrepared = false;
-            return attemptSkill(targets, data);
-        }
         skillPrepared = true;
-        skillRadiusIndicator = (GameObject)Instantiate(Resources.Load("SRI"));
-        skillRadiusIndicator.transform.localScale = skillRadiusIndicator.transform.localScale * skillRadius;
-        skillRadiusIndicator.transform.position = skillUser.transform.position;
-        return this.skillName + " is ready to be used";
+        return (this.SkillName + " is ready to use");
+    }
+
+    public string unprepareSkill()
+    {
+        skillPrepared = false;
+        return (this.SkillName + "is no longer ready to use");
+    }
+
+    public bool isPrepared()
+    {
+        return skillPrepared;
     }
 
     // Performs the skill and all its effects
@@ -120,6 +133,12 @@ public abstract class AbstractSkill : MonoBehaviour
         {
             turnsUntilOffCD -= 1;
         }
+    }
+
+
+    public void destroySRI()
+    {
+        Destroy(skillRadiusIndicator);
     }
 
     public void resetCooldown()

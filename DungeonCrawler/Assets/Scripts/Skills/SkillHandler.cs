@@ -18,19 +18,20 @@ public class SkillHandler : MonoBehaviour
     //Refactor skillHandler to receive a skill from hotbar and attempt to perform that skill. To allow control of toggleable radiuses for different skills
 
     private AbstractSkill[] skillBar;
-    AbstractSkill skillToUse;
+    AbstractSkill skillToUse = null;
+    [SerializeField]
+    private AbstractCreature parent;
     public Text skillText;
     private bool fadeTextPlaying;
     public Text skillDescription;
-
-    public bool skillPerformed;
-    private bool skillRadiusToggle = false;
+    private GameObject skillRadiusIndicator;
 
     private IEnumerator coroutine;
 
     void Awake()
     {
         skillBar = GetComponents<AbstractSkill>();
+        parent = GetComponentInParent<AbstractCreature>();
     }
 
     public string getSkillsText()
@@ -56,7 +57,27 @@ public class SkillHandler : MonoBehaviour
         }
         else
         {
-            SkillEvent(skillBar[i].prepareSkill(targets, data, skillUser));
+            if(skillToUse != null && skillToUse != skillBar[i])
+            {
+                skillToUse.destroySRI();
+                SkillEvent(skillToUse.unprepareSkill());
+            }
+
+            skillToUse = skillBar[i];
+            
+            if (skillToUse.isPrepared())
+            {
+                SkillEvent(skillToUse.attemptSkill(targets, data));
+                Destroy(skillRadiusIndicator);
+            }
+            else
+            {
+                SkillEvent(skillToUse.prepareSkill());
+                skillRadiusIndicator = (GameObject)Instantiate(Resources.Load("SRI"));
+                skillRadiusIndicator.transform.localScale = skillRadiusIndicator.transform.localScale * skillBar[i].skillRadius;
+                skillRadiusIndicator.transform.position = parent.transform.position;
+                skillToUse.SkillRadiusIndicator = skillRadiusIndicator;
+            }
             return skillBar[i].skillSuccessful;
         }
     }

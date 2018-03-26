@@ -5,16 +5,11 @@ using UnityEngine;
 public abstract class AbstractCloseAoe : AbstractSkill {
 
 
-    private GameObject aoe;
-
     
     protected List<AbstractCreature> getNearbyTargets()
     {
-        Transform parent = this.GetComponentInParent<Transform>();
-        aoe = new GameObject("aoe");
-        aoe.transform.position = parent.transform.position;
-        CircleCollider2D skillRadiusCol = aoe.AddComponent<CircleCollider2D>();
-        skillRadiusCol.radius = skillRadius;
+        
+        CircleCollider2D skillRadiusCol = skillRadiusIndicator.AddComponent<CircleCollider2D>();
         skillRadiusCol.isTrigger = true;
 
         ContactFilter2D cf2d = new ContactFilter2D();
@@ -37,7 +32,7 @@ public abstract class AbstractCloseAoe : AbstractSkill {
         Collider2D[] combatantColliders;
         combatantColliders = new Collider2D[100]; //Max of 100 creatures in a combat
         int numOfCombatants = skillRadiusCol.OverlapCollider(cf2d, combatantColliders);
-        Destroy(aoe);
+        //Destroy(aoe);
         int i = 0;
         List<AbstractCreature> creaturesInCollision = new List<AbstractCreature>();
         while(combatantColliders[i] != null)

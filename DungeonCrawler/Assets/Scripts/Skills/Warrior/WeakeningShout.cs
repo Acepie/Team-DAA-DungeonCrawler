@@ -13,7 +13,7 @@ public class WeakeningShout : AbstractCloseAoe {
         skillCooldown = 4;
         skillCost = 2;
         skillDescription = "Weaken your enemies. Reducing their damage dealt by 50%.\nCooldown: "+ skillCooldown;
-        skillRadius = 2;
+        skillRadius = 4;
 
         w = new Weakened(2, 0.50f);
     }
@@ -26,11 +26,13 @@ public class WeakeningShout : AbstractCloseAoe {
     protected override bool performSkill(List<AbstractCreature> target, CombatData data)
     {
         List<AbstractCreature> targets = getNearbyTargets();
+        SkillOnUseText = "Weakened ";
 
         foreach (AbstractCreature t in targets)
         {
-            if(t.name != this.transform.name)
+            if(t.name != parent.name)
             {
+                SkillOnUseText += t.name + "\n";
                 t.statusController.addStatus(w);
             }
         }
