@@ -5,12 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
-  - Door
   - Key
-  - EndZone
   - Pickup
-  - Switch
-  - UIManager
   layers:
   - Default
   - TransparentFX
@@ -20,8 +16,8 @@ TagManager:
   - UI
   - 
   - 
-  - Player
-  - enemy
+  - 
+  - 
   - 
   - 
   - 

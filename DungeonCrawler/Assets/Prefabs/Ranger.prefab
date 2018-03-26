@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 20575504267169332}
   - component: {fileID: 124815567878226880}
   - component: {fileID: 81460207988381230}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 114325279760035104}
   - component: {fileID: 114462676552742136}
   - component: {fileID: 114950058112435012}
-  m_Layer: 12
+  m_Layer: 8
   m_Name: Ranger
   m_TagString: Player
   m_Icon: {fileID: 0}

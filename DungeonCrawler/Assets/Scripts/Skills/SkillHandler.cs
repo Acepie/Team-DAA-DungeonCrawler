@@ -33,29 +33,21 @@ public class SkillHandler : MonoBehaviour
         skillBar = GetComponents<AbstractSkill>();
     }
 
-    //Allow player to set their own skills for a future skillbar
-    public void setSkillAtIndex(int i, AbstractSkill skilltoSet)
+    public string getSkillsText()
     {
-        //Incoming  value will be of keyboard input (1-9), set i to match array indexing
-        i -= 1;
-        if (i < 0 || i >= skillBar.Length)
+        int skillIndex = 1;
+        string res = "Skill available: \n";
+        foreach (var skill in skillBar)
         {
-            //Attempting to set a skill out of array bounds
-            return;
+            res += "(" + skillIndex.ToString() + ") " + skill.SkillName + "\n";
+            skillIndex++;
         }
-        skillBar[i] = skilltoSet;
-    }
-
-    public AbstractSkill getSkillAtIndex(int i)
-    {
-        i -= 1;
-        return skillBar[i];
+        return res;
     }
 
     // Performs a skill at a given index within the skillbar
     public bool performSkillAtIndex(int i, List<AbstractCreature> targets, CombatData data, AbstractCreature skillUser)
     {
-        i -= 1;
         if (i < 0 || i >= skillBar.Length)
         {
             //Attempting to get a skill out of array bounds

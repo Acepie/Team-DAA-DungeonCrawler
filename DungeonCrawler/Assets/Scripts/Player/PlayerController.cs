@@ -79,10 +79,10 @@ public class PlayerController : AbstractCreature
         while (!turnEnded)
         {
 
-            if (attackMade && hasMoved)
+            if (attackMade)
             {
                 turnEnded = true;
-            }   
+            }
             count++;
             yield return new WaitUntil(() => Input.anyKey);
             if (Input.GetKeyDown(KeyCode.E))
@@ -100,14 +100,9 @@ public class PlayerController : AbstractCreature
                 hasMoved = true;
             }
 
-            if (Input.GetKeyDown(KeyCode.I))
-            {
-                //Use some item
-            }
-
             if (Input.GetMouseButtonDown(0))
             {
-                 potentialTarget = ClickOnTarget();
+                potentialTarget = ClickOnTarget();
                 if (potentialTarget == null)
                 {
                     targetsBeingAttacked.Clear();
@@ -133,46 +128,59 @@ public class PlayerController : AbstractCreature
                 {
                     combatText += t.name + ":\t Health: " + t.data.CurrentHealth + "\n";
                 }
-                combatText += "\nSkill available: (1) " + skillHandler.getSkillAtIndex(1).SkillName +
+                /*combatText += "\nSkill available: (1) " + skillHandler.getSkillAtIndex(1).SkillName +
                     "\n (2)" + skillHandler.getSkillAtIndex(2).SkillName +
                     "\n (3)" + skillHandler.getSkillAtIndex(3).SkillName +
-                    "\n (4)" + skillHandler.getSkillAtIndex(4).SkillName;
+                    "\n (4)" + skillHandler.getSkillAtIndex(4).SkillName;*/
+                combatText = getInstructionText();
+                combatText += getTargetText(targetsBeingAttacked);
+                combatText += skillHandler.getSkillsText();
                 this.ctc.updateText(combatText);
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha1) && !attackMade)
             {
-                attackMade = skillHandler.performSkillAtIndex(1, new List<AbstractCreature>(targetsBeingAttacked), data, this);
+                attackMade = skillHandler.performSkillAtIndex(0, new List<AbstractCreature>(targetsBeingAttacked), data, this);
             }
 
-            if (Input.GetKeyDown(KeyCode.Alpha2) && !attackMade )
+            if (Input.GetKeyDown(KeyCode.Alpha2) && !attackMade)
             {
-                attackMade =  skillHandler.performSkillAtIndex(2, new List<AbstractCreature>(targetsBeingAttacked), data, this);
+                attackMade = skillHandler.performSkillAtIndex(1, new List<AbstractCreature>(targetsBeingAttacked), data, this);
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha3) && !attackMade)
             {
-                attackMade =  skillHandler.performSkillAtIndex(3, new List<AbstractCreature>(targetsBeingAttacked), data, this);
+                attackMade = skillHandler.performSkillAtIndex(2, new List<AbstractCreature>(targetsBeingAttacked), data, this);
             }
 
-            if(Input.GetKeyDown(KeyCode.Alpha4) && !attackMade)
+            if (Input.GetKeyDown(KeyCode.Alpha4) && !attackMade)
             {
-                attackMade = skillHandler.performSkillAtIndex(4, new List<AbstractCreature>(targetsBeingAttacked), data, this);
-            }
-
-            if (attackMade)
-            {
-               this.ctc.updateText("Attack made! Press E to end your turn");
+                attackMade = skillHandler.performSkillAtIndex(3, new List<AbstractCreature>(targetsBeingAttacked), data, this);
             }
         }
 
         yield return null;
     }
 
-    public override void StartTurn() {
-        
-        string combatText = "Press E to end your turn \nClick an enemy to mark/unmark for attack.\n";
+    public override void StartTurn()
+    {
+
+        string combatText = getInstructionText();
         this.ctc.updateText(combatText);
+    }
+
+    private string getTargetText(HashSet<AbstractCreature> targetsBeingAttacked)
+    {
+        string combatText = "Targets:\n";
+        foreach (var t in targetsBeingAttacked)
+        {
+            combatText += t.name + ":\t Health: " + t.data.CurrentHealth + "\n";
+        }
+        return combatText;
+    }
+
+    private string getInstructionText() {
+        return "Click an enemy to mark/unmark for attack.\nPress M to move \nPress E to end your turn \n";
     }
 
     private AbstractCreature ClickOnTarget()
