@@ -35593,11 +35593,6 @@ Prefab:
       propertyPath: skillDescription
       value: 
       objectReference: {fileID: 1273456427}
-    - target: {fileID: 114605961236238210, guid: 0b6b4496d506cf248bcd9440e114cdcc,
-        type: 2}
-      propertyPath: playerUIController
-      value: 
-      objectReference: {fileID: 1693985747}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0b6b4496d506cf248bcd9440e114cdcc, type: 2}
   m_IsPrefabParent: 0
