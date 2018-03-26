@@ -13,7 +13,7 @@ public class Whirlwind : AbstractCloseAoe
         skillName = "Whirlwind";
         skillCooldown = 3;
         skillCost = 3;
-        skillDescription = "Deal damage to all nearby enemies. Cooldown of: " + skillCooldown;
+        skillDescription = "Deal damage to all nearby enemies.\nCooldown:" + skillCooldown;
         skillRadius = 2;
     }
 

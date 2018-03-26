@@ -70,6 +70,7 @@ public class PlayerController : AbstractCreature
         bool turnEnded = false;
         bool hasMoved = false;
         bool attackMade = false;
+        string skillDescription = "";
         AbstractCreature potentialTarget = null;
 
 
@@ -141,22 +142,33 @@ public class PlayerController : AbstractCreature
             if (Input.GetKeyDown(KeyCode.Alpha1) && !attackMade)
             {
                 attackMade = skillHandler.performSkillAtIndex(0, new List<AbstractCreature>(targetsBeingAttacked), data, this);
+                skillDescription = skillHandler.getSkillDescriptionAtIndex(0);
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha2) && !attackMade)
             {
                 attackMade = skillHandler.performSkillAtIndex(1, new List<AbstractCreature>(targetsBeingAttacked), data, this);
+                skillDescription = skillHandler.getSkillDescriptionAtIndex(1);
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha3) && !attackMade)
             {
                 attackMade = skillHandler.performSkillAtIndex(2, new List<AbstractCreature>(targetsBeingAttacked), data, this);
+                skillDescription = skillHandler.getSkillDescriptionAtIndex(2);
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha4) && !attackMade)
             {
                 attackMade = skillHandler.performSkillAtIndex(3, new List<AbstractCreature>(targetsBeingAttacked), data, this);
+                skillDescription = skillHandler.getSkillDescriptionAtIndex(3);
             }
+
+            if (attackMade)
+            {
+                skillDescription = "";
+            }
+
+            playerUIController.skillDescriptionText.text = skillDescription;
         }
 
         yield return null;

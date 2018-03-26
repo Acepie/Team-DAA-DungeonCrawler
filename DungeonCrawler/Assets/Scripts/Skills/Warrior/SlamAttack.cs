@@ -14,7 +14,7 @@ public class SlamAttack : AbstractSkill
         skillName = "Slam";
         skillCooldown = 2;
         skillCost = 1;
-        skillDescription = "Slam your opponent for massive damage! Cooldown of: " + skillCooldown;
+        skillDescription = "Slam your opponent for massive damage!\nCooldown: " + skillCooldown;
         skillRadius = 2;
     }
 

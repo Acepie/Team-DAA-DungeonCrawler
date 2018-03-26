@@ -9,6 +9,7 @@ public class PlayerUIController : MonoBehaviour
     private static CombatData data;
     public Text healthText;
     public Text eventText;
+    public Text skillDescriptionText;
     public Slider playerHealthSlider;
 
     private bool fadeTextPlaying;

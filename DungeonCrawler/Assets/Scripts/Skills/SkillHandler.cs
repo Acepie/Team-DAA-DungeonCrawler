@@ -61,6 +61,11 @@ public class SkillHandler : MonoBehaviour
         }
     }
 
+    public string getSkillDescriptionAtIndex(int i)
+    {
+        return skillBar[i].SkillDescription;
+    }
+
     //Decrements all skill's remaining cooldown until available again
     public void decrementSkillsCooldown()
     {

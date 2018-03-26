@@ -18,6 +18,7 @@ public abstract class AbstractSkill : MonoBehaviour
     protected int turnsUntilOffCD;
 
     protected int skillCost;
+    
     public float skillRadius;
     private GameObject skillRadiusIndicator;
 
@@ -26,7 +27,7 @@ public abstract class AbstractSkill : MonoBehaviour
     protected string skillName;
     public string SkillName { get { return skillName; } }
     protected string skillDescription;
-    public string SkillDescription { get { return skillDescription; } }
+    public string SkillDescription { get  { return skillDescription; } }
     protected string skillOnUseText;
     public string SkillOnUseText { get { return skillOnUseText; } }
     protected int ignoreLayer;

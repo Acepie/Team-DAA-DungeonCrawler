@@ -12,7 +12,7 @@ public class WeakeningShout : AbstractCloseAoe {
         skillName = "Weakening Shout";
         skillCooldown = 4;
         skillCost = 2;
-        skillDescription = "Weaken your enemies. Reducing their damage dealt by 50%" + skillCooldown;
+        skillDescription = "Weaken your enemies. Reducing their damage dealt by 50%.\nCooldown: "+ skillCooldown;
         skillRadius = 2;
 
         w = new Weakened(2, 0.50f);
