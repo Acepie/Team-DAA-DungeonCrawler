@@ -69,11 +69,8 @@ public abstract class AbstractSkill : MonoBehaviour
             ignoreLayer = ~ignoreLayer;
 
             RaycastHit2D rayHit = Physics2D.Raycast(start, direction, skillRadius, ignoreLayer);
-           // Debug.Log(rayHit.collider);
             if(rayHit.collider != t.GetComponent<Collider2D>())
             {
-                Debug.Log(rayHit.collider.name);
-                Debug.Log(start);
                 return "Target out of sight";
             }
         }
