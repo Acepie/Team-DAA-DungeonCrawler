@@ -17,7 +17,7 @@ public class AbstractEnemy : AbstractCreature
     public RuntimeAnimatorController combatAnimControl;
     public RuntimeAnimatorController normalAnimControl;
 
-    public GameObject dropItem;
+    public List<GameObject> dropItems;
     [Range(0, 1)]
     public float dropRate;
 
@@ -49,7 +49,8 @@ public class AbstractEnemy : AbstractCreature
 
     public override void OnDeath()
     {
-        if (dropRate > Random.value && dropItem) {
+        if (dropItems.Count > 0 && dropRate > Random.value) {
+            GameObject dropItem = dropItems[Random.Range(0, dropItems.Count)];
             GameObject item = Instantiate(dropItem, transform.position, Quaternion.identity);
         }
 

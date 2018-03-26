@@ -37,8 +37,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1202529344318048}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.2084866, y: 0.01710771, z: -0.08728999}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -16.35165, y: 7.137394, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,7 +76,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0034202635, y: -0.16521536}
+  m_Offset: {x: -0.02, y: -0.15}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 1}
@@ -87,7 +87,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.40237558, y: 0.38462386}
+  m_Size: {x: 0.4, y: 0.4}
   m_EdgeRadius: 0
 --- !u!95 &95731667655424150
 Animator:
@@ -121,12 +121,13 @@ MonoBehaviour:
     currentHealth: 0
     maxHealth: 5
     attackpower: 1
-  speed: 0
+  speed: 0.2
   moveCD: 1
   combatAnimControl: {fileID: 22100000, guid: e152b19a802a97b4597cc34c567dd758, type: 2}
   normalAnimControl: {fileID: 22100000, guid: 3942f05073260414caaef840af74fdeb, type: 2}
-  dropItem: {fileID: 1888648712246898, guid: 94e102f3e37f18d46b210d8a320f21a4, type: 2}
-  dropRate: 1
+  dropItems:
+  - {fileID: 1888648712246898, guid: 94e102f3e37f18d46b210d8a320f21a4, type: 2}
+  dropRate: 0.5
 --- !u!212 &212115735613052258
 SpriteRenderer:
   m_ObjectHideFlags: 1

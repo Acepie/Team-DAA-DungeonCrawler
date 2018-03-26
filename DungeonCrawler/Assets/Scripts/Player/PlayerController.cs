@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : AbstractCreature
 {
@@ -109,19 +110,23 @@ public class PlayerController : AbstractCreature
                     continue;
                 }
 
-                if (!validTargetList.Contains(potentialTarget)) {
+                if (!validTargetList.Contains(potentialTarget))
+                {
                     continue;
                 }
 
-                if (targetsBeingAttacked.Contains(potentialTarget)) {
+                if (targetsBeingAttacked.Contains(potentialTarget))
+                {
                     targetsBeingAttacked.Remove(potentialTarget);
-                } else {
+                }
+                else
+                {
                     targetsBeingAttacked.Add(potentialTarget);
                 }
                 string combatText = "Press E to end your turn \nClick an enemy to mark/unmark for attack.\nTargets:\n";
-                
-
-                foreach (var t in targetsBeingAttacked) {
+               
+                foreach (var t in targetsBeingAttacked)
+                {
                     combatText += t.name + ":\t Health: " + t.data.currentHealth + "\n";
                 }
                 combatText += "\nSkill available: (1) " + skillHandler.getSkillAtIndex(1).SkillName +
@@ -182,6 +187,7 @@ public class PlayerController : AbstractCreature
     public override void OnDeath()
     {
         Debug.Log("Defeated!!!");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void SpawnPlayer()
@@ -204,9 +210,16 @@ public class PlayerController : AbstractCreature
             Destroy(other.gameObject);
         }
 
+        if (other.gameObject.CompareTag("Switch"))
+        {
+            other.gameObject.GetComponent<Switch>().ActivateSwitch();
+            playerUIController.PickupEvent("A switch has activated! I wonder what it does...");
+        }
+
         if (other.gameObject.CompareTag("EndZone"))
         {
             playerUIController.PickupEvent("Level Ended! Progressing to next level");
+            other.gameObject.GetComponent<LevelLoader>().LoadLevel();
         }
     }
 
@@ -222,11 +235,18 @@ public class PlayerController : AbstractCreature
 
         if (other.gameObject.CompareTag("Door"))
         {
-            if (keysFound.Contains(other.gameObject.GetComponent<LockedDoor>().keyToUnlock))
+            LockedDoor door = other.gameObject.GetComponent<LockedDoor>();
+            if (!door)
+            {
+                return;
+            }
+
+            if (keysFound.Contains(door.keyToUnlock))
             {
                 playerUIController.PickupEvent("The door unlocks!");
                 Destroy(other.gameObject);
-            } else
+            }
+            else
             {
                 playerUIController.PickupEvent("You don't have the right key to open this door");
             }

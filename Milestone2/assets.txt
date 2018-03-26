@@ -22,3 +22,29 @@ https://opengameart.org/content/top-down-tileset
 License:
 CC0 1.0 Universal
 https://creativecommons.org/publicdomain/zero/1.0/
+
+=================================
+
+Rule Tiles:
+https://github.com/Unity-Technologies/2d-extras	
+
+License:
+MIT 
+
+=================================
+
+Items:
+https://opengameart.org/content/fantasy-icon-pack-by-ravenmore-0
+
+License:
+CC0 1.0 Universal
+https://creativecommons.org/publicdomain/zero/1.0/
+
+=================================
+
+Keys:
+https://opengameart.org/content/key-icons
+
+License:
+CC0 1.0 Universal
+https://creativecommons.org/publicdomain/zero/1.0/

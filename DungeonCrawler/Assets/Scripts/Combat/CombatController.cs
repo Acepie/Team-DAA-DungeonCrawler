@@ -27,7 +27,7 @@ public class CombatController : MonoBehaviour
         cf2d.useLayerMask = true;
 
         CircleCollider2D combatRadius = gameObject.AddComponent<CircleCollider2D>();
-        combatRadius.radius = 3;
+        combatRadius.radius = 1.5f;
         combatRadius.isTrigger = true;
 
         Collider2D[] combatantColliders;
