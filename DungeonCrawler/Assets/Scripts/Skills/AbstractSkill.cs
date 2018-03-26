@@ -64,13 +64,17 @@ public abstract class AbstractSkill : MonoBehaviour
                 return "Target out of range";
             }
 
-            ignoreLayer = 1 << 12;
+            //Need to ignore layer of object that uses skill 
+            //because raycast originates inside of game object and instantly collidesd
+            ignoreLayer = 1 << skillUser.gameObject.layer;
             ignoreLayer = ~ignoreLayer;
 
             RaycastHit2D rayHit = Physics2D.Raycast(start, direction, skillRadius, ignoreLayer);
            // Debug.Log(rayHit.collider);
             if(rayHit.collider != t.GetComponent<Collider2D>())
             {
+                Debug.Log(rayHit.collider.name);
+                Debug.Log(start);
                 return "Target out of sight";
             }
         }

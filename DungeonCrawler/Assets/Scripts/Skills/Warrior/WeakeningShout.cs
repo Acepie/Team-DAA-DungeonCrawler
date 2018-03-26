@@ -12,7 +12,7 @@ public class WeakeningShout : AbstractSkill {
         skillCooldown = 3;
         skillCost = 2;
         skillDescription = "Weaken your enemies. Reducing their damage dealt by 25%" + skillCooldown;
-        skillRadius = 8;
+        skillRadius = 2;
     }
 	
 	// Update is called once per frame

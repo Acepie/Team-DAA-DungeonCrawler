@@ -6,6 +6,7 @@ using UnityEngine;
 public abstract class AbstractAoE : AbstractProjectile {
 
     protected float explosionRadius;
+    
 
     // Use this for initialization
     void Start () {

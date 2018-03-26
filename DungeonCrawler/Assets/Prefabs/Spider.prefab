@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 61635433036954202}
   - component: {fileID: 95731667655424150}
   - component: {fileID: 114527973068959792}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Spider
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -37,8 +37,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1202529344318048}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -19.85, y: 6.85, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.2084866, y: 0.01710771, z: -0.08728999}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -121,12 +121,12 @@ MonoBehaviour:
     currentHealth: 0
     maxHealth: 5
     attackpower: 1
-  speed: 1
+  speed: 0
   moveCD: 1
   combatAnimControl: {fileID: 22100000, guid: e152b19a802a97b4597cc34c567dd758, type: 2}
   normalAnimControl: {fileID: 22100000, guid: 3942f05073260414caaef840af74fdeb, type: 2}
   dropItem: {fileID: 1888648712246898, guid: 94e102f3e37f18d46b210d8a320f21a4, type: 2}
-  dropRate: 0.1
+  dropRate: 1
 --- !u!212 &212115735613052258
 SpriteRenderer:
   m_ObjectHideFlags: 1
