@@ -2,23 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StatusController : MonoBehaviour {
+public class StatusController {
 
-    List<AbstractStatus> statuses;
+    List<AbstractStatus> statuses = new List<AbstractStatus>();
 
-    // Use this for initialization
-    void Start()
-    {
-        statuses = new List<AbstractStatus>();
-    }
-
-    public void addStatus(AbstractStatus s)
+    public void addStatus(AbstractCreature c, AbstractStatus s)
     {
         statuses.Add(s);
-        s.applyStatus(this.GetComponent<AbstractCreature>());
+        s.applyStatus(c);
     }
 
-    public void reduceStatusDuration()
+    public void reduceStatusDuration(AbstractCreature c)
     {
         foreach (AbstractStatus s in statuses)
         {
@@ -29,7 +23,7 @@ public class StatusController : MonoBehaviour {
 
             if(s.TurnsUntilRemoved == 0)
             {
-                s.removeStatus(this.GetComponent<AbstractCreature>());
+                s.removeStatus(c);
             }
         }
     }

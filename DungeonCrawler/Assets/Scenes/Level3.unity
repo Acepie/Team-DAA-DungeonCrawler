@@ -31662,6 +31662,11 @@ Prefab:
       propertyPath: skillDescription
       value: 
       objectReference: {fileID: 1540639400}
+    - target: {fileID: 114254462591056056, guid: 0b6b4496d506cf248bcd9440e114cdcc,
+        type: 2}
+      propertyPath: playerClass
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0b6b4496d506cf248bcd9440e114cdcc, type: 2}
   m_IsPrefabParent: 0

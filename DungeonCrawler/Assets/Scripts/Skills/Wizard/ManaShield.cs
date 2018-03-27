@@ -21,7 +21,7 @@ public class ManaShield : AbstractSkill {
     protected override bool performSkill(List<AbstractCreature> target, CombatData data)
     {
         skillOnUseText = "Shielded yourself for " + manaShield.ShieldHealth;
-        parent.statusController.addStatus(manaShield);
+        parent.statusController.addStatus(parent, manaShield);
         return true;
         
     }

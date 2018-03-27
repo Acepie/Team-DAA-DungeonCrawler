@@ -7,12 +7,19 @@ using System;
 
 public class PlayerController : AbstractCreature
 {
+    [Serializable]
+    public enum PlayerClass {
+        Warrior,
+        Wizard,
+        Ranger
+    }
 
     Rigidbody2D rb2d;
 
     // Used for combat UI
     public CombatTextController ctc;
     public PlayerUIController playerUIController;
+    public PlayerClass playerClass = PlayerClass.Warrior;
     private SkillHandler skillHandler;
     private HashSet<string> keysFound;
     private Animator animator;
@@ -23,9 +30,32 @@ public class PlayerController : AbstractCreature
         SpawnPlayer();
         rb2d = GetComponent<Rigidbody2D>();
         skillHandler = GetComponent<SkillHandler>();
-        statusController = GetComponent<StatusController>();
         keysFound = new HashSet<string>();
         animator = GetComponent<Animator>();
+        PlayerLevelManager.Init(this, playerUIController);
+
+        switch (playerClass) {
+            case PlayerClass.Warrior:
+                gameObject.AddComponent(typeof(BasicMelee));
+                gameObject.AddComponent(typeof(SlamAttack));
+                gameObject.AddComponent(typeof(WeakeningShout));
+                gameObject.AddComponent(typeof(Whirlwind));
+                break;
+            case PlayerClass.Wizard:
+                gameObject.AddComponent(typeof(Fireball));
+                gameObject.AddComponent(typeof(GraspingRoots));
+                gameObject.AddComponent(typeof(LavaWave));
+                gameObject.AddComponent(typeof(ManaShield));
+                gameObject.AddComponent(typeof(StunningStrike));
+                break;
+            case PlayerClass.Ranger:
+                gameObject.AddComponent(typeof(BasicRanged));
+                gameObject.AddComponent(typeof(TacticalReposition));
+                gameObject.AddComponent(typeof(ThrowTrap));
+                gameObject.AddComponent(typeof(Volley));
+                break;
+        }
+        skillHandler.InitSkills();
     }
 
     // Update is called once per frame
@@ -172,7 +202,7 @@ public class PlayerController : AbstractCreature
         //Reduce current CD of any skills on CD by 1
         skillHandler.decrementSkillsCooldown();
         //Reduce all statuses by 1 turn
-        statusController.reduceStatusDuration();
+        statusController.reduceStatusDuration(this);
         string combatText = getInstructionText();
         this.ctc.updateText(combatText);
     }
