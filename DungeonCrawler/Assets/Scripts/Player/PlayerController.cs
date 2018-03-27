@@ -8,7 +8,8 @@ using System;
 public class PlayerController : AbstractCreature
 {
     [Serializable]
-    public enum PlayerClass {
+    public enum PlayerClass
+    {
         Warrior,
         Wizard,
         Ranger
@@ -33,8 +34,8 @@ public class PlayerController : AbstractCreature
         keysFound = new HashSet<string>();
         animator = GetComponent<Animator>();
         PlayerLevelManager.Init(this, playerUIController);
-
-        switch (playerClass) {
+        switch (playerClass)
+        {
             case PlayerClass.Warrior:
                 gameObject.AddComponent(typeof(BasicMelee));
                 gameObject.AddComponent(typeof(SlamAttack));
@@ -97,12 +98,21 @@ public class PlayerController : AbstractCreature
         bool hasMoved = false;
         bool attackMade = false;
         string skillDescription = "";
-        AbstractCreature potentialTarget = null;
 
 
         //Potential values needed for multiattacks
         HashSet<AbstractCreature> targetsBeingAttacked = new HashSet<AbstractCreature>();
-        int count = 0;
+        if (lastTargets != null && lastTargets.Count != 0)
+        {
+            lastTargets.RemoveWhere((t) =>
+            {
+                return t == null || t.IsDead();
+            });
+            targetsBeingAttacked = lastTargets;
+            string combatText = getInstructionText() + getTargetText(targetsBeingAttacked) + skillHandler.getSkillsText();
+            this.ctc.updateText(combatText);
+        }
+
         while (!turnEnded)
         {
 
@@ -110,7 +120,6 @@ public class PlayerController : AbstractCreature
             {
                 turnEnded = true;
             }
-            count++;
             yield return new WaitUntil(() => Input.anyKey);
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -124,23 +133,22 @@ public class PlayerController : AbstractCreature
                 Camera cam = Camera.main;
                 transform.position = cam.ScreenToWorldPoint(Input.mousePosition);
                 hasMoved = true;
+                this.ctc.updateText(getInstructionText());
             }
 
             if (Input.GetMouseButtonDown(0))
             {
-                potentialTarget = ClickOnTarget();
+
+                AbstractCreature potentialTarget = ClickOnTarget();
                 if (potentialTarget == null)
                 {
                     targetsBeingAttacked.Clear();
-                    continue;
                 }
-
-                if (!validTargetList.Contains(potentialTarget))
+                else if (!validTargetList.Contains(potentialTarget))
                 {
-                    continue;
+                    //Do nothing
                 }
-
-                if (targetsBeingAttacked.Contains(potentialTarget))
+                else if (targetsBeingAttacked.Contains(potentialTarget))
                 {
                     targetsBeingAttacked.Remove(potentialTarget);
                 }
@@ -150,15 +158,7 @@ public class PlayerController : AbstractCreature
                 }
 
                 lastTargets = targetsBeingAttacked;
-                string combatText = "Press E to end your turn \nClick an enemy to mark/unmark for attack.\nTargets:\n";
-               
-                foreach (var t in targetsBeingAttacked)
-                {
-                    combatText += t.name + ":\t Health: " + t.data.CurrentHealth + "\n";
-                }
-                combatText = getInstructionText();
-                combatText += getTargetText(targetsBeingAttacked);
-                combatText += skillHandler.getSkillsText();
+                string combatText = getInstructionText() + getTargetText(targetsBeingAttacked) + skillHandler.getSkillsText();
                 this.ctc.updateText(combatText);
             }
 
@@ -217,7 +217,8 @@ public class PlayerController : AbstractCreature
         return combatText;
     }
 
-    private string getInstructionText() {
+    private string getInstructionText()
+    {
         return "Click an enemy to mark/unmark for attack.\nPress M to move \nPress E to end your turn \n";
     }
 
