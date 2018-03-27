@@ -29,7 +29,6 @@ public class StunningStrike : AbstractSkill {
         }
 
         stun = new Stunned(stunDuration);
-        stunDuration -= 1;
         skillOnUseText = "Stunned " + target[0] + "for " + stunDuration + " turn";
         target[0].statusController.addStatus(target[0], stun);
         return true;
