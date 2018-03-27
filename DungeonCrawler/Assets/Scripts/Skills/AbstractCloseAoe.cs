@@ -13,20 +13,7 @@ public abstract class AbstractCloseAoe : AbstractSkill {
         skillRadiusCol.isTrigger = true;
 
         ContactFilter2D cf2d = new ContactFilter2D();
-        int playerLayer = 8;
-        int enemyLayer = 9;
-        int playerMask = 1 << playerLayer;
-        int enemyMask = 1 << enemyLayer;
-
-        if (parent.CompareTag("Player"))
-        {
-            cf2d.layerMask = enemyMask;
-        }
-        else
-        {
-            cf2d.layerMask = playerMask;
-        }
-
+        cf2d.layerMask = LayerMask.GetMask("Player", "Enemy");
         cf2d.useLayerMask = true;
 
         Collider2D[] combatantColliders;

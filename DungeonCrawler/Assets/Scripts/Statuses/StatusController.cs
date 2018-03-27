@@ -18,6 +18,12 @@ public class StatusController {
         {
             if (s.TurnsUntilRemoved > 0)
             {
+                //Can be abstracted to DoT effects later
+                if( s is Ignited)
+                {
+                    Ignited i = (Ignited)s;
+                    c.UnderAttack(i.FireDamage);
+                }
                 s.TurnsUntilRemoved -= 1;
             }
 

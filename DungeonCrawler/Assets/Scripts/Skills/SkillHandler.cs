@@ -77,10 +77,13 @@ public class SkillHandler : MonoBehaviour
             else
             {
                 SkillEvent(skillToUse.prepareSkill());
-                skillRadiusIndicator = (GameObject)Instantiate(Resources.Load("SRI"));
-                skillRadiusIndicator.transform.localScale = skillRadiusIndicator.transform.localScale * skillBar[i].skillRadius;
-                skillRadiusIndicator.transform.position = parent.transform.position;
-                skillToUse.SkillRadiusIndicator = skillRadiusIndicator;
+                if (skillToUse.isPrepared())
+                {
+                    skillRadiusIndicator = (GameObject)Instantiate(Resources.Load("SRI"));
+                    skillRadiusIndicator.transform.localScale = skillRadiusIndicator.transform.localScale * skillBar[i].skillRadius;
+                    skillRadiusIndicator.transform.position = parent.transform.position;
+                    skillToUse.SkillRadiusIndicator = skillRadiusIndicator;
+                }
             }
             return skillBar[i].skillSuccessful;
         }

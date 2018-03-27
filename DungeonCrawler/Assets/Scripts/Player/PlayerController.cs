@@ -44,15 +44,17 @@ public class PlayerController : AbstractCreature
                 break;
             case PlayerClass.Wizard:
                 gameObject.AddComponent(typeof(Fireball));
-                gameObject.AddComponent(typeof(GraspingRoots));
+                //gameObject.AddComponent(typeof(GraspingRoots));
                 gameObject.AddComponent(typeof(LavaWave));
                 gameObject.AddComponent(typeof(ManaShield));
                 gameObject.AddComponent(typeof(StunningStrike));
                 break;
             case PlayerClass.Ranger:
                 gameObject.AddComponent(typeof(BasicRanged));
-                gameObject.AddComponent(typeof(TacticalReposition));
-                gameObject.AddComponent(typeof(ThrowTrap));
+                gameObject.AddComponent(typeof(RicochetArrow));
+                gameObject.AddComponent(typeof(ImmolationArrow));
+                //gameObject.AddComponent(typeof(TacticalReposition));
+                //gameObject.AddComponent(typeof(ThrowTrap));
                 gameObject.AddComponent(typeof(Volley));
                 break;
         }
@@ -135,6 +137,7 @@ public class PlayerController : AbstractCreature
                 hasMoved = true;
                 this.ctc.updateText(getInstructionText());
             }
+
 
             if (Input.GetMouseButtonDown(0))
             {

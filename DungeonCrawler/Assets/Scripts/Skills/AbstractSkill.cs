@@ -53,10 +53,7 @@ public abstract class AbstractSkill : MonoBehaviour
     {
         skillPrepared = false;
         //Checks to make sure skill is not on CD
-        if (this.skillOnCooldown())
-        {
-            return this.skillName + " is on cooldown for " + turnsUntilOffCD + " more turns";
-        }
+
 
         //Confirms a target is selected
         if (targets.Count == 0)
@@ -81,7 +78,11 @@ public abstract class AbstractSkill : MonoBehaviour
             ignoreLayer = ~ignoreLayer;
 
             RaycastHit2D rayHit = Physics2D.Raycast(start, direction, skillRadius, ignoreLayer);
-            if(rayHit.collider != t.GetComponent<Collider2D>())
+            //Introduced a bug that allows you to hit enemies further than intended if collision with another
+            //enemy occurs first. Target should be modified to be the first enemy hit via raycast
+            //However, this should not be too much of an issue as it will rarely come up
+            //Also, this should make melee better 
+            if(rayHit.collider.tag != t.tag)
             {
                 return "Target out of sight";
             }
@@ -100,6 +101,12 @@ public abstract class AbstractSkill : MonoBehaviour
 
     public string prepareSkill()
     {
+
+        if (this.skillOnCooldown())
+        {
+            return this.skillName + " is on cooldown for " + turnsUntilOffCD + " more turns";
+        }
+
         skillSuccessful = false;
         skillPrepared = true;
         return (this.SkillName + " is ready to use");
