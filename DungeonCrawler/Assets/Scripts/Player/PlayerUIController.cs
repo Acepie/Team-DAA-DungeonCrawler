@@ -60,7 +60,8 @@ public class PlayerUIController : MonoBehaviour
     public GameObject drawCombatArrows(AbstractCreature target)
     {
         var newArrow = Instantiate(this.arrow, new Vector3(0,0,0), Quaternion.identity);
-        newArrow.transform.parent = this.canv.transform;
+        //newArrow.transform.parent = this.canv.transform;
+        newArrow.transform.SetParent(this.canv.transform, false);
         Vector3 camPos = Camera.main.WorldToScreenPoint(target.transform.position);
         camPos.y += 13;
         camPos.x -= 13;

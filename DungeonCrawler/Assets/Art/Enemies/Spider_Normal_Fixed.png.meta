@@ -1,25 +1,25 @@
 fileFormatVersion: 2
-guid: 8c58c21b53af3c9498422acc7a5f678c
-timeCreated: 1518745987
+guid: 3e4016021dd3a5242ae70450b4cb8d80
+timeCreated: 1522020819
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: BlackWidow_0
-    21300002: BlackWidow_1
-    21300004: BlackWidow_2
-    21300006: BlackWidow_3
-    21300008: BlackWidow_4
-    21300010: BlackWidow_5
-    21300012: BlackWidow_6
-    21300014: BlackWidow_7
-    21300016: BlackWidow_8
-    21300018: BlackWidow_9
-    21300020: BlackWidow_10
-    21300022: BlackWidow_11
-    21300024: BlackWidow_12
-    21300026: BlackWidow_13
-    21300028: BlackWidow_14
-    21300030: BlackWidow_15
+    21300000: Spider_Normal_Fixed_0
+    21300002: Spider_Normal_Fixed_1
+    21300004: Spider_Normal_Fixed_2
+    21300006: Spider_Normal_Fixed_3
+    21300008: Spider_Normal_Fixed_4
+    21300010: Spider_Normal_Fixed_5
+    21300012: Spider_Normal_Fixed_6
+    21300014: Spider_Normal_Fixed_7
+    21300016: Spider_Normal_Fixed_8
+    21300018: Spider_Normal_Fixed_9
+    21300020: Spider_Normal_Fixed_10
+    21300022: Spider_Normal_Fixed_11
+    21300024: Spider_Normal_Fixed_12
+    21300026: Spider_Normal_Fixed_13
+    21300028: Spider_Normal_Fixed_14
+    21300030: Spider_Normal_Fixed_15
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -126,225 +126,225 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BlackWidow_0
+      name: Spider_Normal_Fixed_0
       rect:
         serializedVersion: 2
         x: 0
         y: 96
         width: 32
         height: 32
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: BlackWidow_1
+      name: Spider_Normal_Fixed_1
       rect:
         serializedVersion: 2
         x: 32
         y: 96
         width: 32
         height: 32
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: BlackWidow_2
+      name: Spider_Normal_Fixed_2
       rect:
         serializedVersion: 2
         x: 64
         y: 96
         width: 32
         height: 32
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: BlackWidow_3
+      name: Spider_Normal_Fixed_3
       rect:
         serializedVersion: 2
         x: 96
         y: 96
         width: 32
         height: 32
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: BlackWidow_4
+      name: Spider_Normal_Fixed_4
       rect:
         serializedVersion: 2
         x: 0
         y: 64
         width: 32
         height: 32
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: BlackWidow_5
+      name: Spider_Normal_Fixed_5
       rect:
         serializedVersion: 2
         x: 32
         y: 64
         width: 32
         height: 32
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: BlackWidow_6
+      name: Spider_Normal_Fixed_6
       rect:
         serializedVersion: 2
         x: 64
         y: 64
         width: 32
         height: 32
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: BlackWidow_7
+      name: Spider_Normal_Fixed_7
       rect:
         serializedVersion: 2
         x: 96
         y: 64
         width: 32
         height: 32
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: BlackWidow_8
+      name: Spider_Normal_Fixed_8
       rect:
         serializedVersion: 2
         x: 0
         y: 32
         width: 32
         height: 32
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: BlackWidow_9
+      name: Spider_Normal_Fixed_9
       rect:
         serializedVersion: 2
         x: 32
         y: 32
         width: 32
         height: 32
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: BlackWidow_10
+      name: Spider_Normal_Fixed_10
       rect:
         serializedVersion: 2
         x: 64
         y: 32
         width: 32
         height: 32
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: BlackWidow_11
+      name: Spider_Normal_Fixed_11
       rect:
         serializedVersion: 2
         x: 96
         y: 32
         width: 32
         height: 32
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: BlackWidow_12
+      name: Spider_Normal_Fixed_12
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 32
-        height: 30
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: BlackWidow_13
+      name: Spider_Normal_Fixed_13
       rect:
         serializedVersion: 2
         x: 32
         y: 0
         width: 32
-        height: 30
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: BlackWidow_14
+      name: Spider_Normal_Fixed_14
       rect:
         serializedVersion: 2
         x: 64
         y: 0
         width: 32
-        height: 30
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: BlackWidow_15
+      name: Spider_Normal_Fixed_15
       rect:
         serializedVersion: 2
         x: 96
         y: 0
         width: 32
-        height: 30
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
