@@ -8,7 +8,7 @@ public class Boss : AbstractEnemy {
 
     void Start()
     {
-        data = new CombatData(200, 15);
+        data = new CombatData(125, 10);
         exp = 150;
     }
 

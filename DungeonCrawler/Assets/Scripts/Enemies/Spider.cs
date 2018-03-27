@@ -6,7 +6,7 @@ public class Spider : AbstractEnemy
 {
     void Start()
     {
-        data = new CombatData(50, 10);
+        data = new CombatData(30, 5);
         exp = 40;
     }
 }
