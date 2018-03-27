@@ -5,13 +5,6 @@ using UnityEngine;
 public class Boss : AbstractEnemy {
 
     public GameObject dropKey;
-
-    void Start()
-    {
-        data = new CombatData(125, 10);
-        exp = 150;
-    }
-
     public override void OnDeath()
     {
         GameObject keyItem = Instantiate(dropKey, transform.position, Quaternion.identity);

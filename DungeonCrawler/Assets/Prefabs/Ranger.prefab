@@ -228,10 +228,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-    currentHealth: 0
-    maxHealth: 10
-    attackPower: 30
-    rawAttackPower: 0
+    currentHealth: 100
+    maxHealth: 100
+    attackPower: 10
+    rawAttackPower: 10
     temporaryHealth: 0
     stunned: 0
   statusController: {fileID: 0}

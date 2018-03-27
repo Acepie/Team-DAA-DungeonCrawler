@@ -200,6 +200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillRadius: 0
+  parent: {fileID: 0}
   skillSuccessful: 0
 --- !u!114 &114254462591056056
 MonoBehaviour:
@@ -213,10 +214,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-    currentHealth: 0
-    maxHealth: 10
-    attackPower: 0
-    rawAttackPower: 0
+    currentHealth: 100
+    maxHealth: 100
+    attackPower: 10
+    rawAttackPower: 10
+    temporaryHealth: 0
+    stunned: 0
   statusController: {fileID: 0}
   speed: 4
   ctc: {fileID: 0}
@@ -244,6 +247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillRadius: 0
+  parent: {fileID: 0}
   skillSuccessful: 0
 --- !u!114 &114378995717451204
 MonoBehaviour:
@@ -257,6 +261,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillRadius: 0
+  parent: {fileID: 0}
   skillSuccessful: 0
   attackBonus: 0
 --- !u!114 &114605961236238210
@@ -282,6 +287,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillRadius: 2
+  parent: {fileID: 0}
   skillSuccessful: 0
   skillIcon: {fileID: 0}
 --- !u!114 &114840946327775156
@@ -295,9 +301,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 341ebe9a1c1241b4098b0f812f5a4613, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 0}
   skillText: {fileID: 0}
   skillDescription: {fileID: 0}
-  skillPerformed: 0
 --- !u!124 &124140488491433002
 Behaviour:
   m_ObjectHideFlags: 1

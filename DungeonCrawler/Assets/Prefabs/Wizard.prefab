@@ -196,9 +196,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-    currentHealth: 0
-    maxHealth: 10
-    attackpower: 1
+    currentHealth: 100
+    maxHealth: 100
+    attackPower: 10
+    rawAttackPower: 10
+    temporaryHealth: 0
+    stunned: 0
+  statusController: {fileID: 0}
   speed: 5
   ctc: {fileID: 0}
   playerUIController: {fileID: 0}
@@ -213,9 +217,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 341ebe9a1c1241b4098b0f812f5a4613, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 0}
   skillText: {fileID: 0}
   skillDescription: {fileID: 0}
-  skillPerformed: 0
 --- !u!114 &114728509961802100
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -228,6 +232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillRadius: 0
+  parent: {fileID: 0}
   skillSuccessful: 0
 --- !u!114 &114894997847860382
 MonoBehaviour:
@@ -241,6 +246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillRadius: 0
+  parent: {fileID: 0}
   skillSuccessful: 0
   projectileSpeed: 3
   projectile: {fileID: 50288757808654934, guid: e477b571e92d7044f9f2fad2ab41fabd,

@@ -20,7 +20,6 @@ public class PlayerController : AbstractCreature
 
     void Awake()
     {
-        data = new CombatData(100, 10);
         SpawnPlayer();
         rb2d = GetComponent<Rigidbody2D>();
         skillHandler = GetComponent<SkillHandler>();
