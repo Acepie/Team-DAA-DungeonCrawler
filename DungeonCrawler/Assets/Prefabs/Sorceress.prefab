@@ -132,8 +132,8 @@ MonoBehaviour:
   data:
     currentHealth: 40
     maxHealth: 40
-    attackPower: 20
-    rawAttackPower: 20
+    attackPower: 10
+    rawAttackPower: 10
     temporaryHealth: 0
     stunned: 0
   statusController: {fileID: 0}
