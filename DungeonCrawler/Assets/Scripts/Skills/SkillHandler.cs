@@ -30,8 +30,12 @@ public class SkillHandler : MonoBehaviour
 
     void Awake()
     {
-        skillBar = GetComponents<AbstractSkill>();
         parent = GetComponentInParent<AbstractCreature>();
+    }
+
+    public void InitSkills()
+    {
+        skillBar = GetComponents<AbstractSkill>();
     }
 
     public string getSkillsText()
@@ -57,14 +61,14 @@ public class SkillHandler : MonoBehaviour
         }
         else
         {
-            if(skillToUse != null && skillToUse != skillBar[i])
+            if (skillToUse != null && skillToUse != skillBar[i])
             {
                 skillToUse.destroySRI();
                 SkillEvent(skillToUse.unprepareSkill());
             }
 
             skillToUse = skillBar[i];
-            
+
             if (skillToUse.isPrepared())
             {
                 SkillEvent(skillToUse.attemptSkill(targets, data));

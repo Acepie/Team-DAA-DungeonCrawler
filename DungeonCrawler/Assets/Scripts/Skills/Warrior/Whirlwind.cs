@@ -26,7 +26,6 @@ public class Whirlwind : AbstractCloseAoe
     protected override bool performSkill(List<AbstractCreature> target, CombatData data)
     {
         List<AbstractCreature> targets = getNearbyTargets();
-        int i = 0;
         SkillOnUseText = "Hit ";
         foreach (AbstractCreature t in targets)
         {

@@ -28,7 +28,6 @@ public class AbstractEnemy : AbstractCreature
     {
         rb2d = GetComponent<Rigidbody2D>();
         ani = GetComponent<Animator>();
-        statusController = GetComponent<StatusController>();
         lastMoveTimeStamp = -moveCD;
     }
 
@@ -43,7 +42,7 @@ public class AbstractEnemy : AbstractCreature
 
     public override void StartTurn()
     {
-        statusController.reduceStatusDuration();
+        statusController.reduceStatusDuration(this);
     }
 
 

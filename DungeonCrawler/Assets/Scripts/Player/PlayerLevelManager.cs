@@ -2,21 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerLevelManager : MonoBehaviour {
+public class PlayerLevelManager {
 
     private static int currentLevel = 1;
     private static int currentExp = 0;
     private static int expToNextLevel = 100;
     private static PlayerController player;
-    public static PlayerUIController playerUIController;
+    private static PlayerUIController playerUIController;
 
 
     // Use this for initialization
-    void Start()
+    public static void Init(PlayerController p, PlayerUIController uiController)
     {
-        player = GetComponent<PlayerController>();
-        playerUIController = GameObject.FindGameObjectWithTag("UIManager").GetComponent<PlayerUIController>();
-
+        player = p;
+        playerUIController = uiController;
     }
 
     public static void addExp(int exp)

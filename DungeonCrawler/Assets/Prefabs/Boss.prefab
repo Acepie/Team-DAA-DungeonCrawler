@@ -24,7 +24,6 @@ GameObject:
   - component: {fileID: 58207708597556806}
   - component: {fileID: 95678565474312600}
   - component: {fileID: 50277771960133612}
-  - component: {fileID: 114528412930974346}
   m_Layer: 9
   m_Name: Boss
   m_TagString: Enemy
@@ -115,7 +114,6 @@ MonoBehaviour:
     rawAttackPower: 10
     temporaryHealth: 0
     stunned: 0
-  statusController: {fileID: 0}
   speed: 0
   moveCD: 1
   exp: 150
@@ -124,17 +122,6 @@ MonoBehaviour:
   dropItems: []
   dropRate: 0
   dropKey: {fileID: 1537334541607736, guid: 9ad03afc245cfdd4bb81e650e3428a35, type: 2}
---- !u!114 &114528412930974346
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1702203653249938}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ec711b415039144b9a031abc958dcaf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &212077450521955294
 SpriteRenderer:
   m_ObjectHideFlags: 1
