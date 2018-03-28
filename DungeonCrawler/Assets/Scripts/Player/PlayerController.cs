@@ -7,6 +7,7 @@ using System;
 
 public class PlayerController : AbstractCreature
 {
+    public int distance = 10;
     [Serializable]
     public enum PlayerClass
     {
@@ -125,7 +126,7 @@ public class PlayerController : AbstractCreature
             {
                 turnEnded = true;
             }
-            
+
             yield return new WaitUntil(() => Input.anyKey);
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -137,9 +138,32 @@ public class PlayerController : AbstractCreature
                 ctc.updateText("Move action intiated. Click where you want to go!");
                 yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
                 Camera cam = Camera.main;
-                transform.position = cam.ScreenToWorldPoint(Input.mousePosition);
-                hasMoved = true;
-                this.ctc.updateText(getInstructionText());
+                Vector2 end = cam.ScreenToWorldPoint(Input.mousePosition);
+
+                LayerMask layerMask = LayerMask.GetMask("Player", "Enemy");
+                layerMask = ~layerMask;
+
+                float dist = Vector2.Distance(transform.position, end);
+                if (dist > distance)
+                {
+                    playerUIController.PickupEvent("Unable to move there, distance too far");
+                }
+                else
+                {
+                    //RaycastHit2D rayHit = Physics2D.Raycast(transform.position, end, Vector2.Distance(transform.position, end) ,layerMask);
+                    RaycastHit2D rayHit = Physics2D.Raycast(transform.position, end, distance, layerMask);
+
+                    if (rayHit.collider == null)
+                    {
+                        hasMoved = true;
+                        transform.position = end;
+                        this.ctc.updateText(getInstructionText());
+                    }
+                    else
+                    {
+                        playerUIController.PickupEvent("Unable to move there, something is blocking you");
+                    }
+                }
             }
 
 
@@ -169,7 +193,7 @@ public class PlayerController : AbstractCreature
                 {
                     targetsBeingAttacked.Add(potentialTarget, playerUIController.drawCombatArrows(potentialTarget));
                 }
-                
+
                 lastTargets = new HashSet<AbstractCreature>(targetsBeingAttacked.Keys);
                 string combatText = getInstructionText() + getTargetText(new HashSet<AbstractCreature>(targetsBeingAttacked.Keys)) + skillHandler.getSkillsText();
                 this.ctc.updateText(combatText);
@@ -249,7 +273,7 @@ public class PlayerController : AbstractCreature
         if (hit.collider != null && hit.collider.GetComponent<AbstractCreature>() is AbstractEnemy && hit.collider.gameObject.GetComponent<AbstractCreature>().InCombat)
         {
             targetCreature = hit.collider.gameObject.GetComponent<AbstractCreature>();
-            
+
         }
 
         return targetCreature;

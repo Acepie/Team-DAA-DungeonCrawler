@@ -496,7 +496,7 @@ GameObject:
   - component: {fileID: 166927694}
   - component: {fileID: 166927696}
   - component: {fileID: 166927695}
-  m_Layer: 4
+  m_Layer: 0
   m_Name: Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31632,6 +31632,11 @@ Prefab:
         type: 2}
       propertyPath: playerClass
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114254462591056056, guid: 0b6b4496d506cf248bcd9440e114cdcc,
+        type: 2}
+      propertyPath: distance
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}

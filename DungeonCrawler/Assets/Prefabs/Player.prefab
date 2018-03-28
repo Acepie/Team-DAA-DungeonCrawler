@@ -201,6 +201,7 @@ MonoBehaviour:
     temporaryHealth: 0
     stunned: 0
   speed: 4
+  distance: 5
   ctc: {fileID: 0}
   playerUIController: {fileID: 0}
   playerClass: 0
