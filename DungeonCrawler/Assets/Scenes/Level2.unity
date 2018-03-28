@@ -31848,6 +31848,7 @@ MonoBehaviour:
   eventText: {fileID: 1273456427}
   skillDescriptionText: {fileID: 211371250}
   playerHealthSlider: {fileID: 1677481650}
+  arrow: {fileID: 1813424686180700, guid: 3246083099ebf6c4ab8785e0ffc74e75, type: 2}
 --- !u!4 &1693985748
 Transform:
   m_ObjectHideFlags: 0
