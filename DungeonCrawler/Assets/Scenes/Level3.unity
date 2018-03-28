@@ -31356,11 +31356,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 175381477}
     m_Modifications:
-    - target: {fileID: 114103127536605712, guid: 611befce9eefd424382f4e0cf222133b,
-        type: 2}
-      propertyPath: switchables.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4561959784845506, guid: 611befce9eefd424382f4e0cf222133b, type: 2}
       propertyPath: m_LocalPosition.x
       value: 3.33
@@ -31665,7 +31660,7 @@ Prefab:
     - target: {fileID: 114254462591056056, guid: 0b6b4496d506cf248bcd9440e114cdcc,
         type: 2}
       propertyPath: playerClass
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0b6b4496d506cf248bcd9440e114cdcc, type: 2}
@@ -33027,6 +33022,7 @@ MonoBehaviour:
   eventText: {fileID: 1273456427}
   skillDescriptionText: {fileID: 1540639400}
   playerHealthSlider: {fileID: 1677481650}
+  arrow: {fileID: 1813424686180700, guid: 3246083099ebf6c4ab8785e0ffc74e75, type: 2}
 --- !u!4 &1693985748
 Transform:
   m_ObjectHideFlags: 0

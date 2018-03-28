@@ -42,7 +42,7 @@ public class AbstractEnemy : AbstractCreature
 
     public override void StartTurn()
     {
-        statusController.reduceStatusDuration(this);
+        
     }
 
 
@@ -55,6 +55,8 @@ public class AbstractEnemy : AbstractCreature
             target.UnderAttack(attackDamage);
             endTurn();
         }
+
+        statusController.reduceStatusDuration(this);
         yield return null;
     }
 

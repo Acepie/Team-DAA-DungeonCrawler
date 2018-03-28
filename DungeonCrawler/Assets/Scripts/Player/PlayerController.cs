@@ -218,6 +218,7 @@ public class PlayerController : AbstractCreature
 
     public override void StartTurn()
     {
+        Debug.Log("Start of Turn");
         //Reduce current CD of any skills on CD by 1
         skillHandler.decrementSkillsCooldown();
         //Reduce all statuses by 1 turn

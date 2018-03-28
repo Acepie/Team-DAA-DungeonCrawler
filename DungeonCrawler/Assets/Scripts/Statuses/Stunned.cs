@@ -6,9 +6,10 @@ using UnityEngine;
 public class Stunned : AbstractStatus {
 
     
-    public Stunned(int d)
+    public Stunned(int d, string name)
     {
         statusDuration = d;
+        statusName = name;
     }
 
     public override void applyStatus(AbstractCreature target)

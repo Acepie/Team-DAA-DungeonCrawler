@@ -24,7 +24,7 @@ public class ProjectilePhysics : MonoBehaviour {
     protected void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log(other.gameObject.tag);
-        if ((other.gameObject.CompareTag("Enemy")  || other.gameObject.CompareTag("Player")) && other.gameObject.tag != skillUser.tag)
+        if ((other.gameObject.CompareTag("Enemy")  || other.gameObject.CompareTag("Player")) && other.gameObject.tag != skillUser.tag && other.gameObject.GetComponent<AbstractCreature>().InCombat)
         {
             other.gameObject.GetComponent<AbstractCreature>().UnderAttack(projectileDamage);        
         }

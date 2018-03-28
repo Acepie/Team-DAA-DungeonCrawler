@@ -16,8 +16,10 @@ public class StatusController {
     {
         foreach (AbstractStatus s in statuses)
         {
-            if (s.TurnsUntilRemoved > 0)
+            Debug.Log(s.StatusName + " " + s.TurnsUntilRemoved);
+            if (s.TurnsUntilRemoved >= 0)
             {
+                
                 //Can be abstracted to DoT effects later
                 if( s is Ignited)
                 {
@@ -32,5 +34,8 @@ public class StatusController {
                 s.removeStatus(c);
             }
         }
+
+        statuses.RemoveAll(s => s.TurnsUntilRemoved < 0 -1);
+
     }
 }

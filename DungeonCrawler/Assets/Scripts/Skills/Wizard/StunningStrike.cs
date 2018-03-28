@@ -17,7 +17,7 @@ public class StunningStrike : AbstractSkill {
         skillCost = 3;
         skillCooldown = 5;
         skillRadius = 6;
-        stunDuration = 2;
+        stunDuration = 1;
     }
 
     protected override bool performSkill(List<AbstractCreature> target, CombatData data)
@@ -28,7 +28,7 @@ public class StunningStrike : AbstractSkill {
             return false;
         }
 
-        stun = new Stunned(stunDuration);
+        stun = new Stunned(stunDuration, "Stunning Striked");
         skillOnUseText = "Stunned " + target[0] + "for " + stunDuration + " turn";
         target[0].statusController.addStatus(target[0], stun);
         return true;
