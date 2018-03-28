@@ -12,7 +12,7 @@ public class Fireball : AbstractSkill {
         skillDescription = "Hurl a small ball of fire towards your foes";
         skillCost = 1;
         skillCooldown = 1;
-        skillRadius = 10;
+        skillRadius = 6;
     }
 
     protected override bool performSkill(List<AbstractCreature> target, CombatData data)

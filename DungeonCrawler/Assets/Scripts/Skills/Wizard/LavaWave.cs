@@ -12,7 +12,7 @@ public class LavaWave : AbstractProjectile {
         skillCooldown = 2;
         skillDescription = "Shoot forth a cascading wave of lava. Cooldown of: " + skillCooldown;
         skillCost = 2;
-        skillRadius = 10;
+        skillRadius = 6;
         projectile = (Rigidbody2D)Resources.Load("LavaWave", typeof(Rigidbody2D));
         projectileSpeed = 2;
     }

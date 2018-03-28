@@ -29,6 +29,7 @@ public class PlayerController : AbstractCreature
     void Awake()
     {
         SpawnPlayer();
+        DontDestroyOnLoad(this.gameObject);
         rb2d = GetComponent<Rigidbody2D>();
         skillHandler = GetComponent<SkillHandler>();
         keysFound = new HashSet<string>();

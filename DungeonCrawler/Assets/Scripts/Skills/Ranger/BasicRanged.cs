@@ -13,7 +13,7 @@ public class BasicRanged : AbstractSkill {
         skillDescription = "A basic ranged attack that deals damage to the target";
         skillCost = 1;
         skillCooldown = 1;
-        skillRadius = 10;
+        skillRadius = 8;
     }
 
     protected override bool performSkill(List<AbstractCreature> targets, CombatData data)

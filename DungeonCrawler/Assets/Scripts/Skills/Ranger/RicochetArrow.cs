@@ -15,7 +15,7 @@ public class RicochetArrow : AbstractSkill {
         skillName = "Ricochet Arrow";
         skillCost = 2;
         skillCooldown = 4;
-        skillRadius = 10;
+        skillRadius = 6;
         skillDescription = "Shoot an arrow that ricochets into multiple enemies. Cooldown: " + skillCooldown;
         unavailableTargets.Add((parent.GetComponent<AbstractCreature>()));
 

@@ -12,7 +12,7 @@ public class Volley : AbstractSkill
         skillDescription = "A basic attack that deals damage to all targets";
         skillCost = 1;
         skillCooldown = 2;
-        skillRadius = 10;
+        skillRadius = 8;
     }
 
     protected override bool performSkill(List<AbstractCreature> targets, CombatData data)
