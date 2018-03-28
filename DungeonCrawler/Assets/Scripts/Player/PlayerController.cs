@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using System;
 
 public class PlayerController : AbstractCreature
 {
@@ -14,15 +16,17 @@ public class PlayerController : AbstractCreature
     private SkillHandler skillHandler;
     private HashSet<string> keysFound;
     private Animator animator;
+    private HashSet<AbstractCreature> lastTargets; // Used to keep targets betwen turns
 
     void Awake()
     {
+        data = new CombatData(100, 10);
         SpawnPlayer();
         rb2d = GetComponent<Rigidbody2D>();
         skillHandler = GetComponent<SkillHandler>();
+        statusController = GetComponent<StatusController>();
         keysFound = new HashSet<string>();
-        data.currentHealth = data.maxHealth;
-        animator = this.GetComponent<Animator>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -58,22 +62,36 @@ public class PlayerController : AbstractCreature
     */
     public override IEnumerator PerformTurn(List<AbstractCreature> validTargetList)
     {
-
-        //Reduce current CD of any skills on CD by 1
-        //TODO: Fix the below line of code
-        //skillHandler.decrementSkillsCooldown();
-
         bool turnEnded = false;
         bool hasMoved = false;
+        bool attackMade = false;
+        string skillDescription = "";
+        AbstractCreature potentialTarget = null;
+
 
         //Potential values needed for multiattacks
-        //A collection of arrows drawn on the ui
+        // Each AbstractCreature has UI elements associated with it, stored in a dictionary
         Dictionary<AbstractCreature, GameObject> targetsBeingAttacked = new Dictionary<AbstractCreature, GameObject>();
-
-
+        int count = 0;  // TODO: what is this? 
 
         while (!turnEnded)
         {
+
+            if (attackMade)
+            {
+                turnEnded = true;
+            }
+            count++;
+
+            // If there were any previous targets, then rebuild the targets
+            if (lastTargets != null)
+            {
+                foreach (var t in lastTargets)
+                {
+                    targetsBeingAttacked.Add(t, playerUIController.drawCombatArrows(potentialTarget));
+                }
+            }
+
             yield return new WaitUntil(() => Input.anyKey);
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -89,14 +107,9 @@ public class PlayerController : AbstractCreature
                 hasMoved = true;
             }
 
-            if (Input.GetKeyDown(KeyCode.I))
-            {
-                //Use some item
-            }
-
             if (Input.GetMouseButtonDown(0))
             {
-                AbstractCreature potentialTarget = ClickOnTarget();
+                potentialTarget = ClickOnTarget();
                 if (potentialTarget == null)
                 {
                     foreach (var key in targetsBeingAttacked.Keys)
@@ -108,45 +121,65 @@ public class PlayerController : AbstractCreature
                     continue;
                 }
 
-                if (!validTargetList.Contains(potentialTarget)) {
+                if (!validTargetList.Contains(potentialTarget))
+                {
                     continue;
                 }
 
-                if (targetsBeingAttacked.ContainsKey(potentialTarget)) {
+                if (targetsBeingAttacked.ContainsKey(potentialTarget))
+                {
                     Destroy(targetsBeingAttacked[potentialTarget]);
                     targetsBeingAttacked.Remove(potentialTarget);
-                } else {
+                }
+                else
+                {
                     targetsBeingAttacked.Add(potentialTarget, playerUIController.drawCombatArrows(potentialTarget));
                 }
 
-                string combatText = "Click an enemy to mark/unmark for attack.\nTargets:\n";
-                foreach(var t in targetsBeingAttacked.Keys) {
-                    combatText += t.name + ":\t Health: " + t.data.currentHealth + "\n";
+                lastTargets = new HashSet<AbstractCreature>(targetsBeingAttacked.Keys);
+                string combatText = "Press E to end your turn \nClick an enemy to mark/unmark for attack.\nTargets:\n";
+
+                foreach (var t in targetsBeingAttacked.Keys)
+                {
+                    combatText += t.name + ":\t Health: " + t.data.CurrentHealth + "\n";
+
                 }
-                combatText += "\nPress 1 to perform attack. Press 2 for a slam attack! Press 3 for a multihit attack.";
+                combatText = getInstructionText();
+                combatText += getTargetText(new HashSet<AbstractCreature>(targetsBeingAttacked.Keys));
+                combatText += skillHandler.getSkillsText();
                 this.ctc.updateText(combatText);
             }
 
-            if (Input.GetKeyDown(KeyCode.Alpha1) && targetsBeingAttacked.Count > 0)
+            if (Input.GetKeyDown(KeyCode.Alpha1) && !attackMade)
             {
-                var listOfCreatures = new List<AbstractCreature>(targetsBeingAttacked.Keys);
-                skillHandler.performSkillAtIndex(1, listOfCreatures, data);
-                turnEnded = skillHandler.skillPerformed;
+                attackMade = skillHandler.performSkillAtIndex(0, new List<AbstractCreature>(targetsBeingAttacked.Keys), data, this);
+                skillDescription = skillHandler.getSkillDescriptionAtIndex(0);
             }
 
-            if (Input.GetKeyDown(KeyCode.Alpha2) && targetsBeingAttacked.Count > 0)
+            if (Input.GetKeyDown(KeyCode.Alpha2) && !attackMade)
             {
-                var listOfCreatures = new List<AbstractCreature>(targetsBeingAttacked.Keys);
-                skillHandler.performSkillAtIndex(2, listOfCreatures, data);
-                turnEnded = skillHandler.skillPerformed;
+                attackMade = skillHandler.performSkillAtIndex(1, new List<AbstractCreature>(targetsBeingAttacked.Keys), data, this);
+                skillDescription = skillHandler.getSkillDescriptionAtIndex(1);
             }
 
-            if (Input.GetKeyDown(KeyCode.Alpha3) && targetsBeingAttacked.Count > 0)
+            if (Input.GetKeyDown(KeyCode.Alpha3) && !attackMade)
             {
-                var listOfCreatures = new List<AbstractCreature>(targetsBeingAttacked.Keys);
-                skillHandler.performSkillAtIndex(3, listOfCreatures, data);
-                turnEnded = skillHandler.skillPerformed;
+                attackMade = skillHandler.performSkillAtIndex(2, new List<AbstractCreature>(targetsBeingAttacked.Keys), data, this);
+                skillDescription = skillHandler.getSkillDescriptionAtIndex(2);
             }
+
+            if (Input.GetKeyDown(KeyCode.Alpha4) && !attackMade)
+            {
+                attackMade = skillHandler.performSkillAtIndex(3, new List<AbstractCreature>(targetsBeingAttacked.Keys), data, this);
+                skillDescription = skillHandler.getSkillDescriptionAtIndex(3);
+            }
+
+            if (attackMade)
+            {
+                skillDescription = "";
+            }
+
+            playerUIController.skillDescriptionText.text = skillDescription;
         }
 
         foreach (var key in targetsBeingAttacked.Keys)
@@ -157,10 +190,28 @@ public class PlayerController : AbstractCreature
         yield return null;
     }
 
-    public override void StartTurn() {
-        
-        string combatText = "Click an enemy to mark/unmark for attack.\n";
+    public override void StartTurn()
+    {
+        //Reduce current CD of any skills on CD by 1
+        skillHandler.decrementSkillsCooldown();
+        //Reduce all statuses by 1 turn
+        statusController.reduceStatusDuration();
+        string combatText = getInstructionText();
         this.ctc.updateText(combatText);
+    }
+
+    private string getTargetText(HashSet<AbstractCreature> targetsBeingAttacked)
+    {
+        string combatText = "Targets:\n";
+        foreach (var t in targetsBeingAttacked)
+        {
+            combatText += t.name + ":\t Health: " + t.data.CurrentHealth + "\n";
+        }
+        return combatText;
+    }
+
+    private string getInstructionText() {
+        return "Click an enemy to mark/unmark for attack.\nPress M to move \nPress E to end your turn \n";
     }
 
     private AbstractCreature ClickOnTarget()
@@ -179,6 +230,7 @@ public class PlayerController : AbstractCreature
     public override void OnDeath()
     {
         Debug.Log("Defeated!!!");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void SpawnPlayer()
@@ -201,9 +253,16 @@ public class PlayerController : AbstractCreature
             Destroy(other.gameObject);
         }
 
+        if (other.gameObject.CompareTag("Switch"))
+        {
+            other.gameObject.GetComponent<Switch>().ActivateSwitch();
+            playerUIController.PickupEvent("A switch has activated! I wonder what it does...");
+        }
+
         if (other.gameObject.CompareTag("EndZone"))
         {
             playerUIController.PickupEvent("Level Ended! Progressing to next level");
+            other.gameObject.GetComponent<LevelLoader>().LoadLevel();
         }
     }
 
@@ -219,11 +278,18 @@ public class PlayerController : AbstractCreature
 
         if (other.gameObject.CompareTag("Door"))
         {
-            if (keysFound.Contains(other.gameObject.GetComponent<LockedDoor>().keyToUnlock))
+            LockedDoor door = other.gameObject.GetComponent<LockedDoor>();
+            if (!door)
+            {
+                return;
+            }
+
+            if (keysFound.Contains(door.keyToUnlock))
             {
                 playerUIController.PickupEvent("The door unlocks!");
                 Destroy(other.gameObject);
-            } else
+            }
+            else
             {
                 playerUIController.PickupEvent("You don't have the right key to open this door");
             }
@@ -234,5 +300,10 @@ public class PlayerController : AbstractCreature
     {
         base.CombatEnded();
         skillHandler.resetCooldowns();
+    }
+
+    protected override void endTurn()
+    {
+        Debug.Log("Player ending turn");
     }
 }

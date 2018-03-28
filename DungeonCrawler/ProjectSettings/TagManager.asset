@@ -5,10 +5,13 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
-  - Door
   - Key
-  - EndZone
   - Pickup
+  - Door
+  - EndZone
+  - UIManager
+  - Switch
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -18,14 +21,14 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
   - Player
+  - Enemy
   - 
   - 
-  - Background
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -45,13 +48,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Player
-    uniqueID: 3193159381
-    locked: 0
-  - name: Wall
-    uniqueID: 3218142923
-    locked: 0
-  - name: Background
-    uniqueID: 3865910747
     locked: 0

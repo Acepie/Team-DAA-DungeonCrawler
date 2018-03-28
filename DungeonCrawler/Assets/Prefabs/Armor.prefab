@@ -36,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1810495833070718}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.971412, y: 0.32368022, z: -0.16796875}
+  m_LocalPosition: {x: 6.971412, y: 0.32368022, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -68,7 +68,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecf6ca054e176cd4586c7b933595c264, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  armorAmount: 2
+  armorAmount: 10
 --- !u!212 &212613229327815278
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -103,8 +103,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0.63220084, g: 0.6691177, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 6c6f8e9e277a48c49953b22ad476d4d2, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

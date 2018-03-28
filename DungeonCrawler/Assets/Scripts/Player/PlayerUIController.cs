@@ -9,6 +9,7 @@ public class PlayerUIController : MonoBehaviour
     private static CombatData data;
     public Text healthText;
     public Text eventText;
+    public Text skillDescriptionText;
     public Slider playerHealthSlider;
     public GameObject arrow;
 
@@ -21,14 +22,14 @@ public class PlayerUIController : MonoBehaviour
     void Start()
     {
         canv = GameObject.Find("Canvas").GetComponent<Canvas>();
-        data = GameObject.Find("player").GetComponent<PlayerController>().data;
+        data = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().data;
     }
 
     // Update is called once per frame
     void Update()
     {
-        healthText.text = "Health: " + data.currentHealth.ToString() + "/" + data.maxHealth.ToString();
-        playerHealthSlider.value = ((float)data.currentHealth) / ((float)data.maxHealth);
+        healthText.text = "Health: " + data.CurrentHealth.ToString() + "/" + data.MaxHealth.ToString();
+        playerHealthSlider.value = ((float)data.CurrentHealth) / ((float)data.MaxHealth);
     }
 
     public void PickupEvent(string s)

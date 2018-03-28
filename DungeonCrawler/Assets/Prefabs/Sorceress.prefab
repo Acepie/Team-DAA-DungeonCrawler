@@ -24,7 +24,8 @@ GameObject:
   - component: {fileID: 50438746178519284}
   - component: {fileID: 95178042174427990}
   - component: {fileID: 114592914048241318}
-  m_Layer: 12
+  - component: {fileID: 114195994106828286}
+  m_Layer: 9
   m_Name: Sorceress
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -37,8 +38,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1924186500491498}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.36, y: 7.62, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 36.051514, y: 7.567108, z: -0.08728999}
   m_LocalScale: {x: 2, y: 2.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -106,6 +107,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114195994106828286
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1924186500491498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ec711b415039144b9a031abc958dcaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114592914048241318
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -120,11 +132,18 @@ MonoBehaviour:
   data:
     currentHealth: 0
     maxHealth: 7
-    attackpower: 2
-  speed: 1.2
+    attackPower: 0
+    rawAttackPower: 0
+  statusController: {fileID: 0}
+  speed: 1
   moveCD: 1
+  exp: 0
   combatAnimControl: {fileID: 22100000, guid: f4a30d521ec53af46b6336887d7a76a6, type: 2}
   normalAnimControl: {fileID: 22100000, guid: a92461ffafe0ef24d9ddfbf1bfb7a179, type: 2}
+  dropItems:
+  - {fileID: 1637233739888350, guid: 5394af506709d3c44a34c92a8a3b87c5, type: 2}
+  - {fileID: 1810495833070718, guid: 41ddc2adb5735c4439c03b845c58f06e, type: 2}
+  dropRate: 0.5
 --- !u!212 &212802252192443726
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -157,7 +176,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1101807915
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2e0a82499eb2dd44b8a2c2a8b2c61d8a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

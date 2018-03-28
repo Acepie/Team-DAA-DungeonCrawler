@@ -15,49 +15,76 @@ using UnityEngine.UI;
 public class SkillHandler : MonoBehaviour
 {
 
+    //Refactor skillHandler to receive a skill from hotbar and attempt to perform that skill. To allow control of toggleable radiuses for different skills
+
     private AbstractSkill[] skillBar;
+    AbstractSkill skillToUse = null;
+    [SerializeField]
+    private AbstractCreature parent;
     public Text skillText;
     private bool fadeTextPlaying;
     public Text skillDescription;
-
-    public bool skillPerformed;
+    private GameObject skillRadiusIndicator;
 
     private IEnumerator coroutine;
 
     void Awake()
     {
         skillBar = GetComponents<AbstractSkill>();
+        parent = GetComponentInParent<AbstractCreature>();
     }
 
-    //Allow player to set their own skills for a future skillbar
-    public void setSkillAtIndex(int i, AbstractSkill skilltoSet)
+    public string getSkillsText()
     {
-        //Incoming  value will be of keyboard input (1-9), set i to match array indexing
-        i -= 1;
-        if (i < 0 || i >= skillBar.Length)
+        int skillIndex = 1;
+        string res = "Skill available: \n";
+        foreach (var skill in skillBar)
         {
-            //Attempting to set a skill out of array bounds
-            return;
+            res += "(" + skillIndex.ToString() + ") " + skill.SkillName + "\n";
+            skillIndex++;
         }
-        skillBar[i] = skilltoSet;
+        return res;
     }
 
     // Performs a skill at a given index within the skillbar
-    public void performSkillAtIndex(int i, List<AbstractCreature> targets, CombatData data)
+    public bool performSkillAtIndex(int i, List<AbstractCreature> targets, CombatData data, AbstractCreature skillUser)
     {
-        i -= 1;
         if (i < 0 || i >= skillBar.Length)
         {
             //Attempting to get a skill out of array bounds
             SkillEvent("No skill found!");
-            skillPerformed = false;
-            return;
+            return false;
         }
         else
         {
-            SkillEvent(skillBar[i].attemptSkill(targets, data));
-            skillPerformed = skillBar[i].skillSuccessful;
+            if(skillToUse != null && skillToUse != skillBar[i])
+            {
+                skillToUse.destroySRI();
+                SkillEvent(skillToUse.unprepareSkill());
+            }
+
+            skillToUse = skillBar[i];
+            
+            if (skillToUse.isPrepared())
+            {
+                SkillEvent(skillToUse.attemptSkill(targets, data));
+                Destroy(skillRadiusIndicator);
+            }
+            else
+            {
+                SkillEvent(skillToUse.prepareSkill());
+                skillRadiusIndicator = (GameObject)Instantiate(Resources.Load("SRI"));
+                skillRadiusIndicator.transform.localScale = skillRadiusIndicator.transform.localScale * skillBar[i].skillRadius;
+                skillRadiusIndicator.transform.position = parent.transform.position;
+                skillToUse.SkillRadiusIndicator = skillRadiusIndicator;
+            }
+            return skillBar[i].skillSuccessful;
         }
+    }
+
+    public string getSkillDescriptionAtIndex(int i)
+    {
+        return skillBar[i].SkillDescription;
     }
 
     //Decrements all skill's remaining cooldown until available again

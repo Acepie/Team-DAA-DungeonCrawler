@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +7,8 @@ public class AbstractEnemy : AbstractCreature
 {
     private float lastMoveTimeStamp;
     public float moveCD = 1.0f;
-
+    [SerializeField]
+    protected int exp;
     private float aggroRadius;
     private int moveDirection;
 
@@ -17,7 +19,7 @@ public class AbstractEnemy : AbstractCreature
     public RuntimeAnimatorController combatAnimControl;
     public RuntimeAnimatorController normalAnimControl;
 
-    public GameObject dropItem;
+    public List<GameObject> dropItems;
     [Range(0, 1)]
     public float dropRate;
 
@@ -26,8 +28,8 @@ public class AbstractEnemy : AbstractCreature
     {
         rb2d = GetComponent<Rigidbody2D>();
         ani = GetComponent<Animator>();
+        statusController = GetComponent<StatusController>();
         lastMoveTimeStamp = -moveCD;
-        data.currentHealth = data.maxHealth;
     }
 
     // Update is called once per frame
@@ -39,20 +41,31 @@ public class AbstractEnemy : AbstractCreature
         }
     }
 
+    public override void StartTurn()
+    {
+        statusController.reduceStatusDuration();
+    }
+
+
     public override IEnumerator PerformTurn(List<AbstractCreature> targets)
     {
-        int attackDamage = Random.Range(1, data.attackpower + 1);
-        AbstractCreature target = targets[Random.Range(0, targets.Count)];
-        target.UnderAttack(attackDamage);
+        if (!data.Stunned)
+        {
+            int attackDamage = data.AttackPower;
+            AbstractCreature target = targets[UnityEngine.Random.Range(0, targets.Count)];
+            target.UnderAttack(attackDamage);
+            endTurn();
+        }
         yield return null;
     }
 
     public override void OnDeath()
     {
-        if (dropRate > Random.value && dropItem) {
+        if (dropItems.Count > 0 && dropRate > UnityEngine.Random.value) {
+            GameObject dropItem = dropItems[UnityEngine.Random.Range(0, dropItems.Count)];
             GameObject item = Instantiate(dropItem, transform.position, Quaternion.identity);
         }
-
+        PlayerLevelManager.addExp(exp);
         Destroy(this.gameObject);
     }
 
@@ -60,7 +73,7 @@ public class AbstractEnemy : AbstractCreature
     {
         if (Time.time - lastMoveTimeStamp > moveCD)
         {
-            moveDirection = Random.Range(1, 5);
+            moveDirection = UnityEngine.Random.Range(1, 5);
             ani.SetInteger("Direction", moveDirection);
             lastMoveTimeStamp = Time.time;
         }
@@ -103,5 +116,11 @@ public class AbstractEnemy : AbstractCreature
     private void revertToNormalAnimations()
     {
         ani.runtimeAnimatorController = normalAnimControl;
+    }
+
+    protected override void endTurn()
+    {
+
+        Debug.Log("enemy end turn");
     }
 }

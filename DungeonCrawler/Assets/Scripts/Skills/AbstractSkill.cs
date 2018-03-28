@@ -18,29 +18,102 @@ public abstract class AbstractSkill : MonoBehaviour
     protected int turnsUntilOffCD;
 
     protected int skillCost;
+    
+    public float skillRadius;
+    protected GameObject skillRadiusIndicator;
+    public GameObject SkillRadiusIndicator { get { return skillRadiusIndicator; } set { skillRadiusIndicator = value; } }
+
+    [SerializeField]
+    protected AbstractCreature parent;
 
     protected string skillName;
+    public string SkillName { get { return skillName; } }
     protected string skillDescription;
+    public string SkillDescription { get  { return skillDescription; } }
     protected string skillOnUseText;
+    public string SkillOnUseText
+    {
+        get { return skillOnUseText; }
+        set { skillOnUseText = value; }
+    }
+    protected int ignoreLayer;
 
-    public bool skillSuccessful;
+    public bool skillSuccessful = false;
 
+    protected bool skillPrepared = false;
+
+    void Awake()
+    {
+        parent = GetComponentInParent<AbstractCreature>();
+    }
     /* Attempt to perform the skill. Takes in a target for the skill to be used on
        *Returns a string detailing information about the usage of the skill for the skillHandler to use
     */
-    public string attemptSkill(List<AbstractCreature> targets, CombatData data)
+    public virtual string attemptSkill(List<AbstractCreature> targets, CombatData data)
     {
+        skillPrepared = false;
+        //Checks to make sure skill is not on CD
         if (this.skillOnCooldown())
         {
-            skillSuccessful = false;
             return this.skillName + " is on cooldown for " + turnsUntilOffCD + " more turns";
         }
 
-        skillSuccessful = performSkill(targets, data);
-        if (skillSuccessful) {
-            turnsUntilOffCD = skillCooldown;
+        //Confirms a target is selected
+        if (targets.Count == 0)
+        {
+            return "No targets selected!";
         }
-        return this.skillOnUseText;
+
+        //Checks to make sure target(s) are in range
+        foreach (AbstractCreature t in targets)
+        {
+            Vector2 start = parent.transform.position;
+            Vector2 end = t.transform.position;
+            Vector2 direction = end - start;
+            if (Vector2.Distance(start, end) > skillRadius)
+            {
+                return "Target out of range";
+            }
+
+            //Need to ignore layer of object that uses skill 
+            //because raycast originates inside of game object and instantly collidesd
+            ignoreLayer = 1 << parent.gameObject.layer;
+            ignoreLayer = ~ignoreLayer;
+
+            RaycastHit2D rayHit = Physics2D.Raycast(start, direction, skillRadius, ignoreLayer);
+            if(rayHit.collider != t.GetComponent<Collider2D>())
+            {
+                return "Target out of sight";
+            }
+        }
+
+        skillSuccessful = performSkill(targets, data);
+        if (skillSuccessful)
+        {
+            turnsUntilOffCD = skillCooldown;
+            return this.skillOnUseText;
+        }
+        else
+            return "Unable to use " + this.skillName + " at this time" ;
+        
+    }
+
+    public string prepareSkill()
+    {
+        skillSuccessful = false;
+        skillPrepared = true;
+        return (this.SkillName + " is ready to use");
+    }
+
+    public string unprepareSkill()
+    {
+        skillPrepared = false;
+        return (this.SkillName + "is no longer ready to use");
+    }
+
+    public bool isPrepared()
+    {
+        return skillPrepared;
     }
 
     // Performs the skill and all its effects
@@ -54,10 +127,17 @@ public abstract class AbstractSkill : MonoBehaviour
     //Decrements the number of turns remaining until the skill is available to be used again
     public void decrementCooldownCountdown()
     {
+        
         if (turnsUntilOffCD > 0)
         {
             turnsUntilOffCD -= 1;
         }
+    }
+
+
+    public void destroySRI()
+    {
+        Destroy(skillRadiusIndicator);
     }
 
     public void resetCooldown()
