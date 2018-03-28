@@ -11,6 +11,8 @@ public abstract class AbstractCreature : MonoBehaviour
 
     protected bool inCombat;
 
+    public bool InCombat { get { return inCombat; } }
+
     public abstract void Move(float speed);
 
     public virtual void UnderAttack(int damageTaken)

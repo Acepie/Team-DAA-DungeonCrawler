@@ -29,7 +29,6 @@ public class PlayerController : AbstractCreature
     void Awake()
     {
         SpawnPlayer();
-        DontDestroyOnLoad(this.gameObject);
         rb2d = GetComponent<Rigidbody2D>();
         skillHandler = GetComponent<SkillHandler>();
         keysFound = new HashSet<string>();
@@ -162,7 +161,7 @@ public class PlayerController : AbstractCreature
                 {
                     //Do nothing
                 }
-                if (targetsBeingAttacked.ContainsKey(potentialTarget))
+                else if (targetsBeingAttacked.ContainsKey(potentialTarget))
                 {
                     Destroy(targetsBeingAttacked[potentialTarget]);
                     targetsBeingAttacked.Remove(potentialTarget);
@@ -247,9 +246,10 @@ public class PlayerController : AbstractCreature
         AbstractCreature targetCreature = null;
         Camera cam = Camera.main;
         RaycastHit2D hit = Physics2D.Raycast(cam.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-        if (hit.collider != null && hit.collider.GetComponent<AbstractCreature>() is AbstractEnemy)
+        if (hit.collider != null && hit.collider.GetComponent<AbstractCreature>() is AbstractEnemy && hit.collider.gameObject.GetComponent<AbstractCreature>().InCombat)
         {
             targetCreature = hit.collider.gameObject.GetComponent<AbstractCreature>();
+            
         }
 
         return targetCreature;
