@@ -95,19 +95,19 @@ public abstract class AbstractSkill : MonoBehaviour
             return this.skillOnUseText;
         }
         else
-            return "Unable to use " + this.skillName + " at this time" ;
+            return  this.skillName + " cannot attack multiple targets";
         
     }
 
     public string prepareSkill()
     {
-
+        skillSuccessful = false;
         if (this.skillOnCooldown())
         {
             return this.skillName + " is on cooldown for " + turnsUntilOffCD + " more turns";
         }
 
-        skillSuccessful = false;
+        
         skillPrepared = true;
         return (this.SkillName + " is ready to use");
     }

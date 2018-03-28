@@ -14,7 +14,7 @@ public class BasicMelee : AbstractSkill
         skillDescription = "A basic attack that deals damage to the target";
         skillCost = 1;
         skillCooldown = 1;
-        skillRadius = 2;
+        skillRadius = 3;
     }
 
     protected override bool performSkill(List<AbstractCreature> targets, CombatData data)
