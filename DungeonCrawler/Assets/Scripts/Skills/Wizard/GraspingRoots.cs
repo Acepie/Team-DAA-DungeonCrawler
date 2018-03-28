@@ -12,7 +12,7 @@ public class GraspingRoots : AbstractSkill {
             skillCooldown = 3;
             skillCost = 2;
             skillDescription = "Roots spurt forth from the ground ensnaring enemies caught. They are unable to move for one turn. Cooldown of: " + skillCooldown;
-            skillRadius = 8;
+            skillRadius = 4;
     }
 	
 	// Update is called once per frame

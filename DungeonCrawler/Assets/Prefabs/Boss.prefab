@@ -108,11 +108,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-    currentHealth: 0
-    maxHealth: 15
-    attackpower: 2
+    currentHealth: 125
+    maxHealth: 125
+    attackPower: 10
+    rawAttackPower: 10
+    temporaryHealth: 0
+    stunned: 0
   speed: 0
   moveCD: 1
+  exp: 150
   combatAnimControl: {fileID: 0}
   normalAnimControl: {fileID: 0}
   dropItems: []

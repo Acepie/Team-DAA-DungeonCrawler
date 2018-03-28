@@ -24,7 +24,6 @@ GameObject:
   - component: {fileID: 50438746178519284}
   - component: {fileID: 95178042174427990}
   - component: {fileID: 114592914048241318}
-  - component: {fileID: 114195994106828286}
   m_Layer: 9
   m_Name: Sorceress
   m_TagString: Enemy
@@ -107,17 +106,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114195994106828286
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1924186500491498}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ec711b415039144b9a031abc958dcaf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114592914048241318
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -130,14 +118,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-    currentHealth: 0
-    maxHealth: 7
-    attackPower: 0
-    rawAttackPower: 0
-  statusController: {fileID: 0}
+    currentHealth: 40
+    maxHealth: 40
+    attackPower: 10
+    rawAttackPower: 10
+    temporaryHealth: 0
+    stunned: 0
   speed: 1
   moveCD: 1
-  exp: 0
+  exp: 50
   combatAnimControl: {fileID: 22100000, guid: f4a30d521ec53af46b6336887d7a76a6, type: 2}
   normalAnimControl: {fileID: 22100000, guid: a92461ffafe0ef24d9ddfbf1bfb7a179, type: 2}
   dropItems:

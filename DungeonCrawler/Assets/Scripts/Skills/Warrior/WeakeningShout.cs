@@ -33,7 +33,7 @@ public class WeakeningShout : AbstractCloseAoe {
             if(t.name != parent.name)
             {
                 SkillOnUseText += t.name + "\n";
-                t.statusController.addStatus(w);
+                t.statusController.addStatus(t, w);
             }
         }
         return true;

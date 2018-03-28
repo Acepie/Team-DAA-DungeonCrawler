@@ -43,14 +43,8 @@ GameObject:
   - component: {fileID: 61975242887116076}
   - component: {fileID: 95078544151508458}
   - component: {fileID: 114840946327775156}
-  - component: {fileID: 114779104088071186}
-  - component: {fileID: 114378995717451204}
-  - component: {fileID: 114249744312387928}
-  - component: {fileID: 114327727114688826}
-  - component: {fileID: 114315318928036776}
-  - component: {fileID: 114605961236238210}
   m_Layer: 8
-  m_Name: Warrior
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -188,19 +182,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114249744312387928
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1959786037162124}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffbbcb6b9eaac174da0ec887131c2122, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillRadius: 0
-  skillSuccessful: 0
 --- !u!114 &114254462591056056
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -213,77 +194,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-    currentHealth: 0
-    maxHealth: 10
-    attackPower: 0
-    rawAttackPower: 0
-  statusController: {fileID: 0}
+    currentHealth: 100
+    maxHealth: 100
+    attackPower: 10
+    rawAttackPower: 10
+    temporaryHealth: 0
+    stunned: 0
   speed: 4
   ctc: {fileID: 0}
   playerUIController: {fileID: 0}
---- !u!114 &114315318928036776
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1959786037162124}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ec711b415039144b9a031abc958dcaf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114327727114688826
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1959786037162124}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db3b45917b6c5534eb7d0b1a3eb19277, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillRadius: 0
-  skillSuccessful: 0
---- !u!114 &114378995717451204
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1959786037162124}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98049a36b0998d249a6ae17cf2cc43e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillRadius: 0
-  skillSuccessful: 0
-  attackBonus: 0
---- !u!114 &114605961236238210
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1959786037162124}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70d35f3d86eae7f459c243fe361e9f22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114779104088071186
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1959786037162124}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8ea1d056c988804ca43dbf5b96f27ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillRadius: 2
-  skillSuccessful: 0
-  skillIcon: {fileID: 0}
+  playerClass: 0
 --- !u!114 &114840946327775156
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -295,9 +215,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 341ebe9a1c1241b4098b0f812f5a4613, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 0}
   skillText: {fileID: 0}
   skillDescription: {fileID: 0}
-  skillPerformed: 0
 --- !u!124 &124140488491433002
 Behaviour:
   m_ObjectHideFlags: 1

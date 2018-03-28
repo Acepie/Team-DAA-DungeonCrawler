@@ -7,12 +7,20 @@ using System;
 
 public class PlayerController : AbstractCreature
 {
+    [Serializable]
+    public enum PlayerClass
+    {
+        Warrior,
+        Wizard,
+        Ranger
+    }
 
     Rigidbody2D rb2d;
 
     // Used for combat UI
     public CombatTextController ctc;
     public PlayerUIController playerUIController;
+    public PlayerClass playerClass = PlayerClass.Warrior;
     private SkillHandler skillHandler;
     private HashSet<string> keysFound;
     private Animator animator;
@@ -20,13 +28,38 @@ public class PlayerController : AbstractCreature
 
     void Awake()
     {
-        data = new CombatData(100, 10);
         SpawnPlayer();
+        DontDestroyOnLoad(this.gameObject);
         rb2d = GetComponent<Rigidbody2D>();
         skillHandler = GetComponent<SkillHandler>();
-        statusController = GetComponent<StatusController>();
         keysFound = new HashSet<string>();
         animator = GetComponent<Animator>();
+        PlayerLevelManager.Init(this, playerUIController);
+        switch (playerClass)
+        {
+            case PlayerClass.Warrior:
+                gameObject.AddComponent(typeof(BasicMelee));
+                gameObject.AddComponent(typeof(SlamAttack));
+                gameObject.AddComponent(typeof(WeakeningShout));
+                gameObject.AddComponent(typeof(Whirlwind));
+                break;
+            case PlayerClass.Wizard:
+                gameObject.AddComponent(typeof(Fireball));
+                //gameObject.AddComponent(typeof(GraspingRoots));
+                gameObject.AddComponent(typeof(LavaWave));
+                gameObject.AddComponent(typeof(ManaShield));
+                gameObject.AddComponent(typeof(StunningStrike));
+                break;
+            case PlayerClass.Ranger:
+                gameObject.AddComponent(typeof(BasicRanged));
+                gameObject.AddComponent(typeof(RicochetArrow));
+                gameObject.AddComponent(typeof(ImmolationArrow));
+                //gameObject.AddComponent(typeof(TacticalReposition));
+                //gameObject.AddComponent(typeof(ThrowTrap));
+                gameObject.AddComponent(typeof(Volley));
+                break;
+        }
+        skillHandler.InitSkills();
     }
 
     // Update is called once per frame
@@ -66,13 +99,26 @@ public class PlayerController : AbstractCreature
         bool hasMoved = false;
         bool attackMade = false;
         string skillDescription = "";
-        AbstractCreature potentialTarget = null;
 
 
         //Potential values needed for multiattacks
         // Each AbstractCreature has UI elements associated with it, stored in a dictionary
         Dictionary<AbstractCreature, GameObject> targetsBeingAttacked = new Dictionary<AbstractCreature, GameObject>();
         int count = 0;  // TODO: what is this? 
+        if (lastTargets != null && lastTargets.Count != 0)
+        {
+            lastTargets.RemoveWhere((t) =>
+            {
+                return t == null || t.IsDead();
+            });
+
+            foreach (var t in lastTargets)
+            {
+                targetsBeingAttacked.Add(t, playerUIController.drawCombatArrows(t));
+            }
+            string combatText = getInstructionText() + getTargetText(new HashSet<AbstractCreature>(targetsBeingAttacked.Keys)) + skillHandler.getSkillsText();
+            this.ctc.updateText(combatText);
+        }
 
         while (!turnEnded)
         {
@@ -81,17 +127,7 @@ public class PlayerController : AbstractCreature
             {
                 turnEnded = true;
             }
-            count++;
-
-            // If there were any previous targets, then rebuild the targets
-            if (lastTargets != null)
-            {
-                foreach (var t in lastTargets)
-                {
-                    targetsBeingAttacked.Add(t, playerUIController.drawCombatArrows(potentialTarget));
-                }
-            }
-
+            
             yield return new WaitUntil(() => Input.anyKey);
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -105,11 +141,14 @@ public class PlayerController : AbstractCreature
                 Camera cam = Camera.main;
                 transform.position = cam.ScreenToWorldPoint(Input.mousePosition);
                 hasMoved = true;
+                this.ctc.updateText(getInstructionText());
             }
+
 
             if (Input.GetMouseButtonDown(0))
             {
-                potentialTarget = ClickOnTarget();
+
+                AbstractCreature potentialTarget = ClickOnTarget();
                 if (potentialTarget == null)
                 {
                     foreach (var key in targetsBeingAttacked.Keys)
@@ -118,14 +157,11 @@ public class PlayerController : AbstractCreature
                         Destroy(targetsBeingAttacked[key]);
                     }
                     targetsBeingAttacked.Clear();
-                    continue;
                 }
-
-                if (!validTargetList.Contains(potentialTarget))
+                else if (!validTargetList.Contains(potentialTarget))
                 {
-                    continue;
+                    //Do nothing
                 }
-
                 if (targetsBeingAttacked.ContainsKey(potentialTarget))
                 {
                     Destroy(targetsBeingAttacked[potentialTarget]);
@@ -135,18 +171,9 @@ public class PlayerController : AbstractCreature
                 {
                     targetsBeingAttacked.Add(potentialTarget, playerUIController.drawCombatArrows(potentialTarget));
                 }
-
+                
                 lastTargets = new HashSet<AbstractCreature>(targetsBeingAttacked.Keys);
-                string combatText = "Press E to end your turn \nClick an enemy to mark/unmark for attack.\nTargets:\n";
-
-                foreach (var t in targetsBeingAttacked.Keys)
-                {
-                    combatText += t.name + ":\t Health: " + t.data.CurrentHealth + "\n";
-
-                }
-                combatText = getInstructionText();
-                combatText += getTargetText(new HashSet<AbstractCreature>(targetsBeingAttacked.Keys));
-                combatText += skillHandler.getSkillsText();
+                string combatText = getInstructionText() + getTargetText(new HashSet<AbstractCreature>(targetsBeingAttacked.Keys)) + skillHandler.getSkillsText();
                 this.ctc.updateText(combatText);
             }
 
@@ -195,7 +222,7 @@ public class PlayerController : AbstractCreature
         //Reduce current CD of any skills on CD by 1
         skillHandler.decrementSkillsCooldown();
         //Reduce all statuses by 1 turn
-        statusController.reduceStatusDuration();
+        statusController.reduceStatusDuration(this);
         string combatText = getInstructionText();
         this.ctc.updateText(combatText);
     }
@@ -210,7 +237,8 @@ public class PlayerController : AbstractCreature
         return combatText;
     }
 
-    private string getInstructionText() {
+    private string getInstructionText()
+    {
         return "Click an enemy to mark/unmark for attack.\nPress M to move \nPress E to end your turn \n";
     }
 

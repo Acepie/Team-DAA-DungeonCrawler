@@ -6,7 +6,7 @@ public abstract class AbstractCreature : MonoBehaviour
 {
 
     public CombatData data;
-    public StatusController statusController;
+    public StatusController statusController = new StatusController();
     public float speed;
 
     protected bool inCombat;

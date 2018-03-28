@@ -30,8 +30,12 @@ public class SkillHandler : MonoBehaviour
 
     void Awake()
     {
-        skillBar = GetComponents<AbstractSkill>();
         parent = GetComponentInParent<AbstractCreature>();
+    }
+
+    public void InitSkills()
+    {
+        skillBar = GetComponents<AbstractSkill>();
     }
 
     public string getSkillsText()
@@ -57,14 +61,14 @@ public class SkillHandler : MonoBehaviour
         }
         else
         {
-            if(skillToUse != null && skillToUse != skillBar[i])
+            if (skillToUse != null && skillToUse != skillBar[i])
             {
                 skillToUse.destroySRI();
                 SkillEvent(skillToUse.unprepareSkill());
             }
 
             skillToUse = skillBar[i];
-            
+
             if (skillToUse.isPrepared())
             {
                 SkillEvent(skillToUse.attemptSkill(targets, data));
@@ -73,10 +77,13 @@ public class SkillHandler : MonoBehaviour
             else
             {
                 SkillEvent(skillToUse.prepareSkill());
-                skillRadiusIndicator = (GameObject)Instantiate(Resources.Load("SRI"));
-                skillRadiusIndicator.transform.localScale = skillRadiusIndicator.transform.localScale * skillBar[i].skillRadius;
-                skillRadiusIndicator.transform.position = parent.transform.position;
-                skillToUse.SkillRadiusIndicator = skillRadiusIndicator;
+                if (skillToUse.isPrepared())
+                {
+                    skillRadiusIndicator = (GameObject)Instantiate(Resources.Load("SRI"));
+                    skillRadiusIndicator.transform.localScale = skillRadiusIndicator.transform.localScale * skillBar[i].skillRadius;
+                    skillRadiusIndicator.transform.position = parent.transform.position;
+                    skillToUse.SkillRadiusIndicator = skillRadiusIndicator;
+                }
             }
             return skillBar[i].skillSuccessful;
         }
