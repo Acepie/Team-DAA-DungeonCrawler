@@ -103,7 +103,6 @@ public class PlayerController : AbstractCreature
         //Potential values needed for multiattacks
         // Each AbstractCreature has UI elements associated with it, stored in a dictionary
         Dictionary<AbstractCreature, GameObject> targetsBeingAttacked = new Dictionary<AbstractCreature, GameObject>();
-        int count = 0;  // TODO: what is this? 
         if (lastTargets != null && lastTargets.Count != 0)
         {
             lastTargets.RemoveWhere((t) =>
