@@ -140,9 +140,6 @@ public class PlayerController : AbstractCreature
                 Camera cam = Camera.main;
                 Vector2 end = cam.ScreenToWorldPoint(Input.mousePosition);
 
-                LayerMask layerMask = LayerMask.GetMask("Player", "Enemy");
-                layerMask = ~layerMask;
-
                 float dist = Vector2.Distance(transform.position, end);
                 if (dist > distance)
                 {
@@ -150,7 +147,8 @@ public class PlayerController : AbstractCreature
                 }
                 else
                 {
-                    //RaycastHit2D rayHit = Physics2D.Raycast(transform.position, end, Vector2.Distance(transform.position, end) ,layerMask);
+                    LayerMask layerMask = LayerMask.GetMask("Player", "Enemy");
+                    layerMask = ~layerMask;
                     RaycastHit2D rayHit = Physics2D.Raycast(transform.position, end, distance, layerMask);
 
                     if (rayHit.collider == null)

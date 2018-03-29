@@ -29647,7 +29647,7 @@ GameObject:
   m_Component:
   - component: {fileID: 603750839}
   - component: {fileID: 603750838}
-  m_Layer: 4
+  m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31240,7 +31240,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1731149045}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Enemies
   m_TagString: Untagged
   m_Icon: {fileID: 0}

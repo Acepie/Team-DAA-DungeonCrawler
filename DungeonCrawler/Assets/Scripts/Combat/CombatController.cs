@@ -9,6 +9,7 @@ public class CombatController : MonoBehaviour
     private int turnCount;
     List<AbstractCreature> nonplayers;
     List<AbstractCreature> players;
+    public float radius = 1.5f;
 
     /* Create our combat controller for a single combat.
     Create a circle collider to determine all combatants that should be in this combat.
@@ -22,7 +23,7 @@ public class CombatController : MonoBehaviour
         cf2d.useLayerMask = true;
 
         CircleCollider2D combatRadius = gameObject.AddComponent<CircleCollider2D>();
-        combatRadius.radius = 2.5f;
+        combatRadius.radius = radius;
         combatRadius.isTrigger = true;
 
         Collider2D[] combatantColliders;

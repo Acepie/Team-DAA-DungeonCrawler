@@ -42,11 +42,19 @@ public abstract class AbstractCreature : MonoBehaviour
     {
         inCombat = true;
         Move(0);
+        Rigidbody2D r = this.GetComponent<Rigidbody2D>();
+        if (r != null) {
+            r.mass *= 10000000;
+        }
     }
 
     public virtual void CombatEnded()
     {
         inCombat = false;
+        Rigidbody2D r = this.GetComponent<Rigidbody2D>();
+        if (r != null) {
+            r.mass /= 10000000;
+        }
     }
 
     public abstract IEnumerator PerformTurn(List<AbstractCreature> targets);
