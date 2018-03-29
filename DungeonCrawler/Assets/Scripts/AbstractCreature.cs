@@ -44,7 +44,7 @@ public abstract class AbstractCreature : MonoBehaviour
         Move(0);
         Rigidbody2D r = this.GetComponent<Rigidbody2D>();
         if (r != null) {
-            r.mass *= 10000000;
+            r.isKinematic = true;
         }
     }
 
@@ -53,7 +53,7 @@ public abstract class AbstractCreature : MonoBehaviour
         inCombat = false;
         Rigidbody2D r = this.GetComponent<Rigidbody2D>();
         if (r != null) {
-            r.mass /= 10000000;
+            r.isKinematic = false;
         }
     }
 
