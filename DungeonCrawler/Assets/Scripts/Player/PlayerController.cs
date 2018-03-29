@@ -121,12 +121,6 @@ public class PlayerController : AbstractCreature
 
         while (!turnEnded)
         {
-
-            if (attackMade)
-            {
-                turnEnded = true;
-            }
-
             yield return new WaitUntil(() => Input.anyKey);
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -138,19 +132,20 @@ public class PlayerController : AbstractCreature
                 ctc.updateText("Move action intiated. Click where you want to go!");
                 yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
                 Camera cam = Camera.main;
+                Vector2 start = transform.position;
                 Vector2 end = cam.ScreenToWorldPoint(Input.mousePosition);
 
-                float dist = Vector2.Distance(transform.position, end);
+                float dist = Vector2.Distance(start, end);
                 if (dist > distance)
                 {
                     playerUIController.PickupEvent("Unable to move there, distance too far");
                 }
                 else
                 {
-                    LayerMask layerMask = LayerMask.GetMask("Player", "Enemy");
-                    layerMask = ~layerMask;
-                    RaycastHit2D rayHit = Physics2D.Raycast(transform.position, end, distance, layerMask);
-
+                    int layerMask = LayerMask.GetMask("Default");
+                    Vector2 dir = (end - start);
+                    dir.Normalize();
+                    RaycastHit2D rayHit = Physics2D.Raycast(start, dir, dist, layerMask);
                     if (rayHit.collider == null)
                     {
                         hasMoved = true;
@@ -227,6 +222,11 @@ public class PlayerController : AbstractCreature
             }
 
             playerUIController.skillDescriptionText.text = skillDescription;
+
+            if (attackMade)
+            {
+                turnEnded = true;
+            }
         }
 
         foreach (var key in targetsBeingAttacked.Keys)
