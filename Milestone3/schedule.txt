@@ -7,7 +7,7 @@
 (✔) Be able to move and attack with character (M)
 (✔) Enemies able to move and attack character (M)
 (✔) Enemies can be killed (M)
-(X) Enemies deal variable damage (M) (Implemented, but enemies currently only deal 1 damage)
+(✔) Enemies deal variable damage (M)
 (✔) Ranged attack and melee for player and monsters (S)
 (✔) Enemies have aggro radius & simple pathfinding (S)
 (✔) Skills
@@ -26,7 +26,7 @@ Checkpoint 2
 	UPDATE:
 	    Playtests show that current UI is confusion
 (✔) Must have at least 3 levels (M)
-(X) Levels have traps and treasures (S)
+(✔) Levels have traps and treasures (S)
 (✔) Equipment for the player to pick up (S)
 (✔) Player interactables exist (S) 
 (X) Allow player to restart (S)
@@ -60,14 +60,20 @@ Combat
 
 
 Final
-Player death = game over (M)
-Level up (M)
+UI
+  - (X) Unify text to 1 place (M)
+  - (X) UI for level up (M)
+  - (X) Instruction Page (S)
+  - (X) Ability to view skill information (S)
+  - (X) Skillbar (C)
+(✔)Player death = restart (M)
+(✔)Level up (M)
 (✔)Sprites (M)
-Enemies have different skills akin to player (S)
-Randomized level generation (C)
-Random enemy spawn locations (C)
-Semi-permenance from previous playthroughs (C)
-Central hub between levels or between playthroughs (C)
+(X)Enemies have different skills akin to player (S)
+(X)Randomized level generation (C)
+(X)Random enemy spawn locations (C)
+(X)Semi-permenance from previous playthroughs (C)
+(X)Central hub between levels or between playthroughs (C)
 
 See below for more details and ideas
 
