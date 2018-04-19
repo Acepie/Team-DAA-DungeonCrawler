@@ -1,0 +1,29 @@
+We were able to complete most all of our features as planned. 
+Our fist sprint, we got really far ahead, so we upgraded/ added new
+"musts" to the subsequent sprints. Some upgrades included adding classes
+and items. So from our origionally planned goals we think we were very sucesfull.
+
+Comparing our origional idea to the final:
+Our origional idea I think was a little more tile based, but the final game
+ended up being more Zelda like than Pokemon. The combat system evolved
+into something a lot more complicated than we origionally planned. Having
+turn based combat from games like Final Fantasy or Pokemon, yet also having
+a 2D combat area, complete with range and in combat movement and repositioning. 
+
+Combat was the biggest change from start to finish. However, it was not a bad
+kind of change. Just a lot of "I think we can do this, let's try and see". 
+In the end, we are happy with the state of all the systems in the game:
+combat, doors and keys, skills etc. But each system only got more complicated
+as time went on. 
+
+Our playtests were very usefull. The first one allowed us to focus on what kind
+of content our players wanted. Like we said above: our systems were very good, 
+but the didn't have a lot of interactables yet. So learning what players wanted
+or what they didn't want was very helpfull to us. 
+
+Our second playtest shown us that, while our systems were complicated and fully
+implimented, they were complicated. We quickly learned that players were impressed
+with what they were doing, but the didn't understand it. So our goals from then
+was to try to make the UI more intuitive, and this had mixed results. Building a 
+good UI after the fact is hard. Perhapse we should of developed it as we went along
+instead of at the end. 
