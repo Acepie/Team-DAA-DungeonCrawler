@@ -115,7 +115,7 @@ public class PlayerController : AbstractCreature
             {
                 targetsBeingAttacked.Add(t, playerUIController.drawCombatArrows(t));
             }
-            string combatText = getInstructionText() + getTargetText(new HashSet<AbstractCreature>(targetsBeingAttacked.Keys)) + skillHandler.getSkillsText();
+            string combatText = getTargetText(new HashSet<AbstractCreature>(targetsBeingAttacked.Keys)) + skillHandler.getSkillsText();
             this.ctc.updateText(combatText);
         }
 
@@ -150,7 +150,7 @@ public class PlayerController : AbstractCreature
                     {
                         hasMoved = true;
                         transform.position = end;
-                        this.ctc.updateText(getInstructionText());
+                        this.ctc.updateText("Move completed");
                     }
                     else
                     {
@@ -188,7 +188,7 @@ public class PlayerController : AbstractCreature
                 }
 
                 lastTargets = new HashSet<AbstractCreature>(targetsBeingAttacked.Keys);
-                string combatText = getInstructionText() + getTargetText(new HashSet<AbstractCreature>(targetsBeingAttacked.Keys)) + skillHandler.getSkillsText();
+                string combatText = getTargetText(new HashSet<AbstractCreature>(targetsBeingAttacked.Keys)) + skillHandler.getSkillsText();
                 this.ctc.updateText(combatText);
             }
 
@@ -239,12 +239,11 @@ public class PlayerController : AbstractCreature
 
     public override void StartTurn()
     {
-        Debug.Log("Start of Turn");
         //Reduce current CD of any skills on CD by 1
         skillHandler.decrementSkillsCooldown();
         //Reduce all statuses by 1 turn
         statusController.reduceStatusDuration(this);
-        string combatText = getInstructionText();
+        string combatText = "Combat Started";
         this.ctc.updateText(combatText);
     }
 
@@ -256,11 +255,6 @@ public class PlayerController : AbstractCreature
             combatText += t.name + ":\t Health: " + t.data.CurrentHealth + "\n";
         }
         return combatText;
-    }
-
-    private string getInstructionText()
-    {
-        return "Click an enemy to mark/unmark for attack.\nPress M to move \nPress E to end your turn \n";
     }
 
     private AbstractCreature ClickOnTarget()
